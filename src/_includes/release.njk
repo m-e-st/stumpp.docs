@@ -1,0 +1,17 @@
+<!-- deutschebahn snippet - release.njk -->
+
+<pre class="w3-left-align">
+  {{ site.title }}
+  Version {{ site.version }}
+  Release Notes
+{%- if site.author.hide -%}
+{%- else -%}
+  Copyright (c) {{ site.author.year | d("2022") }} {{ site.author.name }} &lt;{{ site.author.code | safe }}&gt;
+
+{%- endif %}
+    
+  v0.1
+    + Erstausgabe
+    
+</pre>
+

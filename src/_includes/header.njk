@@ -1,0 +1,58 @@
+<!-- deutschebahn header.njk - stone header and menu -->
+
+<header class="{{ "w3-top" if not head.topscroll }}">
+
+	<div class="w3-cell-row {{ 'w3-white' if dbstyle else 'hwn-pale-stone' }}">
+		<div class="w3-container w3-cell w3-cell-middle w3-hover-shadow hwn-capitalize {{ head.class }}" style="width:11rem">
+			<a href="{{ site.url.info | default('/') }}">
+				<h3 class="hwn-text-stone" style="font-weight: 550;"
+					title="{{ description if description else site.description }}">
+					<img src="res/img/db-logo.svg" style="float:left;height:32px;margin-right:12px;">
+					{{ caption if caption else site.caption}}
+				</h3>
+			</a>
+		</div>
+
+		<div class="w3-container w3-cell w3-cell-middle w3-hide-small">
+			{% for data in menu.topmenu %}
+				{% if not data.hide %}
+					{% if data.url -%}
+						<a href="{{ data.url }}" {% if data.target -%}target="{{ data.target }}"{%- endif %}>
+					{%- endif %}
+					<button {% if data.action -%}onclick="{{ data.action }}"{%- endif %}
+							{% if data.disabled %}disabled{% endif %}
+							class="w3-bar-item w3-button hwn-textstone hwn-hover-pale-stone {% if data.menu-right %}w3-right w3-right-align{% endif %}"
+							{% if data.hint -%}title="{{ data.hint }}"{%- endif %}
+					>
+						{{ data.caption }}
+					</button>
+					{%if data.url %}</a>{% endif %}
+				{%- endif %}
+			{% endfor %}
+		</div>
+
+		<div class="w3-container w3-cell w3-cell-middle w3-right-align" style="width:12rem;">
+			{% if testbutton %}
+			<a>
+				<img src="res/img/assistant_navigation.svg"
+					 class="w3-hover-shadow w3-image w3-section"
+					 style="width:32px; height:32px; cursor:pointer;"
+					 onclick="setServerStatus();"
+					 title="Überprüfung des Online Status der Server (Methode 2)">
+			</a>
+			<span class="w3-large hwn-text-stone">|</span>
+			{% endif %}
+			<a>
+				<img src="res/timlogo.png"
+					 class="w3-hover-shadow w3-image w3-section"
+					 style="width:32px; height:32px; cursor:pointer;"
+					 onclick="document.getElementById('about').style.display='block';"
+					 title="{{ site.title }} Version {{ site.version }}">
+			</a>
+		</div>
+	</div>
+
+	{% if dbstyle %}
+	<hr class="hwn-border-pale-stone" style="margin-top:0; border: 1px solid;">
+	{% endif %}
+</header>

@@ -1,0 +1,19 @@
+<!-- deutschebahn snippet - macros.njk - ... -->
+
+{% macro caption(text, picture, height=24, float='left', click='') %}
+	{%- if click %}<a href="javascript:{{ click }}">{% endif -%}
+		<img src="res/img/{{ picture }}.svg" style="height:{{ height }}px; float:{{ float }};">
+		{{ text }}
+	{%- if click %}</a>{% endif -%}
+{% endmacro %}
+
+{% macro headline(caption, description, color='grey') %}
+<div id="{{ caption }}" class="tabulator w3-container" style="display:block" title="{{ description }}">
+	<div class="w3-panel w3-{{ color }} w3-opacity-min w3-round-large w3-center">
+		<h2>
+			{{ caption }}
+		</h2>
+	</div>
+</div>
+{% endmacro %}
+

@@ -1,0 +1,16 @@
+---
+layout: base.njk
+--- 
+
+{% import 'macros.njk' as m %}
+{% include 'header.njk' %}
+
+<main style="{{ "padding-top:64px;" if not head.topscroll }} padding-bottom:48px;">
+	<section class="w3-section">
+	{{ content | safe }}
+	</section>
+</main>
+
+{% include 'footer.njk' %}
+{% include 'modals.njk' %}
+

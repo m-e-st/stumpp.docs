@@ -1,0 +1,39 @@
+<!-- deutschebahn snippet - offline.njk -->
+
+<script>
+	document.getElementById("offline-close").remove();
+</script>
+
+<div class="w3-row-padding">
+	<div class="w3-col w3-center" style="width: 10rem">
+		<p>
+		<img src="res/img/db-logo.svg" id="offlineLogo"
+			 class="w3-image w3-spin"
+			 style="height: 8rem; margin-top: 8px;"
+			 onclick='window.location.assign("{{ site.url.main }}")'
+		>
+		</p>
+	</div>
+	<div class="w3-col w3-center w3-padding" style="width: 16rem">
+		<p>
+			<button class="w3-btn w3-block w3-round-xlarge w3-left-align w3-border w3-section"
+					onclick='if (checkIntranetAccessWithAnimation()) { closeModal("offline"); }'>
+				<img style="height:32px;" src="res/img/lan.svg"> <b>Netzwerk prüfen</b>
+			</button>
+			<button class="w3-btn w3-block w3-round-xlarge w3-left-align w3-border w3-section"
+					onclick='window.location.assign("{{ site.url.main }}");'>
+				<img style="height:32px" src="res/img/door_back.svg"> <b>Seite verlassen</b>
+			</button>
+		</p>
+	</div>
+	<div class="w3-rest w3-margin-left w3-cell-middle" style="text-align:justify;">
+		<p>
+			Zur Zeit besteht kein Zugriff auf das Intranet der DB AG.
+			Dieses Programm kann nur innerhalb des DB Intranets benutzt werden.
+			Sie haben die Möglichkeit, 
+				die Verbindung zum DB Intranet erneut zu prüfen 
+				oder die Seite zu verlassen.
+			<button class="w3-btn w3-right" ondblclick='closeModal("offline");'>&nbsp;</button>
+		</p>
+	</div>
+</div>

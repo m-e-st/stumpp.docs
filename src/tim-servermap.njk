@@ -1,0 +1,119 @@
+---
+layout: main.njk
+description: "TIM Serverauswahl"
+dbstyle: true
+testbutton: true
+permalink: "{{ page.fileSlug | slug }}.html"
+---
+
+{% macro enteliweb(server) %}https://{{ server }}/enteliweb{% endmacro %}
+
+<script>
+	function showServerCard(rbcode) {
+		let cards = document.getElementsByClassName("tim-server");
+		for (let i = 0; i < cards.length; i++) {
+			cards[i].style.display = "none";
+  		}
+		if (rbcode)
+			document.getElementById(rbcode).style.display = "block";
+	}
+	
+	function setMapFromServerStatus() {
+		console.trace();
+		let area, fqdn;
+		let nodes = document.getElementsByTagName("area");
+		for (let i = 0; i < nodes.length; i++) {
+			let area = nodes[i];
+			let fqdn = area.attributes.getNamedItem("data-fqdn").value
+			checkServer(function(u,s) {
+				//~ console.log('state of ', u, ' is ', s);
+				area.href=(s) ? area.attributes.getNamedItem("data-href").value : "/map";
+				}, fqdn);
+	  		}
+	}
+	function setAllStatus() {
+		setMapFromServerStatus();
+		setServerStatus();
+	}
+
+</script>
+
+<div class="w3-container w3-half">
+	<section class="w3-padding-32 w3-center">
+		<img src="res/img/regionalbereiche.png" alt="Deutschlandkarte" usemap="#rbmap" width="302" height="409" onmouseout="showServerCard('abnahme');">
+		<map name="rbmap" onmouseenter="setAllStatus();", onmouseout="showServerCard('');">
+		{% for data in tim.RBs  %}
+			{% if data.area %}
+				{% set hint %}{{ data.server }} ({{ data.sid }}) &#8680; {{ data.fqdn }}{% endset %}
+				<area shape="{{ data.area.shape }}"
+					  coords="{{ data.area.coords }}"
+					  alt="data.name" 
+					  onmouseover="showServerCard('{{ data.code }}');"
+					  href="{{ enteliweb(data.fqdn) }}"
+					  title="{{ hint | safe }}"
+					  data-fqdn="{{ data.fqdn }}"
+					  data-href="{{ enteliweb(data.fqdn) }}"
+					  >
+			{% endif %}
+		{% endfor %}
+		</map>
+	</section>
+</div>
+
+<div class="w3-container w3-half">
+	<section class="">
+		{% for data in tim.RBs  %}
+			{% set hint %}{{ data.name }} ({{ data.sid }}) &#8680; {{ data.server }}{% endset %}
+			{% set url %}{{ enteliweb(data.fqdn) }}{% endset %}
+			<article class="tim-server w3-padding" id="{{ data.code }}" style="display:none" data-fqdn="{{ data.fqdn }}">
+			<div class="w3-card-4">
+				<header>
+					<a href="{{ url }}" title="{{ hint | safe }}">
+						<div class="w3-container w3-padding w3-{{ data.color | d('brown') }} w3-hover-shadow caption">
+							<b>{{ data.name | d('&nbsp;') | safe }}</b>
+							<span class="w3-right">{{ data.sid | d('&nbsp;') | safe }}</span>
+						</div>
+					</a>
+				</header>
+
+				<div class="w3-container w3-white w3-hide-small">
+					<div class="w3-quarter w3-center w3-hover-shadow" style="vertical-align:middle;overflow:hidden;">
+						<a href="{{ url }}" title="{{ hint | safe }}">
+							<img src="res/img/server.png" class="w3-panel w3-image" style="height:100%;max-height:2.5rem">
+						</a>
+					</div>
+					<div class="w3-rest w3-padding-tiny w3-small w3-hide-small" style="overflow:hidden;">
+						<p>{% for line in data.text %}
+							{{ line }}<br>
+						{% endfor %}</p>
+					</div>
+				</div>
+
+				<footer>
+					<div class="w3-container w3-padding w3-light-grey" style="overflow:hidden;">
+						<a href="{{ url }}" title="{{ hint | safe }}" class="w3-margin-bottom ">
+							{{ data.fqdn }}
+						</a>
+					</div>
+				</footer>
+			</div>
+			</article>
+		{% endfor %}
+	</section>
+
+	<section class="w3-hide" style="margin:20px;">
+		<div class="w3-panel w3-pale-yellow" style="position:absolute; top:400px; margin-right:2rem">
+		<p>
+			Der Zugriff über die Landkarte ist noch unvollständig.
+			Die Maus erkennt noch nicht die Umrisse der Regionalbereiche.
+			Zur Zeit ist nur eine kreisförmige Fläche in der Mitte des Regionalbereichs anklickbar.
+		</p>
+		</div>
+<!--
+		<div id="status" class="w3-panel w3-border w3-padding" style="margin:8px;">
+			&nbsp;
+		</div>
+-->
+	</section>
+
+</div>

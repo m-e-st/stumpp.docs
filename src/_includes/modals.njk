@@ -1,0 +1,33 @@
+<!-- deutschebahn snippet - modals.njk - ... -->
+
+{% macro modal(name, caption='', color='grey', goback=0) %}
+<div id="{{ name }}" class="w3-modal">
+  <div class="w3-modal-content w3-leftbar w3-rightbar w3-bottombar w3-border-{{ color }}">
+	<div class="w3-container w3-{{ color }} w3-padding-small" style="height:48px;">
+	  <span class="w3-xlarge w3-margin-left">{{ caption }}</span>
+	  <span class="w3-button w3-display-topright" style="width:40px;height:40px;" id="{{ name }}-close"
+			onclick="document.getElementById('{{ name }}').style.display='none';
+			{%- if goback -%}history.back();{%- endif -%}
+			">&times;
+	  </span>
+	</div>
+	<div class="w3-container">
+	  {{ caller() }}
+</div></div></div>
+{% endmacro %}
+
+{% call modal('about','Über …', 'blue-grey') %}
+	{% include 'about.njk' %}
+{% endcall %}
+
+{% call modal('license', 'Lizenz: ISC', 'blue-grey') -%}
+	{% include "license.njk" %}
+{%- endcall %}
+
+{% call modal('release', 'Release Notes', 'blue-grey') -%}
+	{% include "release.njk" %}
+{%- endcall %}
+
+{% call modal('offline', 'Kein Intranet ?', 'red') -%}
+	{% include "offline.njk" %}
+{%- endcall %}

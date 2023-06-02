@@ -1,0 +1,200 @@
+---
+layout: main.njk
+description: "Neue Uhr für Ulm Hbf"
+dbstyle: true
+permalink: "{{ page.fileSlug | slug }}.html"
+--- 
+<style>
+.radio-small { width:14px;height:14px;position:relative;top:0px }
+</style>
+
+{% set segs = [ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b' ] %}
+{% set rows = [ '0', '1', '2', '3', '4', '5', '6', '7' ] %}
+{% set cols = [ '0', '1', '2', '3', '4', '5' ] %}
+
+<div class="w3-container">
+	<div class="w3-cell-row">
+		<div class="w3-cell w3-cell-middle w3-padding" style="width:18em">
+			<span class="w3-xxlarge">Bahnhofsuhr</span>
+		</div>
+		<div class="w3-cell w3-cell-middle w3-small" style="width:12em">
+			<input id="do-time", class="radio-small" type="radio" name="display-option" value="time" onclick="handleDisplayOption(this);"> <label for="do-time">Zeitanzeige</label><br>
+			<input id="do-ulm",  class="radio-small" type="radio" name="display-option" value="ulm"  onclick="handleDisplayOption(this);"> <label for="do-ulm" >Ulm Hbf</label><br>
+			<input id="do-text", class="radio-small" type="radio" name="display-option" value="text" onclick="handleDisplayOption(this);"> <label for="do-text">Freitext</label><br>
+		</div>
+		<div class="w3-cell w3-cell-middle" style="width:12em">
+			<input id="displayInput", class="w3-input" type="text" name="display" placeholder="Anzeigetext" maxlength="12">
+		</div>
+		<div class="w3-rest w3-cell-middle" style="width:15em">
+			<button class="w3-btn">&nbsp;</button>
+		</div>
+	</div>
+
+	<hr>
+	<div class="w3-panel w3-gray w3-padding-32" style="overflow:hidden">
+	{% for seg in segs %}
+		<div class="w3-panel w3-cell w3-padding w3-border w3-border-dark-gray">
+			{% for row in rows %}
+				<div class= "w3-cell-row" style="display:block;height:24px; margin:0">
+					{% for col in cols %}
+						<div class= "w3-cell">
+							<svg width="24" height="24" id="led-{{ seg }}{{ row }}{{ col }}" data_state="off" style="fill:transparent">
+								<rect x="2" y="2" width="20" height="20" stroke="black" stroke-width="1"/>
+							</svg>
+						</div>
+					{% endfor %}
+				</div>
+			{% endfor %}
+		</div>
+	{% endfor %}
+	</div>
+	<hr>
+</div>
+
+<script src="res/font6x8.js" defer></script>
+<script>
+	
+var displayContent = "01.Jun 14:30";
+var displayBackup  = "";
+var displayContent = ""; // "DI2305231330";
+
+const textInput = document.getElementById("displayInput");
+
+/* ------------------------------------------------------------------ */
+
+var clockTimer = null;
+const months = ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"];
+function twoDigits (value) {
+	return value.toString().padStart(2, "0");
+}
+function displayClock() {
+		var now = new Date();
+		let clk = twoDigits(now.getDate()) + "." + months[now.getMonth()] + " " + twoDigits(now.getHours()) + ":" + twoDigits(now.getMinutes());
+		textInput.value = clk;
+		displayCurrent(textInput);
+}	
+function startClock() {
+	clockTimer = setInterval( displayClock, 30000);
+}
+function stopClock() {
+	if (! clockTimer) return false;
+	clearInterval(clockTimer);
+	clockTimer = null;
+	return true;
+}
+
+/* ------------------------------------------------------------------ */
+
+var ulmTimer = null;
+var ulmString = "Ulm Hbf     ";
+function displayUlm() {
+	textInput.value = ulmString;
+	displayCurrent(textInput);
+	
+	console.log(ulmString.length, ulmString);
+	if (ulmString.length < 12) 
+		 ulmString = " " + ulmString;
+	else ulmString = ulmString.substr(11,1) + ulmString.substr(0,11);
+}	
+function startUlm() {
+	ulmString = "Ulm Hbf";
+	ulmTimer = setInterval( displayUlm, 1000);
+}
+function stopUlm() {
+	if (! ulmTimer) return false;
+	clearInterval(ulmTimer);
+	ulmTimer = null;
+	return true;
+}
+
+/* ------------------------------------------------------------------ */
+
+function handleDisplayOption (radioInput) {
+	stopClock();
+	stopUlm();
+	switch (radioInput.value) {
+		case "text":
+			textInput.value = displayBackup;
+			textInput.focus();
+			break;
+		case "ulm":
+			displayUlm();
+			startUlm();
+			break;
+		case "time":
+			displayClock();
+			startClock();
+			break;
+	}
+	displayCurrent(textInput);
+}
+
+function displayCurrent(element) {
+	displayContent = (element.value + "            ").substr(0,12);
+	displayText();
+}
+	
+	
+function displayText() {
+	for (let s = 0; s < displayContent.length; s++) {
+		displayChar(s, displayContent[s])
+	}
+}
+
+function displayChar (segment, char) {
+	let row, col, id, state;
+	for (row = 0; row < 8; row++) {
+		for (col = 0; col < 6; col++) {
+			state = getCodeBit_6x8(char, row, col) ? "on" : "off";
+			id = "led-" + segment.toString(16) + row.toString(16) + col.toString(16);
+			setLED(id, state);
+		}
+	}
+}
+
+function setLED(id, state) {
+	let led;
+	led = document.getElementById(id);
+	if (state == "on") {
+		led.data_state = "on";
+		led.style.fill =" #eee";
+	} else {
+		led.data_state = "off";
+		led.style.fill = "transparent";
+	}
+}
+
+function toggleLED(led) {
+	if (led.data_state == "on") { setLED(led.id, "off"); }
+							else { setLED(led.id, "on"); }
+}
+
+document.addEventListener("DOMContentLoaded", function(event) { 
+	const elements = document.getElementsByTagName("svg");
+	
+	document.getElementById("do-text").checked = true;
+	displayCurrent(displayInput);
+	
+	// Set up Event Listener for Display text change click
+	textInput.addEventListener("change", function(event) {
+		displayCurrent(event.target);
+		displayBackup = displayContent;
+	});
+	textInput.addEventListener("click", function(event) {
+		displayCurrent(event.target);
+	});
+	
+	// Set up Event Listener for LED click
+	for (let i = 0; i < elements.length; i++) {
+		elements[i].addEventListener("click", function(event) {
+			let element = event.target;
+			//~ if (element.nodeName == "circle") element = event.target.parentNode;
+			if (element.nodeName == "rect") element = event.target.parentNode;
+			toggleLED(element);
+		});
+	}
+});
+</script>
+
+</div>
+

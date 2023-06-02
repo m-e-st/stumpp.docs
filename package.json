@@ -1,0 +1,26 @@
+{
+  "name": "deutschebahn",
+  "version": "1.0.0",
+  "description": "Standalone Programm für die DB",
+  "main": ".eleventy.js",
+  "scripts": {
+    "clean": "del public",
+    "dev": "eleventy --serve --watch",
+    "build": "ELEVENTY_ENV=production eleventy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m-e-st/deutschebahn.git"
+  },
+  "author": "Michael Stumpp",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/m-e-st/deutschebahn/issues"
+  },
+  "homepage": "https://github.com/m-e-st/deutschebahn#readme",
+  "dependencies": {
+    "del-cli": "^5.0.0",
+	"@11ty/eleventy": "^1.0.2",
+	"html-minifier": "^4.0.0"
+  }
+}
