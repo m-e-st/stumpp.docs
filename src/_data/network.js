@@ -37,6 +37,14 @@ module.exports = {
 			],
 			"img": "hourglass-64.png"
 		}, {
+			"id": "test",
+			"type": "info",
+			"name": "Debitoren",
+			"text": [
+				"Die Anbindung von Anlagen der Gebäudeautomation per WLAN ist derzeit nicht möglich. Es wird untersucht, ob eine solche Anbindung in Zukunft angeboten werden kann."
+			],
+			"img": "hourglass-64.png"
+		}, {
 			"id": "WLAN",
 			"type": "info",
 			"name": "WLAN",

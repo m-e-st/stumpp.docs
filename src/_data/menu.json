@@ -6,7 +6,7 @@
 			"text": [ "Derzeit liegen keine weiteren Informationen über die HTML-Tools von Station&Service vor" ],
 			"url": "./index.html"
 		}, {
-			"hide": true, 
+			"hide": false, 
 			"caption": "ITBF",
 			"hint": "Portbestellung für das Datennetz",
 			"img": "ethernet-port-53.png",
