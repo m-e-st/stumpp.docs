@@ -6,7 +6,8 @@
   "scripts": {
     "clean": "del public",
     "dev": "eleventy --serve --watch",
-    "build": "ELEVENTY_ENV=production eleventy"
+    "build": "ELEVENTY_ENV=production eleventy",
+    "browse": "firefox -p \"eleventy\" -browser -new-tab localhost:8080"
   },
   "repository": {
     "type": "git",

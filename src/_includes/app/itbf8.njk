@@ -1,0 +1,134 @@
+<!-- DB TOOLS NETWORK
+ --- ITBF 8
+ --- ITBF-8 Schema
+ --->
+ 
+<style>
+	.xl,.xi {padding:8px;display:block;border:none;margin-bottom:4px}
+	.xl {font-style: italic}
+	.xi {font-weight: bold;}
+</style>
+
+<div class="w3-row w3-card-4 w3-padding-16">
+	<div class="w3-container">
+		<header class="w3-container w3-pale-yellow">
+		<h4>Navigation</h4>
+		</header>
+		<div class="w3-container w3-third w3-card-4">
+			<h6><b>Netzwerk</b></h6>
+			<input id="ip-search" class="w3-input w3-border w3-round-large" placeholder="Suche nach Netzwerk">
+			<div class="w3-bar w3-padding-16">
+				<button onclick="xeq_cmd(0,'|<');" class="w3-btn"><img style="height:24px" src="res/img/first_page.svg" alt="anfang"></button>
+				<button onclick="xeq_cmd(0,'<<',$('#ip-subnet').val());" class="w3-btn"><img style="height:24px" src="res/img/chevron_left.svg" alt="voriges"></button>
+				<button onclick="xeq_cmd(0,'**',$('#ip-search').val());" class="w3-btn"><img style="height:24px" src="res/img/search.svg" alt="suchen"></button>
+				<button onclick="xeq_cmd(0,'>>',$('#ip-subnet').val());" class="w3-btn"><img style="height:24px" src="res/img/chevron_right.svg" alt="nächstes"></button></button>
+				<button onclick="xeq_cmd(0,'>|');" class="w3-btn"><img style="height:24px" src="res/img/last_page.svg" alt="ende"></button>
+			</div>
+		</div>
+		<div class="w3-container w3-third w3-card-4">
+			<h6><b>Bf.-Nummer</b></h6>
+			<input id="nr-search" class="w3-input w3-border w3-round-large" placeholder="Suche nach Bahnhofsnummer">
+			<div class="w3-bar w3-padding-16">
+				<button onclick="xeq_cmd(1,'|<');" class="w3-btn"><img style="height:24px" src="res/img/first_page.svg" alt="anfang"></button>
+				<button onclick="xeq_cmd(1,'<<',$('#bf-number').val());" class="w3-btn"><img style="height:24px" src="res/img/chevron_left.svg" alt="voriges"></button>
+				<button onclick="xeq_cmd(1,'**',$('#nr-search').val());" class="w3-btn"><img style="height:24px" src="res/img/search.svg" alt="suchen"></button>
+				<button onclick="xeq_cmd(1,'>>',$('#bf-number').val());" class="w3-btn"><img style="height:24px" src="res/img/chevron_right.svg" alt="nächstes"></button></button>
+				<button onclick="xeq_cmd(1,'>|');" class="w3-btn"><img style="height:24px" src="res/img/last_page.svg" alt="ende"></button>
+			</div>
+		</div>
+		<div class="w3-container w3-third w3-card-4">
+			<h6><b>Bf.-Name</b></h6>
+			<input id="name-search" class="w3-input w3-border w3-round-large" placeholder="Suche nach Bahnhofsname">
+			<div class="w3-bar w3-padding-16">
+				<button onclick="xeq_cmd(2,'|<');" class="w3-btn"><img style="height:24px" src="res/img/first_page.svg" alt="anfang"></button>
+				<button onclick="xeq_cmd(2,'<<',$('#bf-name').val());" class="w3-btn"><img style="height:24px" src="res/img/chevron_left.svg" alt="voriges"></button>
+				<button onclick="xeq_cmd(2,'**',$('#name-search').val());" class="w3-btn"><img style="height:24px" src="res/img/search.svg" alt="suchen"></button>
+				<button onclick="xeq_cmd(2,'>>',$('#bf-name').val());" class="w3-btn"><img style="height:24px" src="res/img/chevron_right.svg" alt="nächstes"></button></button>
+				<button onclick="xeq_cmd(2,'>|');" class="w3-btn"><img style="height:24px" src="res/img/last_page.svg" alt="ende"></button>
+			</div>
+		</div>
+	</div>
+</div> 
+
+<div class="w3-row w3-card-4 w3-padding-16">
+	<div class="w3-half w3-container">
+		<header class="w3-container w3-red">
+		<h4>Netzwerk</h4>
+		</header>
+		<div class="w3-section">
+			<label class="xl w3-third">IP Subnetz</label>		<input id="ip-subnet" 	readonly class="xi w3-twothird w3-sand" value="0.0.0.0/0"><br>
+			<label class="xl w3-third">Erste IP-Adresse</label>	<input id="ip-first" 	readonly class="xi w3-twothird w3-sand" value="0.0.0.0"><br>
+			<label class="xl w3-third">Letzte IP Adresse</label><input id="ip-last" 	readonly class="xi w3-twothird w3-sand" value="0.0.0.254"><br>
+			<label class="xl w3-third">Subnetz-Maske</label>	<input id="ip-mask"		readonly class="xi w3-twothird w3-sand" value="255.255.252.0"><br>
+			<label class="xl w3-third">Anzahl Adressen</label>	<input id="ip-count" 	readonly class="xi w3-twothird w3-sand" value="1022"><br>
+		</div>
+	</div>
+	<div class="w3-half w3-container ">
+		<header class="w3-container w3-blue">
+		<h4>Verkehrsstation</h4>
+		</header>
+		<div class="w3-section">
+			<label class="xl w3-third">Bf. Nummer</label>		<input id="bf-number" 	readonly class="xi w3-twothird w3-sand" value="0000">
+			<label class="xl w3-third">Bf. Name</label>			<input id="bf-name"		readonly class="xi w3-twothird w3-sand" value="Timbuktu">
+			<label class="xl w3-third">Bf. Anschrift</label>	<input id="bf-address"	readonly class="xi w3-twothird w3-sand" value="Strasse 24, 12345 Ort">
+			<label class="xl w3-third">Bahnstelle</label>		<input id="bf-account"	readonly class="xi w3-twothird w3-sand" value="999999">
+			<label class="xl w3-third">Betriebsstelle</label>	<input id="bf-betrieb"	readonly class="xi w3-twothird w3-sand" value="AAA">
+		</div>
+	</div>
+</div> 
+
+<!-- -->
+
+
+<script src="res/ITBF8.js"></script>
+<script>
+	
+$(document).ready(function(){
+  // jQuery initialization goes here...
+	itbf8_createIndices();
+	display_network(itbf8_retrieve_number("|<"));
+}); 
+
+function xeq_cmd(pos, command, pattern) {
+	console.log("pattern", pattern);
+	switch(pos) {
+		case 0: display_network(itbf8_retrieve_network(command, pattern));
+				break;
+		case 1: display_network(itbf8_retrieve_number(command, pattern));
+				break;
+		case 2: display_network(itbf8_retrieve_name(command, pattern));
+				break;
+	}
+	console.log ('click', pos, pattern)
+}
+
+function display_network(item) {
+	if (item == undefined) {
+		$("#ip-subnet" 	).val("");
+		$("#ip-first" 	).val("");
+		$("#ip-last" 	).val("");
+		$("#ip-mask"	).val("");
+		$("#ip-count" 	).val("");
+		$("#bf-number" 	).val("");
+		$("#bf-name"	).val("");
+		$("#bf-address"	).val("");
+		$("#bf-account"	).val("");
+		$("#bf-betrieb"	).val("");
+		return;
+	}
+	//~ console.log (item);
+	$("#ip-subnet" 	).val(item.subnetz);
+	$("#ip-first" 	).val(network_ipfirst(item.subnetz));
+	$("#ip-last" 	).val(network_iplast(item.subnetz));
+	$("#ip-mask"	).val(network_ipmask(item.subnetz));
+	$("#ip-count" 	).val(network_ipwidth(item.subnetz));
+	$("#bf-number" 	).val(item.vst_nr);
+	$("#bf-name"	).val(item.vst_name);
+	$("#bf-address"	).val(item.vst_strasse.concat((item.vst_strasse == "")?'':', ', item.vst_plz, ' ', item.vst_ort));
+	$("#bf-account"	).val(item.bahnstelle);
+	$("#bf-betrieb"	).val(item.vst_100);
+}
+
+</script>
+
+

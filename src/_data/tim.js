@@ -1,7 +1,7 @@
 module.exports = {
 	"title": "TIM server database",
-	"version": "1.0.1",
-	"date": "2023-01-20",
+	"version": "1.0.4",
+	"date": "2023-06-09",
 	
 	"server": {
 		"S100": {
@@ -30,7 +30,7 @@ module.exports = {
 		},
 		"S104": {
 			"sid": 104,
-			"type": "-",
+			"type": "p",
 			"name": "RB-West",
 			"fqdn": "tim-dbsus-rbwest.ga.itbf.db.de"
 		},
@@ -57,6 +57,11 @@ module.exports = {
 			"sid": 101,
 			"server": "RB-Nord",
 			"fqdn": "tim-dbsus-rbnord.ga.itbf.db.de",
+			"text": [
+					"09.06.2023:",
+					"Der TIM Server \"RB-Nord\" bedient jetzt nur noch Standorte des RB Nord. " +
+					"Alle Anlagen-Aufschaltungen des RB West wurden auf den neu eingerichteten Server \"RB-West\" umgezogen."
+					],
 			"area": {
 				"shape": "poly",
 				"coords": "100,1, 170,35, 155,87, 181,105, 165,119, 155,182, 126,190, 120,172, 109,128, 58,127, 37,143, 45,70, 95,59"
@@ -76,12 +81,13 @@ module.exports = {
 		},{
 			"code": "west",			
 			"name": "RB West",
-			"server": "RB-Nord",
-			"sid": 101,
-			"fqdn": "tim-dbsus-rbnord.ga.itbf.db.de",
+			"server": "RB-West",
+			"sid": 104,
+			"fqdn": "tim-dbsus-rbwest.ga.itbf.db.de",
 			"text": [
-					"Die Anlagen des RB West sind derzeit auf dem TIM-Server des RB Nord aufgeschaltet. " +
-					"Sobald der TIM Server \"RB-West\" zur Verfügung steht, werden die Anlagen umgezogen."
+					"09.06.2023:",
+					"Der TIM Server \"RB-West\" steht jetzt zur Verfügung. " +
+					"Alle Anlagen-Aufschaltungen wurden vom bisherigen Server \"RB-Nord\" hierher umgezogen."
 					],
 			"area": {
 				"shape": "poly",
@@ -139,7 +145,9 @@ module.exports = {
 			"server": "Abnahme",
 			"fqdn": "tim-dbsus-abnahme.ga.itbf.db.de",
 			"text": [
-					"Der Abnahme- und Quarantäneserver bedient alle Regionalbereiche."
+					"Der Abnahme- und Quarantäneserver bedient alle Regionalbereiche. " +
+					"Die aufgeschalteten Anlagen sind produktiv. " +
+					"Die Entstörungsbeauftragung ist deaktiviert." 
 					],
 			"color": "yellow"
 		},{
@@ -157,26 +165,25 @@ module.exports = {
 
 	"BMs": [
 		{ "name": "Augsburg", "RB": "RB Süd", "sid": "103", "fqdn": "tim-dbsus-rbsuedsuedwest.ga.itbf.db.de" },
-		{ "name": "Bamberg", "RB": "RB Süd", "sid": "103", "fqdn": "tim-dbsus-rbsuedsuedwest.ga.itbf.db.de" },
 		{ "name": "Berlin Fernbahnhöfe", "RB": "RB Ost", "sid": "100", "fqdn": "tim-dbsus-rbostsuedost.ga.itbf.db.de" },
 		{ "name": "Berlin Regionalbahnhöfe", "RB": "RB Ost", "sid": "100", "fqdn": "tim-dbsus-rbostsuedost.ga.itbf.db.de" },
-		{ "name": "Bielefeld", "RB": "RB West", "sid": "101", "fqdn": "tim-dbsus-rbnord.ga.itbf.db.de" },
+		{ "name": "Bielefeld", "RB": "RB West", "sid": "104", "fqdn": "tim-dbsus-rbwest.ga.itbf.db.de" },
 		{ "name": "Braunschweig / Göttingen", "RB": "RB Nord", "sid": "101", "fqdn": "tim-dbsus-rbnord.ga.itbf.db.de" },
 		{ "name": "Bremen / Osnabrück", "RB": "RB Nord", "sid": "101", "fqdn": "tim-dbsus-rbnord.ga.itbf.db.de" },
 		{ "name": "Chemnitz", "RB": "RB Südost", "sid": "100", "fqdn": "tim-dbsus-rbostsuedost.ga.itbf.db.de" },
 		{ "name": "Cottbus", "RB": "RB Ost", "sid": "100", "fqdn": "tim-dbsus-rbostsuedost.ga.itbf.db.de" },
 		{ "name": "Darmstadt", "RB": "RB Mitte", "sid": "102", "fqdn": "tim-dbsus-rbmitte.ga.itbf.db.de" },
-		{ "name": "Dortmund", "RB": "RB West", "sid": "101", "fqdn": "tim-dbsus-rbnord.ga.itbf.db.de" },
+		{ "name": "Dortmund", "RB": "RB West", "sid": "104", "fqdn": "tim-dbsus-rbwest.ga.itbf.db.de" },
 		{ "name": "Dresden", "RB": "RB Südost", "sid": "100", "fqdn": "tim-dbsus-rbostsuedost.ga.itbf.db.de" },
-		{ "name": "Duisburg", "RB": "RB West", "sid": "101", "fqdn": "tim-dbsus-rbnord.ga.itbf.db.de" },
-		{ "name": "Düsseldorf", "RB": "RB West", "sid": "101", "fqdn": "tim-dbsus-rbnord.ga.itbf.db.de" },
+		{ "name": "Duisburg", "RB": "RB West", "sid": "104", "fqdn": "tim-dbsus-rbwest.ga.itbf.db.de" },
+		{ "name": "Düsseldorf", "RB": "RB West", "sid": "104", "fqdn": "tim-dbsus-rbwest.ga.itbf.db.de" },
 		{ "name": "Erfurt", "RB": "RB Südost", "sid": "100", "fqdn": "tim-dbsus-rbostsuedost.ga.itbf.db.de" },
-		{ "name": "Essen", "RB": "RB West", "sid": "101", "fqdn": "tim-dbsus-rbnord.ga.itbf.db.de" },
+		{ "name": "Essen", "RB": "RB West", "sid": "104", "fqdn": "tim-dbsus-rbwest.ga.itbf.db.de" },
 		{ "name": "Frankfurt a. M.", "RB": "RB Mitte", "sid": "102", "fqdn": "tim-dbsus-rbmitte.ga.itbf.db.de" },
 		{ "name": "Freiburg", "RB": "RB Südwest", "sid": "103", "fqdn": "tim-dbsus-rbsuedsuedwest.ga.itbf.db.de" },
 		{ "name": "Friedrichshafen", "RB": "RB Südwest", "sid": "103", "fqdn": "tim-dbsus-rbsuedsuedwest.ga.itbf.db.de" },
 		{ "name": "Gießen", "RB": "RB Mitte", "sid": "102", "fqdn": "tim-dbsus-rbmitte.ga.itbf.db.de" },
-		{ "name": "Hagen", "RB": "RB West", "sid": "101", "fqdn": "tim-dbsus-rbnord.ga.itbf.db.de" },
+		{ "name": "Hagen", "RB": "RB West", "sid": "104", "fqdn": "tim-dbsus-rbwest.ga.itbf.db.de" },
 		{ "name": "Halle (Saale)", "RB": "RB Südost", "sid": "100", "fqdn": "tim-dbsus-rbostsuedost.ga.itbf.db.de" },
 		{ "name": "Hamburg", "RB": "RB Nord", "sid": "101", "fqdn": "tim-dbsus-rbnord.ga.itbf.db.de" },
 		{ "name": "Hannover", "RB": "RB Nord", "sid": "101", "fqdn": "tim-dbsus-rbnord.ga.itbf.db.de" },
@@ -184,24 +191,23 @@ module.exports = {
 		{ "name": "Karlsruhe", "RB": "RB Südwest", "sid": "103", "fqdn": "tim-dbsus-rbsuedsuedwest.ga.itbf.db.de" },
 		{ "name": "Kassel", "RB": "RB Mitte", "sid": "102", "fqdn": "tim-dbsus-rbmitte.ga.itbf.db.de" },
 		{ "name": "Koblenz", "RB": "RB Mitte", "sid": "102", "fqdn": "tim-dbsus-rbmitte.ga.itbf.db.de" },
-		{ "name": "Köln", "RB": "RB West", "sid": "101", "fqdn": "tim-dbsus-rbnord.ga.itbf.db.de" },
+		{ "name": "Köln", "RB": "RB West", "sid": "104", "fqdn": "tim-dbsus-rbwest.ga.itbf.db.de" },
 		{ "name": "Leipzig", "RB": "RB Südost", "sid": "100", "fqdn": "tim-dbsus-rbostsuedost.ga.itbf.db.de" },
 		{ "name": "Magdeburg", "RB": "RB Südost", "sid": "100", "fqdn": "tim-dbsus-rbostsuedost.ga.itbf.db.de" },
 		{ "name": "Mainz", "RB": "RB Mitte", "sid": "102", "fqdn": "tim-dbsus-rbmitte.ga.itbf.db.de" },
 		{ "name": "Mannheim", "RB": "RB Südwest", "sid": "103", "fqdn": "tim-dbsus-rbsuedsuedwest.ga.itbf.db.de" },
+		{ "name": "Mecklenburg-Vorpommern", "RB": "RB Ost", "sid": "100", "fqdn": "tim-dbsus-rbostsuedost.ga.itbf.db.de" },
 		{ "name": "München", "RB": "RB Süd", "sid": "103", "fqdn": "tim-dbsus-rbsuedsuedwest.ga.itbf.db.de" },
-		{ "name": "Münster (Westf)", "RB": "RB West", "sid": "101", "fqdn": "tim-dbsus-rbnord.ga.itbf.db.de" },
+		{ "name": "Münster (Westf)", "RB": "RB West", "sid": "104", "fqdn": "tim-dbsus-rbwest.ga.itbf.db.de" },
+		{ "name": "Nordfranken", "RB": "RB Süd", "sid": "103", "fqdn": "tim-dbsus-rbsuedsuedwest.ga.itbf.db.de" },
 		{ "name": "Nürnberg", "RB": "RB Süd", "sid": "103", "fqdn": "tim-dbsus-rbsuedsuedwest.ga.itbf.db.de" },
 		{ "name": "Potsdam", "RB": "RB Ost", "sid": "100", "fqdn": "tim-dbsus-rbostsuedost.ga.itbf.db.de" },
 		{ "name": "Regensburg", "RB": "RB Süd", "sid": "103", "fqdn": "tim-dbsus-rbsuedsuedwest.ga.itbf.db.de" },
 		{ "name": "Rosenheim", "RB": "RB Süd", "sid": "103", "fqdn": "tim-dbsus-rbsuedsuedwest.ga.itbf.db.de" },
-		{ "name": "Rostock", "RB": "RB Ost", "sid": "100", "fqdn": "tim-dbsus-rbostsuedost.ga.itbf.db.de" },
 		{ "name": "Saarbrücken", "RB": "RB Mitte", "sid": "102", "fqdn": "tim-dbsus-rbmitte.ga.itbf.db.de" },
 		{ "name": "Schleswig-Holstein", "RB": "RB Nord", "sid": "101", "fqdn": "tim-dbsus-rbnord.ga.itbf.db.de" },
-		{ "name": "Schwerin", "RB": "RB Ost", "sid": "100", "fqdn": "tim-dbsus-rbostsuedost.ga.itbf.db.de" },
 		{ "name": "Stuttgart", "RB": "RB Südwest", "sid": "103", "fqdn": "tim-dbsus-rbsuedsuedwest.ga.itbf.db.de" },
-		{ "name": "Ulm", "RB": "RB Südwest", "sid": "103", "fqdn": "tim-dbsus-rbsuedsuedwest.ga.itbf.db.de" },
-		{ "name": "Würzburg", "RB": "RB Süd", "sid": "103", "fqdn": "tim-dbsus-rbsuedsuedwest.ga.itbf.db.de" }
+		{ "name": "Ulm", "RB": "RB Südwest", "sid": "103", "fqdn": "tim-dbsus-rbsuedsuedwest.ga.itbf.db.de" }
 	],
-	"result": 46
+	"result": 44
 }

@@ -1,4 +1,7 @@
 <!-- deutschebahn header.njk - stone header and menu -->
+<!--
+	v2 31.08.2023 spearate "hwn-btn" class defines width; "w3-button" removed.
+-->
 
 <header class="{{ "w3-top" if not head.topscroll }}">
 
@@ -14,14 +17,14 @@
 		</div>
 
 		<div class="w3-container w3-cell w3-cell-middle w3-hide-small">
-			{% for data in menu.topmenu %}
+			{% for data in menus.top %}
 				{% if not data.hide %}
 					{% if data.url -%}
 						<a href="{{ data.url }}" {% if data.target -%}target="{{ data.target }}"{%- endif %}>
 					{%- endif %}
 					<button {% if data.action -%}onclick="{{ data.action }}"{%- endif %}
 							{% if data.disabled %}disabled{% endif %}
-							class="w3-bar-item w3-button hwn-textstone hwn-hover-pale-stone {% if data.menu-right %}w3-right w3-right-align{% endif %}"
+							class="w3-bar-item w3-button hwn-btn hwn-textstone hwn-hover-pale-stone {% if data.menu-right %}w3-right w3-right-align{% endif %}"
 							{% if data.hint -%}title="{{ data.hint }}"{%- endif %}
 					>
 						{{ data.caption }}

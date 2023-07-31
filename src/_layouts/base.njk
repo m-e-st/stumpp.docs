@@ -1,5 +1,6 @@
+<!-- db tools -->
+<!-- v2 31.08.2023 jquery.js added -->
 <!DOCTYPE html>
-<!-- tim dispatcher -->
 <html lang="de">
     <head>
 		<meta charset="utf-8">											<!-- The following 2 meta tags *must* come first in the <head> -->
@@ -24,6 +25,9 @@
 		<link rel="stylesheet" href="lib/w3.css" />
 		<link rel="stylesheet" href="res/main.css" />
 		
+		{% if enable.jquery %}
+			<script src="lib/jquery.min.js" ></script>	
+		{% endif %}
 		{% if enable.sjcl %}
 			<script src="lib/sjcl.min.js" defer></script>	
 			<script src="res/cryptor.js" defer></script>
