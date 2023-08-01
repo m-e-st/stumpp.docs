@@ -61,25 +61,36 @@ function itbf8_createIndices() {
 
 /** --- */
 
+let current = 0;
+
 function itbf8_retrieve_network (command, pattern)	{ return _itbf8_retrieve(index_networks, command, pattern); }
 function itbf8_retrieve_number (command, pattern)	{ return _itbf8_retrieve(index_numbers, command, pattern); }
 function itbf8_retrieve_name (command, pattern)		{ return _itbf8_retrieve(index_names, command, pattern); }
 	
 function _itbf8_retrieve (indexarray, command, pattern) {
 	
-	let index = -1;
+	let index = 0;
+	let ndx = -1;
 	switch (command) {
 		case "|<":	index = indexarray[0].index;
 					break;
 		case ">|":	index = indexarray[indexarray.length-1].index;
 					break;
-		case "<<":	index = indexarray.findIndex(function(item) { return item.value == pattern; });
-					if (--index < 0) index = 0;
+		case "<<":	ndx = indexarray.findIndex(function(item) { return item.index == current; });
+					if (--ndx < 0) ndx = 0;
+					index = indexarray[ndx].index;
 					break;
-		case ">>":	index = indexarray.findIndex(function(item) { return item.value == pattern; });
-					if (++index >= indexarray.length) index = indexarray.length - 1;
+		case ">>":	ndx = indexarray.findIndex(function(item) { return item.index == current; });
+					if (++ndx >= indexarray.length) ndx = indexarray.length - 1;
+					index = indexarray[ndx].index;
 					break;
-		case "**":	index = indexarray.findIndex(function(item) { return item.value.localeCompare(pattern); });
+		case "**":	ndx = indexarray.findIndex(function(item) { 
+													return ((typeof item.value == 'string') 
+															? item.value.localeCompare(pattern) >= 0
+															: item.value >= pattern);
+												});
+					if (ndx < 0) return undefined; /* wi've found nothing, so we don't touch anything */
+					index = indexarray[ndx].index;
 					break;
 		default:
 			
@@ -88,6 +99,7 @@ function _itbf8_retrieve (indexarray, command, pattern) {
 
 	if (index < 0) return undefined;
 	if (index >= indexarray.length) return undefined;
+	current = index;
 	return itbf8_data[index];
 }
 

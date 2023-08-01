@@ -16,7 +16,7 @@
 		</header>
 		<div class="w3-container w3-third w3-card-4">
 			<h6><b>Netzwerk</b></h6>
-			<input id="ip-search" class="w3-input w3-border w3-round-large" placeholder="Suche nach Netzwerk">
+			<input id="ip-search" onchange="xeq_cmd(0,'**',$('#ip-search').val());" class="w3-input w3-border w3-round-large" placeholder="Suche nach Netzwerk">
 			<div class="w3-bar w3-padding-16">
 				<button onclick="xeq_cmd(0,'|<');" class="w3-btn"><img style="height:24px" src="res/img/first_page.svg" alt="anfang"></button>
 				<button onclick="xeq_cmd(0,'<<',$('#ip-subnet').val());" class="w3-btn"><img style="height:24px" src="res/img/chevron_left.svg" alt="voriges"></button>
@@ -27,7 +27,7 @@
 		</div>
 		<div class="w3-container w3-third w3-card-4">
 			<h6><b>Bf.-Nummer</b></h6>
-			<input id="nr-search" class="w3-input w3-border w3-round-large" placeholder="Suche nach Bahnhofsnummer">
+			<input id="nr-search" onchange="xeq_cmd(1,'**',$('#nr-search').val());" class="w3-input w3-border w3-round-large" placeholder="Suche nach Bahnhofsnummer">
 			<div class="w3-bar w3-padding-16">
 				<button onclick="xeq_cmd(1,'|<');" class="w3-btn"><img style="height:24px" src="res/img/first_page.svg" alt="anfang"></button>
 				<button onclick="xeq_cmd(1,'<<',$('#bf-number').val());" class="w3-btn"><img style="height:24px" src="res/img/chevron_left.svg" alt="voriges"></button>
@@ -38,7 +38,7 @@
 		</div>
 		<div class="w3-container w3-third w3-card-4">
 			<h6><b>Bf.-Name</b></h6>
-			<input id="name-search" class="w3-input w3-border w3-round-large" placeholder="Suche nach Bahnhofsname">
+			<input id="name-search" onchange="xeq_cmd(2,'**',$('#name-search').val());" class="w3-input w3-border w3-round-large" placeholder="Suche nach Bahnhofsname">
 			<div class="w3-bar w3-padding-16">
 				<button onclick="xeq_cmd(2,'|<');" class="w3-btn"><img style="height:24px" src="res/img/first_page.svg" alt="anfang"></button>
 				<button onclick="xeq_cmd(2,'<<',$('#bf-name').val());" class="w3-btn"><img style="height:24px" src="res/img/chevron_left.svg" alt="voriges"></button>
