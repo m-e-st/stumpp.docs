@@ -2,7 +2,7 @@ module.exports = {
 	"title": "DB S&S Tools",
 	"description": "HTML Standalones für DB Station&service AG",
 	"caption": "Tools",
-	"version" : "0.3.0.8",
+	"version" : "0.3.0.12",
 	"url" : {
 		"home": "/",
 		"main": "https://www.deutschebahn.com/de/konzern/konzernprofil/Konzernunternehmen/db_station_service_ag-6879530",

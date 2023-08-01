@@ -80,7 +80,8 @@
 <!-- -->
 
 
-<script src="res/ITBF8.js"></script>
+<script src="res/itbf8data.js"></script>
+<script src="res/itbf8prog.js"></script>
 <script>
 	
 $(document).ready(function(){
@@ -90,7 +91,6 @@ $(document).ready(function(){
 }); 
 
 function xeq_cmd(pos, command, pattern) {
-	console.log("pattern", pattern);
 	switch(pos) {
 		case 0: display_network(itbf8_retrieve_network(command, pattern));
 				break;
@@ -99,7 +99,7 @@ function xeq_cmd(pos, command, pattern) {
 		case 2: display_network(itbf8_retrieve_name(command, pattern));
 				break;
 	}
-	console.log ('click', pos, pattern)
+	//~ console.log ('click', pos, pattern)
 }
 
 function display_network(item) {

@@ -20,8 +20,9 @@
   },
   "homepage": "https://github.com/m-e-st/deutschebahn#readme",
   "dependencies": {
+    "@11ty/eleventy": "^1.0.2",
+    "csv-to-js-parser": "^2.3.5",
     "del-cli": "^5.0.0",
-	"@11ty/eleventy": "^1.0.2",
-	"html-minifier": "^4.0.0"
+    "html-minifier": "^4.0.0"
   }
 }
