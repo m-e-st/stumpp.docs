@@ -209,5 +209,24 @@ module.exports = {
 		{ "name": "Stuttgart", "RB": "RB Südwest", "sid": "103", "fqdn": "tim-dbsus-rbsuedsuedwest.ga.itbf.db.de" },
 		{ "name": "Ulm", "RB": "RB Südwest", "sid": "103", "fqdn": "tim-dbsus-rbsuedsuedwest.ga.itbf.db.de" }
 	],
+
+	"bundesland": [
+		{ "name": "Baden-Württemberg", "RB": "RB Südwest", "sid": "103", "fqdn": "tim-dbsus-rbsuedsuedwest.ga.itbf.db.de" },
+		{ "name": "Bayern", "RB": "RB Süd", "sid": "103", "fqdn": "tim-dbsus-rbsuedsuedwest.ga.itbf.db.de" },
+		{ "name": "Berlin", "RB": "RB Ost", "sid": "100", "fqdn": "tim-dbsus-rbostsuedost.ga.itbf.db.de" },
+		{ "name": "Brandenburg", "RB": "RB Ost", "sid": "100", "fqdn": "tim-dbsus-rbostsuedost.ga.itbf.db.de" },
+		{ "name": "Bremen", "RB": "RB Nord", "sid": "101", "fqdn": "tim-dbsus-rbnord.ga.itbf.db.de" },
+		{ "name": "Hamburg", "RB": "RB Nord", "sid": "101", "fqdn": "tim-dbsus-rbnord.ga.itbf.db.de" },
+		{ "name": "Hessen", "RB": "RB Mitte", "sid": "102", "fqdn": "tim-dbsus-rbmitte.ga.itbf.db.de" },
+		{ "name": "Mecklenburg-Vorpommern", "RB": "RB Ost", "sid": "100", "fqdn": "tim-dbsus-rbostsuedost.ga.itbf.db.de" },
+		{ "name": "Niedersachsen", "RB": "RB Nord", "sid": "101", "fqdn": "tim-dbsus-rbnord.ga.itbf.db.de" },
+		{ "name": "Nordrhein-Westfalen", "RB": "RB West", "sid": "104", "fqdn": "tim-dbsus-rbwest.ga.itbf.db.de" },
+		{ "name": "Rheinland-Pfalz", "RB": "RB Mitte", "sid": "102", "fqdn": "tim-dbsus-rbmitte.ga.itbf.db.de" },
+		{ "name": "Saarland", "RB": "RB Mitte", "sid": "102", "fqdn": "tim-dbsus-rbmitte.ga.itbf.db.de" },
+		{ "name": "Sachsen", "RB": "RB Südost", "sid": "100", "fqdn": "tim-dbsus-rbostsuedost.ga.itbf.db.de" },
+		{ "name": "Sachsen-Anhalt", "RB": "RB Südost", "sid": "100", "fqdn": "tim-dbsus-rbostsuedost.ga.itbf.db.de" },
+		{ "name": "Schleswig-Holstein", "RB": "RB Nord", "sid": "101", "fqdn": "tim-dbsus-rbnord.ga.itbf.db.de" },
+		{ "name": "Thüringen", "RB": "RB Südost", "sid": "100", "fqdn": "tim-dbsus-rbostsuedost.ga.itbf.db.de" }
+	],
 	"result": 44
 }

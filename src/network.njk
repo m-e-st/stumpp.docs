@@ -22,7 +22,7 @@ permalink: "{{ page.fileSlug | slug }}.html"
 				<!-- this part will never be displayed -->
 			{% elif data.type == 'info' %}
 				<div class="w3-tag w3-right" style="width:80px;">{{ data.tag | d(data.name) }}</div>
-				<h3>Special: {{ data.name }}</h3>
+				<h3>Netzwerk: {{ data.name }}</h3>
 				{% if data.img %}
 					<img class="w3-image w3-right" style="width:64px; margin-left:24px margin-bottom:24px" src="res/img/{{ data.img }}">
 				{% endif %}
@@ -32,7 +32,7 @@ permalink: "{{ page.fileSlug | slug }}.html"
 			{% elif data.type == 'html' %}
 				{% include 'app/' +  data.file + '.njk' %}
 			{% elif data.type == 'form' %}
-				{% include data.id + '-bestellformular.njk' %}
+				{% include 'app/' +  data.file + '-form.njk' %}
 			{% else %}
 				<p class="w3-panel w3-padding w3-red">Ungültige Konfiguration: {{ data.type }}</p>
 			{% endif %}

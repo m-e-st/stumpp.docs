@@ -1,12 +1,12 @@
 ---
 layout: main.njk
-description: "Spezielle Sonderlösungen"
+description: "TIM Server"
 dbstyle: true
 permalink: "{{ page.fileSlug | slug }}.html"
 --- 
     
 <nav class="w3-sidebar w3-bar-block w3-white" style="width:130px">
-	{% for data in menus.specials %}
+	{% for data in menus.tim %}
 	  {% if not data.hide %}
 		<button id="btn-{{ data.id }}" class="w3-bar-item w3-button tablink" onclick="openPanel(event, '{{ data.id }}')">{{ data.name }}</button>
 	  {% endif %}
@@ -14,13 +14,13 @@ permalink: "{{ page.fileSlug | slug }}.html"
 </nav>
 
 <div class="" style="margin-left:130px">
-	{% for data in menus.specials %}
+	{% for data in menus.tim %}
 		<section id="{{ data.id }}" class="w3-container network" style="display:none">
 			{% if data.hide %}
 				<!-- this part will never be displayed -->
 			{% elif data.type == 'info' %}
 				<div class="w3-tag w3-right" style="width:80px;">{{ data.tag | d(data.name) }}</div>
-				<h3>Special: {{ data.name }}</h3>
+				<h3>TIM: {{ data.name }}</h3>
 				{% if data.img %}
 					<img class="w3-image w3-right" style="width:64px; margin-left:24px margin-bottom:24px" src="res/img/{{ data.img }}">
 				{% endif %}
@@ -56,8 +56,8 @@ function openPanel(evt, netType) {
 }
 
 document.addEventListener("DOMContentLoaded", function(event) { 
-	document.getElementById("ulmuhr").style.display = "block";
-	document.getElementById("btn-ulmuhr").className+= " w3-black";
+	document.getElementById("map").style.display = "block";
+	document.getElementById("btn-map").className+= " w3-black";
 });
 </script>
 

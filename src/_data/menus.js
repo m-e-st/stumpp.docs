@@ -12,12 +12,12 @@ module.exports = {
 			"url": "./index.html"
 		}, {
 			"caption": "TIM",
-			"hint": "TIM Serverauswahl über Landkarte",
+			"hint": "TIM Serverauswahl",
 			"img": "regionalbereiche.png",
 			"text": [
 				"Jeder Regionalbereich wird vom zugeordneten TIM-Servier bedient. Hinzu kommt der Quarantäne-Server für alle Regionen."
 			],
-			"url": "./tim-servermap.html"
+			"url": "./tim.html"
 		}, {
 			"caption": "ITBF",
 			"hint": "Datennetz der Gebäudeautomation",
@@ -42,13 +42,34 @@ module.exports = {
 		}
 	],
 	
-	"specials": [
+	"tim": [
 		{
-			"id"  : "ulmuhr",
-			"name": "Ulmer Uhr",
-			"tag" : "Uhr",
+			"id"  : "map",
+			"name": "Karte",
+			"hint": "Serverauswahl über Landkarte",
 			"type": "html",
-			"file": "uhr",
+			"file": "servermap",
+			"img" : "db-logo.svg"
+		},{
+			"id"  : "region",
+			"name": "Region",
+			"hint": "Serverauswahl über Regionalbereich",
+			"type": "html",
+			"file": "server-rb",
+			"img" : "db-logo.svg"
+		},{
+			"id"  : "bm",
+			"name": "BM",
+			"hint": "Serverauswahl über Bahnhofsmanagement",
+			"type": "html",
+			"file": "server-bm",
+			"img" : "db-logo.svg"
+		},{
+			"id"  : "country",
+			"name": "Land",
+			"hint": "Serverauswahl über Bundesland",
+			"type": "html",
+			"file": "serverland",
 			"img" : "db-logo.svg"
 		},{
 			"hide": true,
@@ -89,6 +110,27 @@ module.exports = {
 				"Dieser Eintrag existiert noch gar nicht"
 			],
 			"img": "hourglass-64.png"
+		}
+	],
+	
+	"specials": [
+		{
+			"id"  : "ulmuhr",
+			"name": "Ulmer Uhr",
+			"tag" : "Uhr",
+			"type": "html",
+			"file": "uhr",
+			"img" : "db-logo.svg"
+		},{
+			"hide": true,
+			"id"  : "empty",
+			"name": "Reserviert",
+			"tag":  "RSV",
+			"type": "info",
+			"text": [
+				"Dieser Eintrag existiert noch gar nicht"
+			],
+			"img" : "db-logo.svg"
 		}
 	],
 	
