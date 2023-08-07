@@ -1,4 +1,7 @@
-
+<!--
+  04.08.2023 created for DB-Tools
+  -->
+  
 <div class="w3-container">
 	<section class="">
 
@@ -16,7 +19,7 @@
 			{% else %}{% set color = "grey" %}{% endif %}
 			{% set hint %}{{ data.server }} ({{ data.sid }}) &#8680; {{ data.fqdn }}{% endset %}
 			{% set url %}https://{{ data.fqdn }}/enteliweb{% endset %}
-			<article class="tim-server w3-third w3-padding" data-fqdn="{{ data.fqdn }}">
+			<article class="tim-server w3-col m6 l4 w3-padding" data-fqdn="{{ data.fqdn }}">
 			<div class="w3-card-4">
 				<header>
 					<a href="{{ url }}" title="{{ hint | safe }}">

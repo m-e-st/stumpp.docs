@@ -1,15 +1,16 @@
-<!--
-  04.08.2023 adapted for DB-Tools
+<!-- tim-bm.njk
+  --
+  -- TIM Serverauswahl über Regionalbereich
   -->
-  
-  <div class="w3-container">
+
+
+<div class="w3-container">
 
 	<section class="w3-row-padding">
 		{% for data in tim.RBs %}
 			{% set hint %}{{ data.server }} ({{ data.sid }}) &#8680; {{ data.fqdn }}{% endset %}
 			{% set url %}https://{{ data.fqdn }}/enteliweb{% endset %}
-
-			<article class="tim-server w3-third w3-padding" data-fqdn="{{ data.fqdn }}">
+			<article class="tim-server w3-col m6 l4 " data-fqdn="{{ data.fqdn }}">
 				<div class="w3-card-4">
 					<header>
 						<a href="{{ url }}" title="{{ hint | safe }}">
@@ -45,4 +46,17 @@
 
 		{% endfor %}
 	</section>	
+<!--
+	<section class="w3-container">
+		<div id="status" class="w3-panel w3-border w3-padding" style="margin:8px;">
+			&nbsp;
+		</div>
+	</section>
+-->
 </div>
+
+<!--
+<svg xmlns="http://www.w3.org/2000/svg" class="w3-panel w3-image" style="height:100%;max-height:3.5rem"fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 01-3-3m3 3a3 3 0 100 6h13.5a3 3 0 100-6m-16.5-3a3 3 0 013-3h13.5a3 3 0 013 3m-19.5 0a4.5 4.5 0 01.9-2.7L5.737 5.1a3.375 3.375 0 012.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 01.9 2.7m0 0a3 3 0 01-3 3m0 3h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008zm-3 6h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008z" />
+</svg>								
+-->

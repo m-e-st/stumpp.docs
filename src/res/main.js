@@ -136,7 +136,7 @@ function toggleServerColor(key) {
  * 
  */
 function setServerStatus() {
-	console.info('setServerStatus');
+	//~ console.info('setServerStatus');
 	let article, url;
 	let nodes = document.getElementsByClassName("tim-server");
 	for (let i = 0; i < nodes.length; i++) {
@@ -155,7 +155,7 @@ function setServerStatus() {
  * 
  */
 function checkServer(callback, fqdn, imagepath="/enteliweb/images/refresh.png") {
-	console.info('checkServer');
+	//~ console.info('checkServer');
     let img = new Image();
     img.onload = function() { callback(fqdn, true); };
     img.onerror = function() { callback(fqdn, false); };

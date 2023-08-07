@@ -1,21 +1,23 @@
 ---
 layout: main.njk
-description: "ITBF-8 Netzwerk"
+description: "TIM Server"
 dbstyle: true
-enable:
-    jquery: true
 
 pagination:
-  data: menus.network
+  data: menus.dragon
   size: 1
 permalink: "{{ page.fileSlug | slug }}-{{ pagination.pageNumber }}.html"
-topic: "network"
+topic: "dragon"
 --- 
+<!-- dragon pagnination experience -->
 
+<!--
+-->
+    
 <!-- Unterauswahl für schmale Schirme -->
 <nav class="w3-hide-medium w3-hide-large" style="margin-top:-16px;">
 	<div class="w3-bar w3-dark-gray">
-	{% for data in menus.network %}
+	{% for data in menus.dragon %}
 	  {% if not data.hide %}
 		<a href="{{ page.fileSlug | slug }}-{{ loop.index0 }}.html" class="w3-bar-item w3-button">{{ data.name }}</a>
 	  {% endif %}
@@ -26,7 +28,7 @@ topic: "network"
 
 <!-- Sidebar -->
 <nav class="w3-hide-small sidebar w3-sidebar w3-bar-block w3-white">
-	{% for data in menus.network %}
+	{% for data in menus.dragon %}
 	  {% if not data.hide %}
 		<a href="{{ page.fileSlug | slug }}-{{ loop.index0 }}.html" class="w3-bar-item w3-button tablink">{{ data.name }}</a>
 	  {% endif %}
@@ -34,16 +36,18 @@ topic: "network"
 </nav>
 
 <div class="content">
-{%- for item in pagination.items %}
-	{%- if item.hint %}
+	{%- for item in pagination.items %}
 		<div class="w3-panel w3-pale-gray" style="overflow-x:hidden">
-			<h4>{{ item.hint }}</h4>
-		</div>
-	{% endif -%}
-	{%- if item.file %}
+	{%- if item.hint %}<h4>{{ item.hint }}</h2>{% endif -%}
+	</div>
+	{%if item.file %}
 		{% include 'app/' +  item.file + '.njk' %}
-	{% endif -%}
-{% endfor -%}
+	{% else %}
+		<img src="res/img/dragon.png">
+	{% endif %}
+	{% endfor -%}
+	</h2>
 </div>
 
+</div>
 

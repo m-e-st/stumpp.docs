@@ -1,7 +1,9 @@
-<!--
-  04.08.2023 adapted for DB-Tools
+<!-- tim-map.njk
+  --
+  -- TIM Serverauswahl über Landkarte
   -->
-  
+
+
 {% macro enteliweb(server) %}https://{{ server }}/enteliweb{% endmacro %}
 
 <script>
@@ -23,7 +25,7 @@
 			let fqdn = area.attributes.getNamedItem("data-fqdn").value
 			checkServer(function(u,s) {
 				//~ console.log('state of ', u, ' is ', s);
-				area.href=(s) ? area.attributes.getNamedItem("data-href").value : "/map";
+				area.href=(s) ? area.attributes.getNamedItem("data-href").value : "{{ page.url }}";
 				}, fqdn);
 	  		}
 	}
@@ -96,8 +98,4 @@
 			</article>
 		{% endfor %}
 	</section>
-
-
-	</section>
-
 </div>

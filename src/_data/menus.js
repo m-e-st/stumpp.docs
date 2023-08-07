@@ -1,6 +1,6 @@
 module.exports = {
 	"title": "DB Menus",
-	"version": "1.0.0",
+	"version": "1.0.2",
 	"date": "2023-07-31",
 	
 	"top": [
@@ -17,7 +17,7 @@ module.exports = {
 			"text": [
 				"Jeder Regionalbereich wird vom zugeordneten TIM-Servier bedient. Hinzu kommt der Quarantäne-Server für alle Regionen."
 			],
-			"url": "./tim.html"
+			"url": "./tim-1.html"
 		}, {
 			"caption": "ITBF",
 			"hint": "Datennetz der Gebäudeautomation",
@@ -25,7 +25,7 @@ module.exports = {
 			"text": [
 				"Informationen zum GA-Datennetz; Bestellungshilfe."
 			],
-			"url": "./network.html"
+			"url": "./network-0.html"
 		}, {
 			"caption": "Specials",
 			"hint": "Spezielle Sonderlösungen",
@@ -33,7 +33,16 @@ module.exports = {
 			"text": [
 				"Hier finden sich Sonderlösungen, welche nicht einem einzelnen Thema zugeordnet sind."
 			],
-			"url": "./specials.html"
+			"url": "./specials-0.html"
+		}, {
+			"hide": true,
+			"caption": "PoC",
+			"hint": "Various Proof of Concept experimental pages are here.",
+			"img": "dragon.png",
+			"text": [
+				"Hic sunt dracones."
+			],
+			"url": "./dragon-0.html"
 		}, {
 			"hide": true,
 			"caption": "leer",
@@ -44,39 +53,40 @@ module.exports = {
 	
 	"tim": [
 		{
+			"id"  : "index",
+			"name": "Server",
+			"hint": "TIM Server",
+			"file": "tim-index",
+			"img" : "server.png"
+		},{
 			"id"  : "map",
 			"name": "Karte",
 			"hint": "Serverauswahl über Landkarte",
-			"type": "html",
-			"file": "servermap",
-			"img" : "db-logo.svg"
+			"file": "tim-map",
+			"img" : "regionalbereiche.png"
 		},{
 			"id"  : "region",
 			"name": "Region",
 			"hint": "Serverauswahl über Regionalbereich",
-			"type": "html",
-			"file": "server-rb",
-			"img" : "db-logo.svg"
+			"file": "tim-rb",
+			"img" : "landscape.svg"
 		},{
 			"id"  : "bm",
 			"name": "BM",
 			"hint": "Serverauswahl über Bahnhofsmanagement",
-			"type": "html",
-			"file": "server-bm",
-			"img" : "db-logo.svg"
+			"file": "tim-bm",
+			"img" : "location_city.svg"
 		},{
 			"id"  : "country",
 			"name": "Land",
 			"hint": "Serverauswahl über Bundesland",
-			"type": "html",
-			"file": "serverland",
-			"img" : "db-logo.svg"
+			"file": "tim-land",
+			"img" : "germany.png"
 		},{
 			"hide": true,
 			"id"  : "empty",
 			"name": "Reserviert",
 			"tag":  "RSV",
-			"type": "info",
 			"text": [
 				"Dieser Eintrag existiert noch gar nicht"
 			],
@@ -89,23 +99,19 @@ module.exports = {
 			"id"  : "itbf8",
 			"name": "IP-Adressen",
 			"tag" : "ITBF-8",
-			"type": "html",
-			"file": "itbf8",
+			"file": "lan-itbf8",
 			"img" : "ethernet-port-53.png",
 		},{
-			"hide": true,
 			"id"  : "order",
 			"name": "Bestellung",
 			"tag" : "LAN",
-			"type": "info",
-			"file": "orderlan",
+			"file": "lan-order",
 			"img" : "ethernet-port-53.png",
 		},{
 			"hide": true,
 			"id"  : "empty",
 			"name": "Reserviert",
 			"tag":  "RSV",
-			"type": "info",
 			"text": [
 				"Dieser Eintrag existiert noch gar nicht"
 			],
@@ -118,8 +124,13 @@ module.exports = {
 			"id"  : "ulmuhr",
 			"name": "Ulmer Uhr",
 			"tag" : "Uhr",
-			"type": "html",
 			"file": "uhr",
+			"img" : "db-logo.svg"
+		},{
+			"id"  : "dragon",
+			"name": "Drache #1",
+			"tag" : "Drache",
+			"file": "dragon",
 			"img" : "db-logo.svg"
 		},{
 			"hide": true,
@@ -134,5 +145,31 @@ module.exports = {
 		}
 	],
 	
-	"rsv": ""
+	"dragon": [
+		{
+			"id"  : "dragon 1",
+			"name": "1. Drache",
+			"tag" : "dragon #1",
+			"img" : "dragon.png"
+		},{
+			"id"  : "dragon 2",
+			"name": "2. Drache",
+			"tag" : "dragon #2",
+			"img" : "dragon.png"
+		},{
+			"id"  : "dragon 3",
+			"name": "3. Drache",
+			"tag" : "dragon #3",
+			"img" : "dragon.png"
+		},{
+			"hide": true,
+			"id"  : "empty",
+			"name": "Reserviert",
+			"tag":  "RSV",
+			"text": [
+				"Dieser Eintrag existiert noch gar nicht"
+			],
+			"img" : "db-logo.svg"
+		}
+	]
 }

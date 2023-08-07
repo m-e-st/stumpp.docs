@@ -1,24 +1,20 @@
-<!-- deutschebahn snippet - footer.njk - lime footer -->
+<!-- deutschebahn snippet - footer.njk
+  -- 06.08.2023 - konsolidiert + footer... switch
+  -- 07.08.2023 - footer.server verschoben nach tim.njk
+  --
+  -->
 
 <footer class="w3-bottom" style="height:48px;">
-	<div class="w3-container hwn-pale-lime w3-padding-large w3-center">
-		<button class="w3-btn w3-left" ondblclick='openModal("offline");'>&nbsp;</button> <!-- was: &#127465;&#127466; -->
-		<span class="w3-text-blue-grey">
-			{% if not site.author.hide %}&copy; 2023 {% endif %}
-			<a href="{{ site.url.impressum }}">{{ site.author.name }}</a> 
-			<span id="versionstring"></span>
-		</span>
-		{% if testbutton %}
-		<div class="w3-right">
-		{%- for key, data in tim.server -%}
-			<span id="{{ key }}" data-fqdn="{{ data.fqdn }}" 
-				  class="tim-status w3-yellow w3-center hwn-uppercase"
-				  style="font-size:8px; display:inline-block;width:10px;margin:0 1px;padding 0 2px; cursor:pointer;"
-				  onclick='toggleServerColor("{{ key }}");');
-				  title="Server {{ data.sid }}"
-				  >{{ data.type }}</span>
-		{%- endfor -%}
+	<div class="w3-container w3-transparent w3-padding-large w3-center">
+
+
+		<div class="w3-mobile w3-hide-small">
+			<span class="w3-text-blue-grey">
+				{% if not site.author.hide %}&copy; 2023 {% endif %}
+				<a href="{{ site.url.impressum }}">{{ site.author.name }}</a> 
+				<span id="versionstring"></span>
+			</span>
 		</div>
-		{% endif %}
+
 	</div>
 </footer>

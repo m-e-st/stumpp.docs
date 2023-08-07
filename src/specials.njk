@@ -1,65 +1,47 @@
 ---
 layout: main.njk
-description: "Spezielle Sonderlösungen"
+description: "Specials"
 dbstyle: true
-permalink: "{{ page.fileSlug | slug }}.html"
+
+pagination:
+  data: menus.specials
+  size: 1
+permalink: "{{ page.fileSlug | slug }}-{{ pagination.pageNumber }}.html"
+topic: "specials"
 --- 
     
-<nav class="w3-sidebar w3-bar-block w3-white" style="width:130px">
+<!-- Unterauswahl für schmale Schirme -->
+<nav class="w3-hide-medium w3-hide-large" style="margin-top:-16px;">
+	<div class="w3-bar w3-dark-gray">
 	{% for data in menus.specials %}
 	  {% if not data.hide %}
-		<button id="btn-{{ data.id }}" class="w3-bar-item w3-button tablink" onclick="openPanel(event, '{{ data.id }}')">{{ data.name }}</button>
+		<a href="{{ page.fileSlug | slug }}-{{ loop.index0 }}.html" class="w3-bar-item w3-button">{{ data.name }}</a>
+	  {% endif %}
+	{% endfor %}
+	<button class="w3-bar-item w3-button w3-right" ondblclick='openModal("offline");'>&nbsp;</button>
+	</div> 
+</nav>
+
+<!-- Sidebar -->
+<nav class="w3-hide-small sidebar w3-sidebar w3-bar-block w3-white">
+	{% for data in menus.specials %}
+	  {% if not data.hide %}
+		<a href="{{ page.fileSlug | slug }}-{{ loop.index0 }}.html" class="w3-bar-item w3-button tablink">{{ data.name }}</a>
 	  {% endif %}
 	{% endfor %}
 </nav>
 
-<div class="" style="margin-left:130px">
-	{% for data in menus.specials %}
-		<section id="{{ data.id }}" class="w3-container network" style="display:none">
-			{% if data.hide %}
-				<!-- this part will never be displayed -->
-			{% elif data.type == 'info' %}
-				<div class="w3-tag w3-right" style="width:80px;">{{ data.tag | d(data.name) }}</div>
-				<h3>Special: {{ data.name }}</h3>
-				{% if data.img %}
-					<img class="w3-image w3-right" style="width:64px; margin-left:24px margin-bottom:24px" src="res/img/{{ data.img }}">
-				{% endif %}
-				{% for line in data.text %}
-					<p>{{ line | safe }}</p>
-				{% endfor %}
-			{% elif data.type == 'html' %}
-				{% include 'app/' +  data.file + '.njk' %}
-			{% elif data.type == 'form' %}
-				{% include 'app/' +  data.file + '-form.njk' %}
-			{% else %}
-				<p class="w3-panel w3-padding w3-red">Ungültige Konfiguration: {{ data.type }}</p>
-			{% endif %}
-		</section>
-	{% endfor %}
+<div class="content">
+	{%- for item in pagination.items %}
+		<div class="w3-panel w3-pale-gray" style="overflow-x:hidden">
+	{%- if item.hint %}<h4>{{ item.hint }}</h2>{% endif -%}
+	</div>
+	{%if item.file %}
+		{% include 'app/' +  item.file + '.njk' %}
+	{% endif %}
+	{% endfor -%}
+	</h2>
 </div>
-
-<script>
-function openPanel(evt, netType) {
-  var i, x, tablinks;
-  x = document.getElementsByClassName("network");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablink");
-  console.log(tablinks);
-  for (i = 0; i < tablinks.length; i++) {
-  console.log(i, tablinks[i]);
-    tablinks[i].className = tablinks[i].className.replace(" w3-black", ""); 
-  }
-  document.getElementById(netType).style.display = "block";
-  evt.currentTarget.className += " w3-black";
-}
-
-document.addEventListener("DOMContentLoaded", function(event) { 
-	document.getElementById("ulmuhr").style.display = "block";
-	document.getElementById("btn-ulmuhr").className+= " w3-black";
-});
-</script>
 
 </div>
 

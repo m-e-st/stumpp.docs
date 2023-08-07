@@ -43,7 +43,7 @@ function itbf8_scheme(parm, subnetz, offset) {
 	switch (parm) {
 		case "offset": return _network_string(netz + offset);
 		case "rg-lan": return _network_string(netz+ 1).concat (sepa, _network_string(netz+20));
-		case "rg-sys": return _network_string(netz+21).concat (sepa, _network_string(netz+20));
+		case "rg-sys": return _network_string(netz+21).concat (sepa, _network_string(netz+50));
 		case "rg-dev": return _network_string(netz+51).concat (sepa, _network_string(last-24));
 		case "rg-srv": return _network_string(last-24).concat (sepa, _network_string(last));
 	}

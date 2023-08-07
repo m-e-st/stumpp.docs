@@ -6,7 +6,9 @@
 <header class="{{ "w3-top" if not head.topscroll }}">
 
 	<div class="w3-cell-row {{ 'w3-white' if dbstyle else 'hwn-pale-stone' }}">
-		<div class="w3-container w3-cell w3-cell-middle w3-hover-shadow hwn-capitalize {{ head.class }}" style="width:11rem">
+		
+		<!-- LOGO Abschnitt -->
+		<div class="w3-mobile w3-container w3-cell w3-cell-middle w3-hover-shadow hwn-capitalize {{ head.class }}" style="width:11rem">
 			<a href="{{ site.url.info | default('/') }}">
 				<h3 class="hwn-text-stone" style="font-weight: 550;"
 					title="{{ description if description else site.description }}">
@@ -16,7 +18,8 @@
 			</a>
 		</div>
 
-		<div class="w3-container w3-cell w3-cell-middle w3-hide-small">
+		<!-- TOP MENU Mitte-->
+		<div class="w3-hide-small w3-container w3-cell w3-cell-middle">
 			{% for data in menus.top %}
 				{% if not data.hide %}
 					{% if data.url -%}
@@ -34,28 +37,62 @@
 			{% endfor %}
 		</div>
 
-		<div class="w3-container w3-cell w3-cell-middle w3-right-align" style="width:12rem;">
+		<div class="w3-container w3-cell w3-cell-middle w3-right-align" style="width:10rem;">
+			<!-- Zweites Logo oben rechts-->
+			<div class="w3-hide-small">
 			{% if testbutton %}
-			<a>
-				<img src="res/img/assistant_navigation.svg"
-					 class="w3-hover-shadow w3-image w3-section"
-					 style="width:32px; height:32px; cursor:pointer;"
-					 onclick="setServerStatus();"
-					 title="Überprüfung des Online Status der Server (Methode 2)">
-			</a>
-			<span class="w3-large hwn-text-stone">|</span>
+				<a>
+					<img src="res/img/assistant_navigation.svg"
+						 class="w3-hover-shadow w3-image w3-section"
+						 style="width:32px; height:32px; cursor:pointer;"
+						 onclick="setServerStatus();"
+						 title="Überprüfung des Online Status der Server (Methode 2)">
+				</a>
+				<span class="w3-large hwn-text-stone">|</span>
 			{% endif %}
-			<a>
-				<img src="res/timlogo.png"
-					 class="w3-hover-shadow w3-image w3-section"
-					 style="width:32px; height:32px; cursor:pointer;"
-					 onclick="document.getElementById('about').style.display='block';"
-					 title="{{ site.title }} Version {{ site.version }}">
-			</a>
+				<a>
+					<img src="res/timlogo.png"
+						 class="w3-hover-shadow w3-image w3-section"
+						 style="width:32px; height:32px; cursor:pointer;"
+						 onclick="document.getElementById('about').style.display='block';"
+						 title="{{ site.title }} Version {{ site.version }}">
+				</a>
+			</div>
+			
+			<!-- Hamburger Menu oben rechts -->
+			<div class="w3-hide-medium w3-hide-large">
+				<div class="w3-dropdown-hover">
+					<button class="w3-button w3-white"><img src="res/img/menu.svg" alt="menu" style="height:24px;" class="w3-image"></button>
+					<div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
+					{% for data in menus.top %}
+					  {% if not data.hide %}
+						{% if data.url -%}
+							<a class="" href="{{ data.url }}" {% if data.target -%}target="{{ data.target }}"{%- endif %}>
+						{%- endif %}
+						<button {% if data.action -%}onclick="{{ data.action }}"{%- endif %}
+								{% if data.disabled %}disabled{% endif %}
+								class="w3-bar-item w3-button hwn-btn hwn-textstone hwn-hover-pale-stone {% if data.menu-right %}w3-right w3-right-align{% endif %}"
+								{% if data.hint -%}title="{{ data.hint }}"{%- endif %}
+						>
+							{{ data.caption }}
+						</button>
+						{%if data.url %}</a>{% endif %}
+					  {%- endif %}
+					{% endfor %}
+						<button class="w3-bar-item w3-button hwn-btn hwn-textstone hwn-hover-pale-stone"
+								onclick="document.getElementById('about').style.display='block';"
+								title="{{ site.title }} Version {{ site.version }}">
+							Info
+						</button>
+					</div>
+				</div>
+				
+			</div>			
+			<!-- Ende Hamburger -->
 		</div>
 	</div>
 
 	{% if dbstyle %}
-	<hr class="hwn-border-pale-stone" style="margin-top:0; border: 1px solid;">
+	<hr class="hwn-border-pale-stone w3-hide-small" style="margin-top:0; border: 1px solid;">
 	{% endif %}
 </header>

@@ -1,21 +1,27 @@
----
-layout: main.njk
-description: "Information"
-dbstyle: true
-testbutton: false
---- 
+<!-- app-index.njk
+  --
+  -- Anzeige der Untermenü-Punkte als Cards
+  -->
 
+
+{% if topic == 'tim' %}{% set menu = menus.tim %}
+{% elif topic == 'itbf' %}{% set menu = menus.itbf %}
+{% elif topic == 'specials' %}{% set menu = menus.specials %}
+{% else %}{% set menu = menus.dragon %}
+{% endif %}
+			
 <div class="w3-container">
 
 	<section class="w3-row-padding">
-		{% for data in menu.topmenu %}
+		
+		{% for data in menu %}
 			{% if not data.hide %}
-			<article class="tim-server w3-third w3-padding" data-fqdn="{{ data.fqdn }}">
+			<article class="tim-server w3-col m12 l6 w3-padding" data-fqdn="{{ data.fqdn }}">
 				
 				<div class="w3-card-4">
 					<header>
 						<a href="{{ data.url }}" title="{{ data.hint | safe }}">
-							<div class="w3-container w3-padding w3-{{ data.color | d('blue') }} w3-hover-shadow caption">
+							<div class="w3-container w3-padding w3-{{ data.color | d('pale-gray') }} w3-hover-shadow caption">
 								<b>{{ data.hint | d('&nbsp;') | safe }}</b>
 								<span class="w3-right">{{ data.sid | d('&nbsp;') | safe }}</span>
 							</div>
