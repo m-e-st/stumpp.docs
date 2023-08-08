@@ -9,10 +9,11 @@
 		
 		<!-- LOGO Abschnitt -->
 		<div class="w3-mobile w3-container w3-cell w3-cell-middle w3-hover-shadow hwn-capitalize {{ head.class }}" style="width:11rem">
-			<a href="{{ site.url.info | default('/') }}">
+			<a href="{{ site.url.home | default('/') }}">
 				<h3 class="hwn-text-stone" style="font-weight: 550;"
 					title="{{ description if description else site.description }}">
-					<img src="res/img/db-logo.svg" style="float:left;height:32px;margin-right:12px;">
+					<img src="res/img/db-logo.svg" style="float:left;height:32px;margin-right:12px;"
+						 id="db-logo" onmouseover="document.getElementById('db-logo').classList.add('w3-spin');">
 					{{ caption if caption else site.caption}}
 				</h3>
 			</a>

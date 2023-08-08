@@ -40,8 +40,10 @@ let graceCounter = 0;
 
 function checkIntranetAccess() {
 	const fqdnTIM = 'tim.ga.itbf.db.de';
-	if (window.location.hostname == fqdnTIM) return true; /* we are hosted inside DB */
-	
+	if (window.location.hostname == fqdnTIM) { /* we are hosted inside DB */
+		displayMain();
+		return true;
+	}
 	graceCounter = 3;  /* graceCounter MUST match no of checkServer calls */
 	checkServer(callbackIntranetAccess, fqdnTIM, "/res/timlogo.png");
 	checkServer(callbackIntranetAccess, "localhost:8080", "/res/timlogo.png");
@@ -52,6 +54,14 @@ function callbackIntranetAccess(u,s) {
 	const urlGoHome = 'https://www.deutschebahn.com/de/konzern/konzernprofil/Konzernunternehmen/db_station_service_ag-6879530';
 	if (s) return; /* we have successfully found a valid item */
 	if (--graceCounter <= 0) { window.location.replace(urlGoHome); }
+	displayMain(graceCounter>0);
+}
+
+function displayMain(state=true) {
+	const nodes = document.getElementsByTagName('main');	
+	for (let i = 0; i < nodes.length; i++) {
+		nodes[i].style.display = (state) ? "block" : "none";
+	}
 }
 
 /**	********************************************************************

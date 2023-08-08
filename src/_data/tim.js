@@ -1,95 +1,18 @@
 module.exports = {
 	"title": "TIM server database",
-	"version": "1.1.4",
+	"version": "1.2.0",
 	"date": "2023-08-04",
 	
-	"server": {
-		"S100": {
-			"sid": 100,
-			"type": "p",
-			"name": "RB-Ost-Südost",
-			"fqdn": "tim-dbsus-rbostsuedost.ga.itbf.db.de"
-		},
-		"S101": {
-			"sid": 101,
-			"type": "p",
-			"name": "RB-Nord",
-			"fqdn": "tim-dbsus-rbnord.ga.itbf.db.de"
-		},
-		"S102": {
-			"sid": 102,
-			"type": "p",
-			"name": "RB-Mitte",
-			"fqdn": "tim-dbsus-rbmitte.ga.itbf.db.de"
-		},
-		"S103": {
-			"sid": 103,
-			"type": "p",
-			"name": "RB-Süd-Südwest",
-			"fqdn": "tim-dbsus-rbsuedsuedwest.ga.itbf.db.de"
-		},
-		"S104": {
-			"sid": 104,
-			"type": "p",
-			"name": "RB-West",
-			"fqdn": "tim-dbsus-rbwest.ga.itbf.db.de"
-		},
-		"S200": {
-			"sid": 200,
-			"type": "q",
-			"name": "Quarantäne",
-			"alias": "Abnahme",
-			"fqdn": "tim-dbsus-abnahme.ga.itbf.db.de"
-		},
-		"S300": {
-			"sid": 300,
-			"type": "t",
-			"name": "Test",
-			"alias": "Entwicklung",
-			"fqdn": "tsyffmsvaglt300.ga.itbf.db.de"
-		}
-	},
+
 	
-	Server: [
-				{ sid: 100, type: "p", name: "RB-Ost-Südost", fqdn: "tim-dbsus-rbostsuedost.ga.itbf.db.de" },
-{
-			"sid": 101,
-			"type": "p",
-			"name": "RB-Nord",
-			"fqdn": "tim-dbsus-rbnord.ga.itbf.db.de"
-		},
-{
-			"sid": 102,
-			"type": "p",
-			"name": "RB-Mitte",
-			"fqdn": "tim-dbsus-rbmitte.ga.itbf.db.de"
-		},
-{
-			"sid": 103,
-			"type": "p",
-			"name": "RB-Süd-Südwest",
-			"fqdn": "tim-dbsus-rbsuedsuedwest.ga.itbf.db.de"
-		},
-{
-			"sid": 104,
-			"type": "p",
-			"name": "RB-West",
-			"fqdn": "tim-dbsus-rbwest.ga.itbf.db.de"
-		},
-{
-			"sid": 200,
-			"type": "q",
-			"name": "Quarantäne",
-			"alias": "Abnahme",
-			"fqdn": "tim-dbsus-abnahme.ga.itbf.db.de"
-		},
-{
-			"sid": 300,
-			"type": "t",
-			"name": "Test",
-			"alias": "Entwicklung",
-			"fqdn": "tsyffmsvaglt300.ga.itbf.db.de"
-		}
+	server: [
+				{ sid: 100, type: "p", name: "RB-Ost-Südost",	fqdn: "tim-dbsus-rbostsuedost.ga.itbf.db.de"	},
+				{ sid: 101, type: "p", name: "RB-Nord",			fqdn: "tim-dbsus-rbnord.ga.itbf.db.de"			},
+				{ sid: 102, type: "p", name: "RB-Mitte",		fqdn: "tim-dbsus-rbmitte.ga.itbf.db.de"			},
+				{ sid: 103, type: "p", name: "RB-Süd-Südwest",	fqdn: "tim-dbsus-rbsuedsuedwest.ga.itbf.db.de"	},
+				{ sid: 104, type: "p", name: "RB-West", 		fqdn: "tim-dbsus-rbwest.ga.itbf.db.de"			},
+				{ sid: 200, type: "q", name: "Quarantäne",		fqdn: "tim-dbsus-abnahme.ga.itbf.db.de",		alias: "Abnahme" },
+				{ sid: 300, type: "t", name: "Test",			fqdn: "tsyffmsvaglt300.ga.itbf.db.de",			alias: "Entwicklung" }
 	],
 
 	"RBs": [

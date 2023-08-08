@@ -2,13 +2,13 @@ module.exports = {
 	title: "DB S&S Tools",
 	description: "HTML Tool für DB Station&service AG",
 	caption: "Tools",
-	version : "0.4.4.45",
+	version : "0.4.4.47",
 	url : {
 		home: "/",
 		main: "https://www.deutschebahn.com/de/konzern/konzernprofil/Konzernunternehmen/db_station_service_ag-6879530",
 		impressum: "https://www.deutschebahn.com/de/impressum",
 		info: "https://www.deutschebahn.com/de/konzern/konzernprofil/Konzernunternehmen/db_station_service_ag-6879530",
-		this: "https://tim-dispatcher.ga.itbf.db.de"
+		this: "https://tim.ga.itbf.db.de"
 	},
 	author: {
 		name: "DB Station&Service AG",

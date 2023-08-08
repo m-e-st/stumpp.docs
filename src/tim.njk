@@ -44,8 +44,8 @@ topic: "tim"
 		{%- if item.hint %}
 				
 			<div class=" w3-right" style="padding:12px;">
-			{%- for key, data in tim.server -%}
-				<span id="{{ key }}" data-fqdn="{{ data.fqdn }}" 
+			{%- for data in tim.server -%}
+				<span id="S{{ data.sid }}" data-fqdn="{{ data.fqdn }}" 
 					  class="tim-status w3-yellow w3-center hwn-uppercase"
 					  style="font-size:8px; display:inline-block;width:10px;margin:0 1px;padding 0 2px; cursor:pointer;"
 					  onclick='toggleServerColor("{{ key }}");');

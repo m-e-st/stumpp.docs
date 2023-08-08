@@ -15,22 +15,25 @@
 
 	<section class="w3-row-padding">
 		
-		{% for data in tim.Server %}
-			<article class="tim-server w3-col m12 l6 w3-padding" data-fqdn="{{ data.fqdn }}">
+		{% for data in tim.server %}
+			{% set hint %}{{ data.server }} ({{ data.sid }}) &#8680; {{ data.fqdn }}{% endset %}
+			{% set url %}https://{{ data.fqdn }}/enteliweb{% endset %}
+			<article class="w3-col m12 l6 w3-padding">
 				
 				<div class="w3-card-4">
 					<header>
-						<a href="{{ data.url }}" title="{{ data.hint | safe }}">
-							<div class="tim-status w3-container w3-padding w3-yellow w3-hover-shadow caption" data-fqdn="{{ data.fqdn }}">
+						<a href="{{ url }}" title="{{ hint | safe }}">
+							<div class="w3-container w3-padding w3-blue">
 								<b>{{ data.name | d('&nbsp;') | safe }}</b>
 								<span class="w3-right">{{ data.sid | d('&nbsp;') | safe }}</span>
 							</div>
 						</a>
 					</header>
 					
-					<div class="w3-container w3-white w3-hide-small">
+					<div class="tim-serverw w3-container w3-white w3-hide-small" data-fqdn="{{ data.fqdn }}">
 						<p class="" style="overflow:hidden;">
-							<a href="{{ data.url }}" title="{{ data.hint | safe }}" class="w3-margin-bottom ">
+						<span class="tim-status w3-badge w3-yellow w3-right" data-fqdn="{{ data.fqdn }}"><b>☀</b></span>
+							<a href="{{ url }}" title="{{ hint | safe }}" class="w3-margin-bottom ">
 								{{ data.fqdn }}
 							</a>
 						</p>

@@ -16,7 +16,7 @@ module.exports = {
 			"caption": "TIM",
 			"hint": "TIM Serverauswahl",
 			"img": "regionalbereiche.png",
-			color: "red",
+			color: "blue",
 			"text": [
 				"Jeder Regionalbereich wird vom zugeordneten TIM-Servier bedient. Hinzu kommt der Quarantäne-Server für alle Regionen."
 			],
@@ -25,7 +25,7 @@ module.exports = {
 			"caption": "ITBF",
 			"hint": "Datennetz der Gebäudeautomation",
 			"img": "ethernet-port-53.png",
-			color: "blue",
+			color: "green",
 			"text": [
 				"Informationen zum GA-Datennetz; Bestellungshilfe für GA-Netzwerk-Anschlüsse."
 			],
@@ -33,8 +33,8 @@ module.exports = {
 		}, {
 			"caption": "Specials",
 			"hint": "Spezielle Sonderlösungen",
-			"img": "timlogo.png",
-			color: "green",
+			"img": "db-logo.svg",
+			color: "red",
 			"text": [
 				"Hier finden sich Sonderlösungen, welche nicht einem einzelnen Thema zugeordnet sind."
 			],
