@@ -112,7 +112,6 @@ function checkServerStates() {
   		}	
 }
 
-
 /***
  * shows server status of all server elements using opacity
  * 
@@ -131,7 +130,6 @@ function setServerStates() {
 			}, url);
   		}
 }
-
 
 /***
  * toggle color of server indicators manually
@@ -161,7 +159,6 @@ function checkServer(callback, fqdn, imagepath="/enteliweb/images/refresh.png") 
     img.onerror = function() { callback(fqdn, false); };
     img.src = protocol + fqdn + imagepath + '?r=' + Math.random(); /* avoid caching */
 }
-
 
 /***
  * displays modal element
