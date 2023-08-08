@@ -21,7 +21,7 @@
 				<div class="w3-card-4">
 					<header>
 						<a href="{{ data.url }}" title="{{ data.hint | safe }}">
-							<div class="w3-container w3-padding w3-yellow w3-hover-shadow caption">
+							<div class="tim-status w3-container w3-padding w3-yellow w3-hover-shadow caption" data-fqdn="{{ data.fqdn }}">
 								<b>{{ data.name | d('&nbsp;') | safe }}</b>
 								<span class="w3-right">{{ data.sid | d('&nbsp;') | safe }}</span>
 							</div>

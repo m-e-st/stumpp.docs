@@ -8,10 +8,98 @@
 </div>
 <div class="w3-container">
 
-	<section class="w3-row-padding">
+<section class="w3-row-padding">
 <p>
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 </p>
-	</section>
+</section>
 
 </div>
+
+<form action="mailto:" class="w3-container w3-card-4 w3-light-grey w3-text-blue">
+
+<h4 class="w3-section">Lieferadresse für das Produkt</h4>
+<div class="w3-row w3-section">
+	<input class="w3-input w3-border" name="standort" type="text" placeholder="Standort (genaue Adresse)">
+</div>
+<div class="w3-row w3-section">
+	<div class="w3-col s6">
+	  <input class="w3-input w3-border" name="flur" type="text" placeholder="Flur/ Etage">
+	</div>
+	<div class="w3-rest">
+	  <input class="w3-margin-left w3-input w3-border" name="raum" type="text" placeholder="Raum">
+	</div>
+</div>
+
+<h4 class="w3-section">Produkteigenschaften</h4>
+<div class="w3-row w3-section">
+	<select class="w3-select" name="produktname">
+		<option value="" disabled>Port-Typ</option>
+		<option value="ITBF8 Port" selected>ITBF-8 Port für Gebäudeautomation</option>
+	</select>
+</div>
+<div class="w3-row w3-section">
+	<select class="w3-select" name="erloesgruppe">
+		<option value="" disabled>Erlösgruppe</option>
+		<option value="IT-Anschluss TK Infra DB S&S" selected>IT-Anschluss TK Infra DB S&amp;S</option>
+	</select>
+</div>
+<div class="w3-row w3-section">
+	<select class="w3-select" name="servicelevel">
+		<option value="" disabled>Servicelevel laut Servicekatalog</option>
+		<option value="basic" selected>Servicelevel: Basic</option>
+	</select>
+</div>
+<div class="w3-row w3-section">
+	<select class="w3-select" name="brandbreite">
+		<option value="" disabled>Bandbreitenklasse</option>
+		<option value="small" selected>Bandbreite: "small"</option>
+	</select>
+</div>
+<div class="w3-row w3-section">
+	<select class="w3-select" name="ermittelterpreis">
+		<option value="" disabled>Ermittelter Preis</option>
+		<option value="Preis nicht ermittelbar." selected>Preis nicht ermittelbar.</option>
+	</select>
+</div>
+
+<h4 class="w3-section">Erweiterte Einstellungen</h4>
+<div class="w3-row w3-section">
+	<select class="w3-select" name="medientyp">
+		<option value="" disabled>Medientyp</option>
+		<option value="Kupfer (RJ45)" selected>Kupfer (RJ45)</option>
+		<option value="LWL - Singlemode 1 Gbit/s">LWL - Singlemode 1 Gbit/s</option>
+		<option value="LWL - Multimode 1 Gbit/s">LWL - Multimode 1 Gbit/s</option>
+		<option value="LWL - Multimode 100 Mbit/s">LWL - Multimode 100 Mbit/s</option>
+		<option value="Kupfer (RJ45) - SFP">Kupfer (RJ45) - SFP</option>
+	</select>
+</div>
+<div class="w3-row w3-section">
+	<div class="w3-col s6">
+		<input class="w3-input w3-border" name="ipadresse" type="text" placeholder="IP-Adresse">
+	</div>
+	<div class="w3-rest">
+		<input class="w3-margin-left w3-input w3-border" name="subnetzmaske" type="text" placeholder="Subnetz-Maske">
+	</div>
+</div>
+<div class="w3-row w3-section">
+	<select class="w3-select" name="ipzuordnung">
+		<option value="" disabled>IP-Zuordnung</option>
+		<option value="statisch" selected>Statische IP</option>
+	</select>
+</div>
+<div class="w3-row w3-section">
+	<select class="w3-select" name="domain">
+		<option value="" disabled>Domäne Netzwerk</option>
+		<option value="gavpn.db.de" selected>gavpn.db.de</option>
+	</select>
+</div>
+<div class="w3-row w3-section">
+	<select class="w3-select" name="VPN">
+		<option value="" disabled>VPN</option>
+		<option value="DB-SUS-GA" selected>DB-SUS-GA</option>
+	</select>
+</div>
+
+<button class="w3-btn w3-block w3-section w3-blue w3-ripple w3-right">Übernehmen</button>
+</form>

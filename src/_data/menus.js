@@ -8,12 +8,15 @@ module.exports = {
 			"hide": true, 
 			"caption": "Info",
 			"hint": "Informationen",
-			"text": [ "Derzeit liegen keine weiteren Informationen über die HTML-Tools von Station&Service vor" ],
+			"img": "home.svg",
+			color: "gray",
+			"text": [ "Derzeit liegen keine weiteren Informationen über die HTML-Tools von Station&Service vor." ],
 			"url": "./index.html"
 		}, {
 			"caption": "TIM",
 			"hint": "TIM Serverauswahl",
 			"img": "regionalbereiche.png",
+			color: "red",
 			"text": [
 				"Jeder Regionalbereich wird vom zugeordneten TIM-Servier bedient. Hinzu kommt der Quarantäne-Server für alle Regionen."
 			],
@@ -22,14 +25,16 @@ module.exports = {
 			"caption": "ITBF",
 			"hint": "Datennetz der Gebäudeautomation",
 			"img": "ethernet-port-53.png",
+			color: "blue",
 			"text": [
-				"Informationen zum GA-Datennetz; Bestellungshilfe."
+				"Informationen zum GA-Datennetz; Bestellungshilfe für GA-Netzwerk-Anschlüsse."
 			],
 			"url": "./network-0.html"
 		}, {
 			"caption": "Specials",
 			"hint": "Spezielle Sonderlösungen",
 			"img": "timlogo.png",
+			color: "green",
 			"text": [
 				"Hier finden sich Sonderlösungen, welche nicht einem einzelnen Thema zugeordnet sind."
 			],
@@ -37,16 +42,20 @@ module.exports = {
 		}, {
 			"hide": true,
 			"caption": "PoC",
-			"hint": "Various Proof of Concept experimental pages are here.",
+			"hint": "Proof of Concept Pages",
 			"img": "dragon.png",
+			color: "black",
 			"text": [
 				"Hic sunt dracones."
 			],
 			"url": "./dragon-0.html"
 		}, {
 			"hide": true,
-			"caption": "leer",
-			"hint": "Diese Karte ist nicht belegt",
+			"caption": "Über",
+			"img": "about-94.png",
+			color: "light-blue",
+			"hint": "Über das Programm",
+			text: [ "HTML Tool für DB Station&service AG" ],
 			"url": "./"
 		}
 	],

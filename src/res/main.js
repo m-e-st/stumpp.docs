@@ -2,6 +2,8 @@
  *	TIM-Dispatcher.js 
  *
  *	Copyright 2022 Michael Stumpp <mstumpp@hwn.de>
+ * 
+ * 08.08.2023 completly new - divided server status and intranet check
  *
  */
 
@@ -17,21 +19,91 @@ document.addEventListener("DOMContentLoaded", function(event) {
   // DOM initialization goes here...
   //~ if (checkIntranetAccess() == false) openModal('offline');
   
-  //~ intervalTimer(true);
+  intervalTimer(true);
 });
 
+
+
+
+/**	********************************************************************
+ *	DB intranet check
+ *	executed once on web page start
+/**	********************************************************************
+ */
+
+
+/**	********************************************************************
+ *	TIM server online check
+ *	********************************************************************
+ *
+ **	intervalTimer
+ * 
+ *	Startet (true) und stoppt (false) den 60-Sekunden-Timer des ServerChecks
+ */
+ 
 const intervalTimer = (function serverTimer() {
     let timer = undefined;
+		console.log('interval timer', timer);
 
-    return function (state) {
-		console.info('interval state', state);
+    return function(state) {
+		console.log('interval state', state);
 		if(state) {
-			timer = setInterval (timerIntranetAccess, 6000); 
+			checkServerStates(); /* run once immediatelly */
+			timer = setInterval (checkServerStates, 6000); 
 		} else {
 			clearTimeout(timer); 
 		}
     }
 }());
+
+/**	checkServerStates
+ * 
+ *	Der Check läuft über alle DOM-Elemente mit der Klasse "tim-status"
+ *	Jedes gefundene Element hat ein Attribute "data-fqdn" zu haben.
+ *	Der mit der URL in "data-fqdn" referenzierte Server wird geprüft.
+ *	Die eigentliche Prüfung findet in der Funktion "checkServer()" statt.
+ *	Abhängig vom Prüfungsergebnis werden die Farbklassen vergebem
+ */
+ 
+function checkServerStates() {
+console.trace();
+	const nodes = document.getElementsByClassName('tim-status');
+	for (let i = 0; i < nodes.length; i++) {
+		let badge = nodes[i];
+		let url = badge.attributes.getNamedItem('data-fqdn').value;
+		checkServer(function(u,s) {
+			badge.classList.remove('w3-yellow');
+			badge.classList.remove('w3-green');
+			badge.classList.remove('w3-red');
+			if (s) badge.classList.add('w3-green');
+			  else badge.classList.add('w3-red');
+			}, url);
+  		}	
+}
+
+/** checkServer
+ *
+ *	Prüft auf die Existenz der angegebenen Datei.
+ *	Wird kein Dateipfad übergeben, wird auf das TIM-Refresh-Image geprüft
+ *	Das Default-Image ist "/enteliweb/images/refresh.png"
+ *
+ *	Diese Funktion wird (mit anderem Bild) auch zur Intranet-Prüfung verwendet!
+ */
+ 
+function checkServer(callback, fqdn, imagepath="/enteliweb/images/refresh.png") {
+	//~ console.info('checkServer');
+    let img = new Image();
+    img.onload = function() { callback(fqdn, true); };
+    img.onerror = function() { callback(fqdn, false); };
+    img.src = "https://" + fqdn + imagepath + '?r=' + Math.random(); /* avoid caching */
+}
+
+
+
+
+
+
+
 
 /***
  * check whether running on tim environment
@@ -148,18 +220,6 @@ function setServerStatus() {
 			  else article.classList.add("w3-opacity-max");
 			}, url);
   		}
-}
-
-/***
- * check online status loading an image
- * 
- */
-function checkServer(callback, fqdn, imagepath="/enteliweb/images/refresh.png") {
-	//~ console.info('checkServer');
-    let img = new Image();
-    img.onload = function() { callback(fqdn, true); };
-    img.onerror = function() { callback(fqdn, false); };
-    img.src = "https://" + fqdn + imagepath + '?r=' + Math.random(); /* avoid caching */
 }
 
 

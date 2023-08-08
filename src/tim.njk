@@ -2,13 +2,17 @@
 layout: main.njk
 description: "TIM Server"
 dbstyle: true
-
+	
 pagination:
   data: menus.tim
   size: 1
 permalink: "{{ page.fileSlug | slug }}-{{ pagination.pageNumber }}.html"
 topic: "tim"
 --- 
+
+<script>
+	document.addEventListener("DOMContentLoaded", function(evt)	{ intervalTimer(true);});
+</script>
 
 <!-- Unterauswahl für schmale Schirme -->
 <nav class="w3-hide-medium w3-hide-large" style="margin-top:-16px;">
