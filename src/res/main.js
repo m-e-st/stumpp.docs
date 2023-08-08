@@ -17,9 +17,8 @@ $(document).ready(function(){
 
 document.addEventListener("DOMContentLoaded", function(event) { 
   // DOM initialization goes here...
-  //~ if (checkIntranetAccess() == false) openModal('offline');
-  
-  intervalTimer(true);
+  checkIntranetAccess();
+  // intervalTimer(true);  --> wird nur in "tim.njk" gestartet
 });
 
 
@@ -29,8 +28,31 @@ document.addEventListener("DOMContentLoaded", function(event) {
  *	DB intranet check
  *	executed once on web page start
 /**	********************************************************************
+ * 
+ *	Die folgenden Prüfdateien stehen zur Verfügung
+ *	 - Host = 'tim.ga.itbf.db.de'
+ *	 - File = 'tim.ga.itbf.db.de/res/timlogo.png'
+ *	 - File = 'localhost:8080/res/timlogo.png'	 // Entwicklungsumgebung
+ *	 - File = 'localhost:8081/res/timlogo.png'	 // Entwicklungsumgebung
  */
 
+let graceCounter = 0;
+
+function checkIntranetAccess() {
+	const fqdnTIM = 'tim.ga.itbf.db.de';
+	if (window.location.hostname == fqdnTIM) return true; /* we are hosted inside DB */
+	
+	graceCounter = 3;  /* graceCounter MUST match no of checkServer calls */
+	checkServer(callbackIntranetAccess, fqdnTIM, "/res/timlogo.png");
+	checkServer(callbackIntranetAccess, "localhost:8080", "/res/timlogo.png");
+	checkServer(callbackIntranetAccess, "localhost:8081", "/res/timlogo.png");
+}
+
+function callbackIntranetAccess(u,s) {
+	const urlGoHome = 'https://www.deutschebahn.com/de/konzern/konzernprofil/Konzernunternehmen/db_station_service_ag-6879530';
+	if (s) return; /* we have successfully found a valid item */
+	if (--graceCounter <= 0) { window.location.replace(urlGoHome); }
+}
 
 /**	********************************************************************
  *	TIM server online check
@@ -40,18 +62,19 @@ document.addEventListener("DOMContentLoaded", function(event) {
  * 
  *	Startet (true) und stoppt (false) den 60-Sekunden-Timer des ServerChecks
  */
- 
 const intervalTimer = (function serverTimer() {
-    let timer = undefined;
-		console.log('interval timer', timer);
+    let timer1 = undefined;
+    let timer2 = undefined;
 
     return function(state) {
-		console.log('interval state', state);
 		if(state) {
 			checkServerStates(); /* run once immediatelly */
-			timer = setInterval (checkServerStates, 6000); 
+			setServerStates(); /* run once immediatelly */
+			timer1 = setInterval (checkServerStates, 6000); 
+			timer2 = setInterval (setServerStates, 6000); 
 		} else {
-			clearTimeout(timer); 
+			clearTimeout(timer1); 
+			clearTimeout(timer2); 
 		}
     }
 }());
@@ -64,9 +87,7 @@ const intervalTimer = (function serverTimer() {
  *	Die eigentliche Prüfung findet in der Funktion "checkServer()" statt.
  *	Abhängig vom Prüfungsergebnis werden die Farbklassen vergebem
  */
- 
 function checkServerStates() {
-console.trace();
 	const nodes = document.getElementsByClassName('tim-status');
 	for (let i = 0; i < nodes.length; i++) {
 		let badge = nodes[i];
@@ -81,6 +102,40 @@ console.trace();
   		}	
 }
 
+
+/***
+ * shows server status of all server elements using opacity
+ * 
+ */
+ 
+function setServerStates() {
+	let article, url;
+	let nodes = document.getElementsByClassName("tim-server");
+	for (let i = 0; i < nodes.length; i++) {
+		let article = nodes[i];
+		let url = article.attributes.getNamedItem("data-fqdn").value
+		checkServer(function(u,s) {
+			//~ console.log('state of ', u, ' is ', s);
+			if (s) article.classList.remove("w3-opacity-max");
+			  else article.classList.add("w3-opacity-max");
+			}, url);
+  		}
+}
+
+
+/***
+ * toggle color of server indicators manually
+ * 
+ */
+function toggleServerColor(key) {
+	let classes = document.getElementById(key).classList;
+	for (let k = 0; k < classes.length; k++) {
+		if (classes[k] == 'w3-blue') { classes.replace("w3-blue", "w3-green");	break; }
+		if (classes[k] == 'w3-green') { classes.replace("w3-green", "w3-red");	break; }
+		if (classes[k] == 'w3-red') { classes.replace("w3-red", "w3-blue");		break; }
+	}
+}
+
 /** checkServer
  *
  *	Prüft auf die Existenz der angegebenen Datei.
@@ -89,89 +144,12 @@ console.trace();
  *
  *	Diese Funktion wird (mit anderem Bild) auch zur Intranet-Prüfung verwendet!
  */
- 
 function checkServer(callback, fqdn, imagepath="/enteliweb/images/refresh.png") {
-	//~ console.info('checkServer');
     let img = new Image();
+    let protocol = fqdn.startsWith("localhost") ? "http://" : "https://";
     img.onload = function() { callback(fqdn, true); };
     img.onerror = function() { callback(fqdn, false); };
-    img.src = "https://" + fqdn + imagepath + '?r=' + Math.random(); /* avoid caching */
-}
-
-
-
-
-
-
-
-
-/***
- * check whether running on tim environment
- * 
- */
-const fqdnTim = 'tim.ga.itbf.db.de';
-
-function checkIntranetAccessWithAnimation() {
-	console.info('checkIntranetAccessWithAnimation');
-	//~ intervalTimer(false);
-	reset_animation('offlineLogo');
-	let rc = checkIntranetAccess();
-	return rc;
-}
-
-function reset_animation(elemId) {
-  var el = document.getElementById(elemId);
-  el.classList.remove('w3-spin');
-  el.offsetHeight; /* trigger reflow */
-  el.classList.add('w3-spin');
-}
-function checkIntranetAccess() {
-	if (window.location.hostname == fqdnTim) return true; /* we are located inside DB */
-	
-	const nodes = document.getElementsByClassName('tim-status');
-	for (let i = 0; i < nodes.length; i++) {
-		let badge = nodes[i];
-		let url = badge.attributes.getNamedItem('data-fqdn').value;
-		checkServer(function(u,s) {
-			badge.classList.remove('w3-yellow');
-			badge.classList.remove('w3-green');
-			badge.classList.remove('w3-red');
-			if (s) badge.classList.add('w3-green');
-			  else badge.classList.add('w3-red');
-			}, url);
-  		}
-	return checkOnlineBadges();
-}
-
-function timerIntranetAccess() {
-	intervalTimer(false);
-	document.getElementById("offline").style.display="none"; 
-	if (window.location.hostname == fqdnTim) return true; /* we are located inside DB */
-	if (checkOnlineBadges()) return true; /* has seen at least one server */
-	intervalTimer(true);
-	console.info('timerIntranetAccess', false);
-	openModal('offline');
-}
-	
-
-/***
- * check whether there is a green badge or a blue badge
- * 
- */
-function checkOnlineBadges() {
-	const nodes = document.getElementsByClassName('tim-status');
-	let offlineCounter = nodes.length;
-	for (let i = 0; i < nodes.length; i++) {
-		let classes = nodes[i].classList;
-		for (let k = 0; k < classes.length; k++) {
-			if (classes[k] == 'w3-red') { offlineCounter--; break; }
-		}
-	}
-	let img=document.getElementById("offlineLogo");
-	if (offlineCounter < 1)
-		 img.src = "res/img/offline.png";
-	else img.src = "res/img/server.png";
-	return (offlineCounter > 0);
+    img.src = protocol + fqdn + imagepath + '?r=' + Math.random(); /* avoid caching */
 }
 
 
@@ -188,38 +166,6 @@ function openModal(modalName) {
 
 function closeModal(modalName) {
 	document.getElementById(modalName).style.display='none';
-}
-
-/***
- * toggle color of server indicators
- * 
- */
-function toggleServerColor(key) {
-	let classes = document.getElementById(key).classList;
-	for (let k = 0; k < classes.length; k++) {
-		if (classes[k] == 'w3-blue') { classes.replace("w3-blue", "w3-green");	break; }
-		if (classes[k] == 'w3-green') { classes.replace("w3-green", "w3-red");	break; }
-		if (classes[k] == 'w3-red') { classes.replace("w3-red", "w3-blue");		break; }
-	}
-}
-
-/***
- * shows server status of all server elements using opacity
- * 
- */
-function setServerStatus() {
-	//~ console.info('setServerStatus');
-	let article, url;
-	let nodes = document.getElementsByClassName("tim-server");
-	for (let i = 0; i < nodes.length; i++) {
-		let article = nodes[i];
-		let url = article.attributes.getNamedItem("data-fqdn").value
-		checkServer(function(u,s) {
-			//~ console.log('state of ', u, ' is ', s);
-			if (s) article.classList.remove("w3-opacity-max");
-			  else article.classList.add("w3-opacity-max");
-			}, url);
-  		}
 }
 
 
