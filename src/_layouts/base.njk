@@ -1,5 +1,5 @@
 <!-- db tools -->
-<!-- v2 31.07.2023 jquery.js added -->
+<!-- v3 09.08.2023 jquery.js added -->
 <!DOCTYPE html>
 <html lang="de">
     <head>
@@ -7,8 +7,8 @@
 		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<base href="./">
-		{%if meta_refresh -%}
-		<meta http-equiv="refresh" content="{{ meta_refresh.delay }} url={{ meta_refresh.url }}">
+		{% if meta_refresh -%}
+		<meta http-equiv="refresh" content="{{ meta_delay | d(10) }} url={{ meta_url | d('/') }}">
 		{%- endif %}
 		<meta name="robots" content="none">								<!-- Control the behavior of search engine crawling and indexing -->
 		<meta name="googlebot" content="none">							<!-- All Search Engines -->
@@ -39,8 +39,11 @@
 									mermaid.initialize({startOnLoad: true});});
 			</script>
 		{% endif %}
+		
+		{%if- meta_refresh -%}
+		{%- else -%}
 		<script src="res/main.js" defer></script>
-
+		{%- endif -%}
 		<style>
 			#versionstring::after {
 				content: "Version {{ site.version }}";
