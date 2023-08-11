@@ -33,7 +33,11 @@ topic: "network"
 	{% endfor %}
 </nav>
 
-<div class="content">
+<div id="authorize" class="content">
+	{% include 'app/lan-authorize.njk' %}
+</div>
+
+<div id="content" class="content" style="display:none">
 {%- for item in pagination.items %}
 	{%- if item.hint %}
 		<div class="w3-panel w3-pale-gray" style="overflow-x:hidden">

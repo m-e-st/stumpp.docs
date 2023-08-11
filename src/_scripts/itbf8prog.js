@@ -21,7 +21,7 @@ function network_ipfirst(subnetz) {
 function network_iplast(subnetz) {
 	const item = subnetz.split('/');
 	const cidr = Number(item[1]);
-	return _network_string(_network_number(item[0]) + 2**(32-Number(item[1]))-1);
+	return _network_string(_network_number(item[0]) + 2**(32-Number(item[1]))-2); // geänert 11.08.23 auf -2
 }
 function network_ipmask(subnetz) {
 	const item = subnetz.split('/');
@@ -70,9 +70,6 @@ function itbf8_createIndices() {
 	index_networks = array_nets.sort(function(a,b) { return a.id - b.id});
 	index_numbers = array_nos.sort(function(a,b) { return a.value - b.value});
 	index_names = array_names.sort(function(a,b) { return a.value.localeCompare(b.value)});
-	//~ for (i = 0; i < 10; i++) {
-		//~ console.log("index", i, index_networks[i], index_numbers[i], index_names[i]);
-	//~ }
 }
 
 
@@ -112,7 +109,7 @@ function _itbf8_retrieve (indexarray, command, pattern) {
 		default:
 			
 	}
-	console.log ("retrieve", indexarray[0].value, command, pattern,"index",index);
+	//~ console.log ("retrieve", indexarray[0].value, command, pattern,"index",index);
 
 	if (index < 0) return undefined;
 	if (index >= indexarray.length) return undefined;

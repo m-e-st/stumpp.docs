@@ -2,7 +2,7 @@ module.exports = {
 	title: "DB S&S Tools",
 	description: "HTML Tool für DB Station&service AG",
 	caption: "Tools",
-	version : "0.4.4.53",
+	version : "0.4.4.54",
 	url : {
 		home: "/",
 		main: "https://www.deutschebahn.com/de/konzern/konzernprofil/Konzernunternehmen/db_station_service_ag-6879530",
