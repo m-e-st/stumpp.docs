@@ -34,14 +34,12 @@ topic: "specials"
 <div class="content">
 	{%- for item in pagination.items %}
 		<div class="w3-panel w3-pale-gray" style="overflow-x:hidden">
-	{%- if item.hint %}<h4>{{ item.hint }}</h2>{% endif -%}
-	</div>
-	{%if item.file %}
-		{% include 'app/' +  item.file + '.njk' %}
-	{% endif %}
+		{%- if item.hint %}<h4>{{ item.hint }}</h4>{% endif -%}
+		</div>
+		{%if item.file %}
+			{% include 'app/' +  item.file + '.njk' %}
+		{% endif %}
 	{% endfor -%}
-	</h2>
 </div>
 
-</div>
 

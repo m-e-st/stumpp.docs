@@ -4,7 +4,7 @@
  --- login screen: id="authorize"	display:block
  --- application:  id="content"		display:none
  --->
- 
+
 <style>
 	.login {
 		margin-top:.3em;
@@ -12,23 +12,23 @@
   	}	
 </style>
 
-<div class="w3-container">
-	<div class="w3-panel w3-pale-gray" style="overflow-x:hidden">
-		<button class="w3-button w3-right w3-padding w3-hover-blue-gray w3-large w3-round-large login"
-				>login</button>
+<div class="">
+	<div class="w3-panel w3-pale-green" style="overflow-x:hidden">
+		<button class="w3-button w3-right w3-padding w3-hover-green w3-large w3-round-large login"
+				>Anmelden</button>
 		<h3>Autorisierung erforderlich</h3>
 	</div>
 	<div class="w3-container w3-card-4 w3-text-blue">
 		<form action="mailto:nobody@deutschebahn.com" class="w3-row">
 			<div class="w3-row">
-				<div class="w3-col s12 m8 l4 w3-padding">
+				<div class="w3-col s12 m12 l6 w3-padding">
 					<input id="loginName" class="w3-input w3-border" name="loginName" type="text" placeholder="Name">
 				</div>
-				<div class="w3-col s12 m4 l2 w3-padding">
+<!--				<div class="w3-col s12 m4 l2 w3-padding">
 					<input id="loginOrga" class="w3-input w3-border" name="loginOrga" type="text" placeholder="OE">
-				</div>
+				</div> -->
 				<div class="w3-col s12 m12 l6 w3-padding">
-					<input id="loginPass" class="w3-input w3-border" name="loginPass" type="password" placeholder="Paraphrase">
+					<input id="loginPass" class="w3-input w3-border" name="loginPass" type="password" placeholder="Kennwort">
 				</div>
 			</div>
 		</form>
@@ -37,58 +37,68 @@
 
 <!-- -->
 
-<script src="res/itbf8login.js"></script>
+<script src="lib/sha.js"></script>
+<script src="res/login.js"></script>
+<script src="res/min/userlist.js"></script>
 <script>
 $(document).ready(function(){
   // jQuery initialization goes here...
-	showContent(false);
-	$("#loginName").val("");
-	$("#loginOrga").val("");
-	$("#loginPass").val("");
-	$("#loginPass").css("background-color", "white");
 
-	
 	$(".login").click(doLogin);
 	$("#loginPass").change(doLogin);
 	$("#loginName").change(function() { if ($(this).val().length) $("#loginOrga").focus(); });
 	$("#loginOrga").change(function() { if ($(this).val().length) $("#loginPass").focus(); });
 	$("input").focus(function() { $(this).css("background-color", "white");});
+	
+	showContent(user.status());
 }); 	
 	
 // name="michaelstumpp"
 // para="ppmutsleahcim"
 
 function doLogin() {
-	showContent(checkLogin());
+	let status = user.status();
+	if (status)
+		user.logoff();
+	else user.logon($("#loginName").val(), $("#loginPass").val());
+	
+	showContent(user.status());
 } 
 
-function showContent(state) {
-	if (state) {
+function doLogoff() {
+	console.log("Logoff");
+	user.logoff();
+	showContent(false);
+}
+
+function showContent(status) {
+	console.log("showContent", status);
+	if (status) {
 			$("#loginName").val("");
 			$("#loginOrga").val("");
 			$("#loginPass").val("");
 			//~ $("#loginPass").css("background-color", "white");
 	} else {
 			$("#loginPass").val("");
-			$("#loginPass").css("background-color", "#FAA");
+			//~ $("#loginPass").css("background-color", "#FAA");
 	}
-	if(state) { $("#authorize").hide(); $("#content").show(); }
-	else	  { $("#authorize").show(); $("#content").hide(); }
+	if(status)	{ $("#authorize").hide(); $("#content").show(); }
+	else		{ $("#authorize").show(); $("#content").hide(); }
 }
 
 function checkLogin() {
 	let result = false;
-		let loginName = $("#loginName").val();
-		let loginOrga = $("#loginOrga").val();
-		let loginPass = $("#loginPass").val();
+	let status = user.status();
 	
-	result = true;
-	result &&= (loginName.length>3);
-	result &&= (loginPass.length>3);
-	result &&= (loginName != loginPass);
-	result &&= (loginName == loginPass.split("").reverse().join(""));
-	result &&= (loginOrga == 42);
-	return result;
+	console.log("checkLogin status:", status);
+	if (status) {	console.log("checkLogin user:", user.name()); 
+					return true; }
+	
+	let loginName = $("#loginName").val();
+	let loginOrga = $("#loginOrga").val();
+	let loginPass = $("#loginPass").val();
+	
+	return user.logon (loginName, loginPass);
 }
 
 

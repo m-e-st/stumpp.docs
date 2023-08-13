@@ -1,0 +1,132 @@
+<!-- DB TOOLS SPECIAL
+ --- Registrierung für beschränkte Bereiche
+ --->
+
+
+
+<style>
+	.login {
+		margin-top:.3em;
+		font-variant: small-caps;
+  	}	
+</style>
+
+<div class="">
+	<div class="w3-panel w3-teal" style="overflow-x:hidden">
+<!--
+		<button class="w3-button w3-right w3-padding w3-hover-red w3-large w3-round-large login"
+				>Anmelden</button>
+-->
+		<h3>Registrierung für den geschützten Bereich</h3>
+	</div>
+	<div class="w3-container w3-card-4 w3-text-blue">
+		<form id="registerMail">
+		<div class="w3-row">
+			<div class="w3-mobile w3-col m12 l6 w3-section">
+				<div class="w3-padding">
+					<input id='rName' class="w3-input w3-border" name="registerName" required type="text" placeholder="Name">
+				</div>
+				<div class="w3-padding">
+					<input id='rPass' class="w3-input w3-border" name="registerPass" required type="password" placeholder="Kennwort">
+					<input id='rHash' class="w3-input w3-border" name="registerHash" readonly type="hidden">
+				</div>
+				<div class="w3-padding">
+					<input id='rOrga' class="w3-input w3-border" name="registerOrga" type="text"  placeholder="Organisation">
+				</div>
+				<div class="w3-padding">
+					<input id='rPurpose' class="w3-input w3-border" name="registerReason" type="text" placeholder="Bedarf">
+				</div>
+				<div class="w3-padding">
+					<input id='rSubmit' class="w3-input w3-border" name="registerSubmit" type="submit" value="Registrierung senden">
+				</div>
+			</div>
+			<div class="w3-mobile w3-col m12 l6">
+				<p id='rExplain' ></p>
+			</div>
+		</div>
+		</form>
+	</div>
+</div>
+
+<script src="lib/sha.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function(event) {
+	const colInputs = document.getElementsByTagName("input");
+	
+	document.getElementById('rPass').addEventListener("change", function(event) {
+		document.getElementById('rHash').value = _hash(document.getElementById('rPass').value);
+		console.log ("changed");
+	});
+	document.getElementById('registerMail').addEventListener("submit", function(event) {
+		event.preventDefault(); // before the code
+		sendMail();
+	});
+	
+	for (let i = 0; i < colInputs.length; i++) {
+		colInputs[i].addEventListener("mouseover", function(event) {
+			document.getElementById('rExplain').innerHTML = _explanation(this.id);
+		});
+		colInputs[i].addEventListener("mouseout", function(event) {
+			document.getElementById('rExplain').innerHTML = _explanation('');
+		});
+	} 
+});
+
+function sendMail() {
+	console.log("sendMail", "{{ site.mail | d(site.author.mail) }}");
+	const dName = document.getElementById('rName').value;
+	const dPass = document.getElementById('rPass').value;
+	const dHash = document.getElementById('rHash').value;
+	const dOrga = document.getElementById('rOrga').value;
+	const dPurpose = document.getElementById('rPurpose').value;
+	
+	if ((dName == dPass) || (dName == dOrga) || (dName == dPurpose) 
+	 ||	(dPass == dOrga) || (dPass == dPurpose)
+	 ||	(dOrga == dPurpose)) {
+		document.getElementById('rName').value = '';
+		document.getElementById('rPass').value = '';
+		document.getElementById('rHash').value = '';
+		document.getElementById('rOrga').value = '';
+		document.getElementById('rPurpose').value = '';
+		alert("Security mismatch encountered. You cannot do this!");
+		return;
+	}
+
+	const receiver = "{{ site.mail | d(site.author.mail) }}";
+	const subject = "DB-Tools: Antrag für den Zugriff auf den geschützten Bereich";
+	
+	const body = subject+"\n"
+		+ "\n" + "Name:\t" + dName
+		+ "\n" + "Orga:\t" + dOrga
+		+ "\n" + "Bedarf:\t" + dPurpose
+		+ "\n" + "Hash #1:\t" + _hash(dName)
+		+ "\n" + "Hash #2:\t" + _hash(dPass)
+		+ "\n" + "Hash #3:\t" + _hash(dHash)
+		+ "\n" + "Hash #4:\t" + _hash(dOrga)
+		+ "\n" + "Hash #5:\t" + _hash(dPurpose)
+		+ "\n\n\tDiese Mail wurde automatisch erstellt.\n";
+	
+	console.log('mailto:',receiver,'\nsubject',subject,'\n&body',encodeURIComponent(body));
+	window.open('mailto:'+receiver+'?subject='+subject+'&body='+encodeURIComponent(body));
+}
+
+function _hash(password) {
+	const hashObj = new jsSHA("SHA-512", "TEXT", { encoding: "UTF8"} );
+	hashObj.update(password);
+	console.log (password, " ==> ", hashObj.getHash("B64"));
+	return hashObj.getHash("B64");
+}
+
+function _explanation (ID) {
+	if (! ID.length) return '';
+	switch(ID) {
+		case 'rName':	return "Als Name des Benutzers verwenden Sie bitte Ihren DB-User (aka BKU-Namen). Abweichende Benutzernamen sind meist möglich, sollten aber vermieden werden.";
+		case 'rPass':	return "Verwenden Sie bitte ein einzigartiges Passwort mit ausreichender Länge. Zur Änderung des Kennworts ist eine neue Registrierung notwendig.";
+		case 'rHash':	return "Dieser Wert dient lediglich zur Identifizierung Ihres Antrags.";
+		case 'rOrga':	return "Geben Sie bitte das Kurzzeichen Ihrer Organisationseinheit ein.";
+		case 'rPurpose':return "Eine kurze Angabe über den Grund Ihres Zugriffswunsches erleichtert die Freigabe und Einrichtung Ihrer Autorisierung.";
+		case 'rSubmit':	return "Es wird eine Mail mit Ihrem Antrag erzeugt. Sie müssen die Mail nur noch absenden.<br><br>\nBitte beachten:<b>Die Bearbeitung des Zugangsantrags kann aus technischen Gründen mehrere Tage dauern.</b>";
+	}
+	return 'Unbekanntes Datenfeld "'+ID+'" kann nicht erklärt werden.';
+}
+</script>

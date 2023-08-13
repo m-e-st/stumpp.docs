@@ -8,7 +8,8 @@ testbutton: false
 <!-- index - main entry point
   -- 
   -- Übersicht über die Funktionen
-  -- 08.ß9.2023 - revived
+  -- 08.09.2023 - revived
+  -- 13.08.2023 - data.action implemented
   -->
 
 <div class="w3-container">
@@ -16,27 +17,35 @@ testbutton: false
 	<section class="w3-row-padding">
 		{% for data in menus.top %}
 			{% if not data.hide %}
-			<article class="tim-server w3-col m12 l6 w3-padding" data-fqdn="{{ data.fqdn }}">
+			<article class="w3-col m12 l6 w3-padding"">
 				
 				<div class="w3-card-4">
 					<header>
+						{% if data.url -%}
 						<a href="{{ data.url }}" title="{{ data.hint | safe }}">
-							<div class="w3-container w3-padding w3-{{ data.color | d('gray') }} w3-hover-shadow caption">
+						{%- endif %}
+							<div class="w3-container w3-padding w3-{{ data.color | d('gray') }} w3-hover-shadow caption"
+								{% if data.action -%}onclick="{{ data.action }}"{%- endif %}
+							>
 								<b>{{ data.hint | d('&nbsp;') | safe }}</b>
 								<span class="w3-right">{{ data.sid | d('&nbsp;') | safe }}</span>
 							</div>
-						</a>
+						{%if data.url %}</a>{% endif %}
 					</header>
 					
 					<div class="w3-container w3-white w3-hide-small">
 						<div class="w3-quarter w3-center w3-hover-shadow" style="vertical-align:middle;overflow:hidden;">
+							{% if data.url -%}
 							<a href="{{ data.url }}" title="{{ data.hint | safe }}" class="tim-url">
-								<img src="res/img/{{ data.img | d('home.svg') }}" class="w3-panel w3-image" style="height:100%;max-height:3rem">
-							</a>
+							{%- endif %}
+								<img src="res/img/{{ data.img | d('home.svg') }}" class="w3-panel w3-image" style="height:100%;max-height:3rem"
+									{% if data.action -%}onclick="{{ data.action }}"{%- endif %}
+								>
+							{%if data.url %}</a>{% endif %}
 						</div>
 						<div class="w3-rest w3-padding-tiny w3-small w3-hide-small" style="overflow:hidden;">
 							<p>{% for line in data.text %}
-								{{ line }}<br>
+								{{ line | safe }}<br>
 							{% endfor %}</p>
 						</div>
 					</div>

@@ -15,11 +15,8 @@
 	.d3 { display:none}
 </style>
 
-<div class="w3-roww3-padding-16">
+<div class="w3-row w3-padding-16">
 	<div class="w3-container w3-row-padding">
-		<header class="w3-container w3-pale-yellow">
-			<h4>Navigation</h4>
-		</header>
 		<div class="w3-col m6 l4 w3-container w3-card-4">
 			<h6><b>Netzwerk</b></h6>
 			<input id="ip-search" onchange="xeq_cmd(0,'**',$('#ip-search').val());" class="w3-input w3-border w3-round-large" placeholder="Suche nach Netzwerk">
@@ -106,7 +103,7 @@
 <!-- -->
 
 
-<script src="res/itbf8.js"></script>
+<script src="res/min/itbf8.js"></script>
 <script>
 	
 $(document).ready(function(){
@@ -134,7 +131,6 @@ function xeq_cmd(pos, command, pattern) {
 		case 2: display_network(itbf8_retrieve_name(command, pattern));
 				break;
 	}
-	//~ console.log ('click', pos, pattern)
 }
 
 function display_network(item) {
@@ -162,7 +158,6 @@ function display_network(item) {
 		$("#ip-devices" 	).val("");		
 		return;
 	}
-	//~ console.log (item);
 	$("#bf-number" 	).val(item.vst_nr);
 	$("#bf-name"	).val(item.vst_name);
 	$("#bf-address"	).val(item.vst_strasse.concat((item.vst_strasse == "")?'':', ', item.vst_plz, ' ', item.vst_ort));

@@ -27,16 +27,19 @@ module.exports = {
 			"img": "ethernet-port-53.png",
 			color: "green",
 			"text": [
-				"Informationen zum GA-Datennetz; Bestellungshilfe für GA-Netzwerk-Anschlüsse."
+				"&bullet; Informationen zum GA-Datennetz.",
+				"&bullet; Bestellhilfe für GA-Netzwerk-Anschlüsse.",
+				"<b>Für diesen Bereich wird eine Anmeldung benötigt.</b>"
 			],
 			"url": "./network-0.html"
 		}, {
 			"caption": "Specials",
-			"hint": "Spezielle Sonderlösungen",
+			"hint": "Registrierung und Sonderlösungen",
 			"img": "db-logo.svg",
 			color: "red",
 			"text": [
-				"Hier finden sich Sonderlösungen, welche nicht einem einzelnen Thema zugeordnet sind."
+				"&bullet; Registrierung für den geschützten Bereich.",
+				"&bullet; Sonderlösungenohne thematische Zuordnung."
 			],
 			"url": "./specials-0.html"
 		}, {
@@ -50,13 +53,13 @@ module.exports = {
 			],
 			"url": "./dragon-0.html"
 		}, {
-			"hide": true,
+			"hide": false,
 			"caption": "Über",
 			"img": "about-94.png",
 			color: "light-blue",
 			"hint": "Über das Programm",
 			text: [ "HTML Tool für DB Station&service AG" ],
-			"url": "./"
+			action: "document.getElementById('about').style.display='block';"
 		}
 	],
 	
@@ -107,20 +110,28 @@ module.exports = {
 		{
 			"id"  : "itbf8",
 			"name": "IP-Adressen",
-			"tag" : "ITBF-8",
+			caption: "IP-Adressen ITBF-8",
 			"file": "lan-itbf8",
 			"img" : "ethernet-port-53.png",
 		},{
 			"id"  : "order",
 			"name": "Bestellung",
-			"tag" : "LAN",
+			caption: "Bestellhilfe Netzwerk",
 			"file": "lan-order",
 			"img" : "ethernet-port-53.png",
 		},{
 			"hide": true,
+			"id"  : "user",
+			"name": "IP-Anwender",
+			caption: "Anwender-Verwaltung",
+			"file": "dragon",
+			"files": "lan-user",
+			"img" : "dragon.png"
+		},{
+			"hide": true,
 			"id"  : "empty",
 			"name": "Reserviert",
-			"tag":  "RSV",
+			caption: "Rserviert für zukünftige Zwecke.",
 			"text": [
 				"Dieser Eintrag existiert noch gar nicht"
 			],
@@ -130,16 +141,16 @@ module.exports = {
 	
 	"specials": [
 		{
+			"id"  : "register",
+			"name": "Registrierung",
+			"tag" : "signin",
+			"file": "register",
+			"img" : "db-logo.svg"
+		},{
 			"id"  : "ulmuhr",
 			"name": "Ulmer Uhr",
 			"tag" : "Uhr",
 			"file": "uhr",
-			"img" : "db-logo.svg"
-		},{
-			"id"  : "dragon",
-			"name": "Drache #1",
-			"tag" : "Drache",
-			"file": "dragon",
 			"img" : "db-logo.svg"
 		},{
 			"hide": true,
@@ -169,6 +180,7 @@ module.exports = {
 			"id"  : "dragon 3",
 			"name": "3. Drache",
 			"tag" : "dragon #3",
+			"file": "dragon",
 			"img" : "dragon.png"
 		},{
 			"hide": true,

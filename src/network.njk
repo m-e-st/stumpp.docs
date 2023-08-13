@@ -39,15 +39,17 @@ topic: "network"
 
 <div id="content" class="content" style="display:none">
 {%- for item in pagination.items %}
-	{%- if item.hint %}
-		<div class="w3-panel w3-pale-gray" style="overflow-x:hidden">
-			<h4>{{ item.hint }}</h4>
+	<div class="">
+		<div class="w3-panel w3-green" style="overflow-x:hidden">
+			<button class="w3-button w3-right w3-padding w3-hover-pale-green w3-large w3-round-large login"
+					>Abmelden</button>
+			<h3>{{ item.caption | d(' ') }}</h3>
 		</div>
-	{% endif -%}
+	</div>
 	{%- if item.file %}
 		{% include 'app/' +  item.file + '.njk' %}
+	{% elif item.exec %}
+		<script>{{ item.exec }};</script>
 	{% endif -%}
 {% endfor -%}
 </div>
-
-
