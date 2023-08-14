@@ -2,7 +2,7 @@ module.exports = {
 	title: "DB S&S Tools",
 	description: "HTML Tool für DB Station&service AG",
 	caption: "Tools",
-	version : "0.5.2.69",
+	version : "0.5.2.70",
 	mail: "SuS.Gebaeudeautomation@deutschebahn.com",
 
 	url : {
