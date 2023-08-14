@@ -22,18 +22,18 @@
 		<title>{% if title -%}{{ title }}{%- else -%}{{ site.title }}{%- endif %}</title>
 		<meta name="description" content="{% if description -%}{{ description }}{%- else -%}{{ site.description }}{%- endif %}">
 		
-		<link rel="stylesheet" href="lib/w3.css" />
+		<link rel="stylesheet" href="res/lib/w3.css" />
 		<link rel="stylesheet" href="res/main.css" />
 		
 		{% if enable.jquery %}
-			<script src="lib/jquery.min.js" ></script>	
+			<script src="res/lib/jquery.min.js" ></script>	
 		{% endif %}
 		{% if enable.sjcl %}
-			<script src="lib/sjcl.min.js" defer></script>	
-			<script src="res/cryptor.js" defer></script>
+			<script src="res/lib/sjcl.min.js" defer></script>	
+			<script src="res/js/cryptor.js" defer></script>
 		{% endif %}
 		{% if enable.mermaid %}	
-			<script src="lib/mermaid.min.js" defer></script>
+			<script src="res/lib/mermaid.min.js" defer></script>
 			<script>
 				document.addEventListener("DOMContentLoaded", function(evt)	{ 
 									mermaid.initialize({startOnLoad: true});});
@@ -42,7 +42,7 @@
 		
 		{%if- meta_refresh -%}
 		{%- else -%}
-		<script src="res/main.js" defer></script>
+		<script src="res/js/main.js" defer></script>
 		{%- endif -%}
 		<style>
 			#versionstring::after {

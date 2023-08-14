@@ -1,4 +1,4 @@
-const itbf8_version = "v1.0.1 (11.08.2023";
+const itbf8_version = "v1.0.1 (11.08.2023)";
 const itbf8_data = [
 {subnetz:"10.1.0.0/22",vst_nr:8192,vst_name:"Flughafen Berlin Brandenburg",vst_100:"BFBI","vst_kat":0,vst_strasse:"",vst_plz:"",vst_ort:"",bahnstelle:885111,id:167837696},
 {subnetz:"10.1.4.0/22",vst_nr:8296,vst_name:"Karower Kreuz",vst_100:"","vst_kat":-1,vst_strasse:"",vst_plz:"",vst_ort:"",bahnstelle:980383,id:167838720},

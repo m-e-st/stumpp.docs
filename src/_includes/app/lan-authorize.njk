@@ -37,9 +37,9 @@
 
 <!-- -->
 
-<script src="lib/sha.js"></script>
-<script src="res/login.js"></script>
-<script src="res/min/userlist.js"></script>
+<script src="res/lib/sha.js"></script>
+<script src="res/js/login.js"></script>
+<script src="res/js/userlist.js"></script>
 <script>
 $(document).ready(function(){
   // jQuery initialization goes here...
@@ -72,13 +72,13 @@ function showContent(status) {
 			$("#loginName").val("");
 			$("#loginOrga").val("");
 			$("#loginPass").val("");
-			//~ $("#loginPass").css("background-color", "white");
+			/* $("#loginPass").css("background-color", "white"); */
 	} else {
 			$("#loginPass").val("");
-			//~ $("#loginPass").css("background-color", "#FAA");
+			/* $("#loginPass").css("background-color", "#FAA"); */
 	}
-	if(status)	{ $("#authorize").hide(); $("#content").show(); }
-	else		{ $("#authorize").show(); $("#content").hide(); }
+	if(status)	{ $("#authorize").hide(); $("#content").show(); $("#dataversion").text("Netz " + itbf8_version); }
+	else		{ $("#authorize").show(); $("#content").hide(); $("#dataversion").text("User " + user_version); }
 }
 
 function checkLogin() {

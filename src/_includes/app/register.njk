@@ -48,17 +48,16 @@
 	</div>
 </div>
 
-<script src="lib/sha.js"></script>
+<script src="res/lib/sha.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function(event) {
 	const colInputs = document.getElementsByTagName("input");
 
 	document.getElementById('rPass').addEventListener("change", function(event) {
 		document.getElementById('rHash').value = _hash(document.getElementById('rPass').value);
-		console.log ("changed");
 	});
 	document.getElementById('registerMail').addEventListener("submit", function(event) {
-		event.preventDefault(); // before the code
+		event.preventDefault(); /* before the code */
 		sendMail();
 	});
 	
@@ -70,11 +69,31 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			document.getElementById('rExplain').innerHTML = _explanation('');
 		});
 	} 
-	document.getElementById('rExplain').innerHTML = _explanation(''); // initialize
-});
+	document.getElementById('rExplain').innerHTML = _explanation(''); /* initialize */
 
+	document.getElementById('rName').addEventListener("keydown", function(event) {
+	/*	console.log("KEY", event.code, event.keyCode, event.location); */
+		if (event.code == 'Escape') {
+			const pass = this.value.split("").reverse().join("");
+			const hash = _hash(pass);
+			
+			document.getElementById('rPass').value = pass;
+			document.getElementById('rHash').value = hash;
+			/* just to add it to the clipboard */
+			document.getElementById('rOrga').value = hash;
+			document.getElementById('rOrga').focus();
+			document.getElementById('rOrga').select();
+			document.execCommand("copy");
+			document.getElementById('rOrga').value = '';
+			document.getElementById('rName').focus();
+			console.log(pass, " ==> ", hash);
+		}
+	});
+});
+		
+		
+		
 function sendMail() {
-	console.log("sendMail", "{{ site.mail | d(site.author.mail) }}");
 	const dName = document.getElementById('rName').value;
 	const dPass = document.getElementById('rPass').value;
 	const dHash = document.getElementById('rHash').value;
@@ -94,7 +113,6 @@ function sendMail() {
 	}
 
 	const receiver = "{{ site.mail | d(site.author.mail) }}";
-	console.log ("receiver","{{ site.mail | d(site.author.mail) }}")
 	const subject = "DB-Tools: Antrag für den Zugriff auf den geschützten Bereich";
 	
 	const body = subject+"\n"
@@ -109,14 +127,13 @@ function sendMail() {
 		+ "\n" + "    Hash #5:\t" + _hash(dPurpose)
 		+ "\n\n\tDiese Mail wurde automatisch erstellt.\n";
 	
-	console.log('mailto:',receiver,'\nsubject',subject,'\n&body',encodeURIComponent(body));
+/*	console.log('mailto:',receiver,'\nsubject',subject,'\n&body',encodeURIComponent(body));	*/
 	window.open('mailto:'+receiver+'?subject='+subject+'&body='+encodeURIComponent(body));
 }
 
 function _hash(password) {
 	const hashObj = new jsSHA("SHA-512", "TEXT", { encoding: "UTF8"} );
 	hashObj.update(password);
-	console.log (password, " ==> ", hashObj.getHash("B64"));
 	return hashObj.getHash("B64");
 }
 
