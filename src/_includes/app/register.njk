@@ -52,7 +52,7 @@
 <script>
 document.addEventListener("DOMContentLoaded", function(event) {
 	const colInputs = document.getElementsByTagName("input");
-	
+
 	document.getElementById('rPass').addEventListener("change", function(event) {
 		document.getElementById('rHash').value = _hash(document.getElementById('rPass').value);
 		console.log ("changed");
@@ -63,13 +63,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	});
 	
 	for (let i = 0; i < colInputs.length; i++) {
-		colInputs[i].addEventListener("mouseover", function(event) {
+		colInputs[i].addEventListener("focus", function(event) {
 			document.getElementById('rExplain').innerHTML = _explanation(this.id);
 		});
-		colInputs[i].addEventListener("mouseout", function(event) {
+		colInputs[i].addEventListener("blur", function(event) {
 			document.getElementById('rExplain').innerHTML = _explanation('');
 		});
 	} 
+	document.getElementById('rExplain').innerHTML = _explanation(''); // initialize
 });
 
 function sendMail() {
@@ -93,17 +94,19 @@ function sendMail() {
 	}
 
 	const receiver = "{{ site.mail | d(site.author.mail) }}";
+	console.log ("receiver","{{ site.mail | d(site.author.mail) }}")
 	const subject = "DB-Tools: Antrag für den Zugriff auf den geschützten Bereich";
 	
 	const body = subject+"\n"
 		+ "\n" + "Name:\t" + dName
 		+ "\n" + "Orga:\t" + dOrga
 		+ "\n" + "Bedarf:\t" + dPurpose
-		+ "\n" + "Hash #1:\t" + _hash(dName)
-		+ "\n" + "Hash #2:\t" + _hash(dPass)
-		+ "\n" + "Hash #3:\t" + _hash(dHash)
-		+ "\n" + "Hash #4:\t" + _hash(dOrga)
-		+ "\n" + "Hash #5:\t" + _hash(dPurpose)
+		+ "\n" + "Sicherheitsangaben"
+		+ "\n" + "    Hash #1:\t" + _hash(dName)
+		+ "\n" + "    Hash #2:\t" + _hash(dPass)
+		+ "\n" + "    Hash #3:\t" + _hash(dHash)
+		+ "\n" + "    Hash #4:\t" + _hash(dOrga)
+		+ "\n" + "    Hash #5:\t" + _hash(dPurpose)
 		+ "\n\n\tDiese Mail wurde automatisch erstellt.\n";
 	
 	console.log('mailto:',receiver,'\nsubject',subject,'\n&body',encodeURIComponent(body));
@@ -118,7 +121,12 @@ function _hash(password) {
 }
 
 function _explanation (ID) {
-	if (! ID.length) return '';
+	const generalExplanation = "Für den Zugriff auf den geschützten Bereich benötigen Sie eine Autorisierung. " 
+							 + "Die Autorisierung beantragen Sie bitte mit diesem Formular. "
+							 + "Es wird eine vorformulierte Mail erzeugt, welche Sie nur noch absenden müssen. "
+							 + "<br><br>"
+							 + "Es werden grundsätzlich alle Sicherheitsangaben zur Einrichtung benötigt.";
+	if (! ID.length) return generalExplanation;
 	switch(ID) {
 		case 'rName':	return "Als Name des Benutzers verwenden Sie bitte Ihren DB-User (aka BKU-Namen). Abweichende Benutzernamen sind meist möglich, sollten aber vermieden werden.";
 		case 'rPass':	return "Verwenden Sie bitte ein einzigartiges Passwort mit ausreichender Länge. Zur Änderung des Kennworts ist eine neue Registrierung notwendig.";

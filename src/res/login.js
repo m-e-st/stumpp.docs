@@ -23,7 +23,6 @@ const user =(function () {
 		genAuth.update('Station&Service 2023');
 		const _user_="user.name";
 		const _hash_="user.hash";
-		//~ console.log("store", cmd, username, password);
 		switch(cmd) {
 			case 'set':
 				const found = _search(username);
@@ -40,7 +39,6 @@ const user =(function () {
 			case 'get':
 				if (! sessionStorage.getItem(_hash_)) return '';
 				if (sessionStorage.getItem(_hash_) != genAuth.getHash('B64')) return '';
-				console.log("logon state successed");
 				return sessionStorage.getItem(_user_);
 			case 'del':
 				sessionStorage.removeItem(_hash_);
@@ -53,18 +51,14 @@ const user =(function () {
 	return {
 		logon: function(username, password) {
 				_stash('set', username, password);
-				console.log('logon', username, password);
 			},
 		logoff: function() {
 				_stash('del');
-				console.log("logoff", '|'+_stash("get")+'|');
 			},
 		name: function() {
-				console.log("status", _stash("get"));
 				return _stash("get");	
 			},
 		status: function() {
-				console.log("status", _stash("get").length > 0);
 				return (_stash("get").length > 0);
 			}
     }

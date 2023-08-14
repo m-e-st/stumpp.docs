@@ -53,26 +53,21 @@ $(document).ready(function(){
 	showContent(user.status());
 }); 	
 	
-// name="michaelstumpp"
-// para="ppmutsleahcim"
-
 function doLogin() {
 	let status = user.status();
 	if (status)
-		user.logoff();
+		 user.logoff();
 	else user.logon($("#loginName").val(), $("#loginPass").val());
 	
 	showContent(user.status());
 } 
 
 function doLogoff() {
-	console.log("Logoff");
 	user.logoff();
 	showContent(false);
 }
 
 function showContent(status) {
-	console.log("showContent", status);
 	if (status) {
 			$("#loginName").val("");
 			$("#loginOrga").val("");
@@ -90,7 +85,6 @@ function checkLogin() {
 	let result = false;
 	let status = user.status();
 	
-	console.log("checkLogin status:", status);
 	if (status) {	console.log("checkLogin user:", user.name()); 
 					return true; }
 	

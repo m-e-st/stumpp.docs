@@ -2,12 +2,14 @@
 layout: main.njk
 description: "TIM Server"
 dbstyle: true
-	
+target: tim
+
 pagination:
   data: menus.tim
   size: 1
 permalink: "{{ page.fileSlug | slug }}-{{ pagination.pageNumber }}.html"
 topic: "tim"
+
 --- 
 
 <script>
