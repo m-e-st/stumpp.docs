@@ -44,10 +44,11 @@ function checkIntranetAccess() {
 		displayMain();
 		return true;
 	}
-	graceCounter = 3;  /* graceCounter MUST match no of checkServer calls */
+	graceCounter = 4;  /* graceCounter MUST match no of checkServer calls */
 	checkServer(callbackIntranetAccess, fqdnTIM, "/res/timlogo.png");
 	checkServer(callbackIntranetAccess, "localhost:8080", "/res/timlogo.png");
 	checkServer(callbackIntranetAccess, "localhost:8081", "/res/timlogo.png");
+	checkServer(callbackIntranetAccess, "172.16.1.4", "/company.svg");
 }
 
 function callbackIntranetAccess(u,s) {
@@ -154,7 +155,7 @@ function toggleServerColor(key) {
  */
 function checkServer(callback, fqdn, imagepath="/enteliweb/images/refresh.png") {
     let img = new Image();
-    let protocol = fqdn.startsWith("localhost") ? "http://" : "https://";
+    let protocol = (fqdn.startsWith("localhost") || fqdn.startsWith("172.16.1.4")) ? "http://" : "https://";
     img.onload = function() { callback(fqdn, true); };
     img.onerror = function() { callback(fqdn, false); };
     img.src = protocol + fqdn + imagepath + '?r=' + Math.random(); /* avoid caching */

@@ -49,6 +49,7 @@
 					  onmouseover="showServerCard('{{ data.code }}');"
 					  href="{{ enteliweb(data.fqdn) }}"
 					  title="{{ hint | safe }}"
+					  target = "{{ target | d('_self') }}"
 					  data-fqdn="{{ data.fqdn }}"
 					  data-href="{{ enteliweb(data.fqdn) }}"
 					  >
