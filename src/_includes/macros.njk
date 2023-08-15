@@ -2,7 +2,7 @@
 
 {% macro caption(text, picture, height=24, float='left', click='') %}
 	{%- if click %}<a href="javascript:{{ click }}">{% endif -%}
-		<img src="res/img/{{ picture }}.svg" style="height:{{ height }}px; float:{{ float }};">
+		<img src="static/img/{{ picture }}.svg" style="height:{{ height }}px; float:{{ float }};">
 		{{ text }}
 	{%- if click %}</a>{% endif -%}
 {% endmacro %}

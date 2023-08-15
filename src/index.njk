@@ -1,4 +1,4 @@
----
+d---
 layout: main.njk
 description: "Information"
 dbstyle: true
@@ -38,7 +38,7 @@ testbutton: false
 							{% if data.url -%}
 							<a href="{{ data.url }}" title="{{ data.hint | safe }}" class="tim-url">
 							{%- endif %}
-								<img src="res/img/{{ data.img | d('home.svg') }}" class="w3-panel w3-image" style="height:100%;max-height:3rem"
+								<img src="static/img/{{ data.img | d('home.svg') }}" class="w3-panel w3-image" style="height:100%;max-height:3rem"
 									{% if data.action -%}onclick="{{ data.action }}"{%- endif %}
 								>
 							{%if data.url %}</a>{% endif %}

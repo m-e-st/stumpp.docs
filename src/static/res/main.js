@@ -4,7 +4,7 @@
  *	Copyright 2022 Michael Stumpp <mstumpp@hwn.de>
  * 
  * 08.08.2023 completly new - divided server status and intranet check
- *
+ * 15.08.2023 "static dir" insted of "res"
  */
 
 /*** initialization on document ready ***/
@@ -31,9 +31,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
  * 
  *	Die folgenden Prüfdateien stehen zur Verfügung
  *	 - Host = 'tim.ga.itbf.db.de'
- *	 - File = 'tim.ga.itbf.db.de/res/timlogo.png'
- *	 - File = 'localhost:8080/res/timlogo.png'	 // Entwicklungsumgebung
- *	 - File = 'localhost:8081/res/timlogo.png'	 // Entwicklungsumgebung
+ *	 - File = 'tim.ga.itbf.db.de/static/timlogo.png'
+ *	 - File = 'localhost:8080/static/timlogo.png'	 // Entwicklungsumgebung
+ *	 - File = 'localhost:8081/static/timlogo.png'	 // Entwicklungsumgebung
  */
 
 let graceCounter = 0;
@@ -45,9 +45,9 @@ function checkIntranetAccess() {
 		return true;
 	}
 	graceCounter = 4;  /* graceCounter MUST match no of checkServer calls */
-	checkServer(callbackIntranetAccess, fqdnTIM, "/res/timlogo.png");
-	checkServer(callbackIntranetAccess, "localhost:8080", "/res/timlogo.png");
-	checkServer(callbackIntranetAccess, "localhost:8081", "/res/timlogo.png");
+	checkServer(callbackIntranetAccess, fqdnTIM, "/static/timlogo.png");
+	checkServer(callbackIntranetAccess, "localhost:8080", "/static/timlogo.png");
+	checkServer(callbackIntranetAccess, "localhost:8081", "/static/timlogo.png");
 	checkServer(callbackIntranetAccess, "172.16.1.4", "/company.svg");
 }
 

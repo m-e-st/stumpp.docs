@@ -12,7 +12,7 @@
 			<a href="{{ site.url.home | default('/') }}">
 				<h3 class="hwn-text-stone" style="font-weight: 550;"
 					title="{{ description if description else site.description }}">
-					<img src="res/img/db-logo.svg" style="float:left;height:36px;margin-right:12px;"
+					<img src="static/img/db-logo.svg" style="float:left;height:36px;margin-right:12px;"
 						 id="db-logo" onmouseover="document.getElementById('db-logo').classList.add('w3-spin');">
 					{{ caption if caption else site.caption}}
 				</h3>
@@ -43,7 +43,7 @@
 			<div class="w3-hide-small">
 			{% if testbutton %}
 				<a>
-					<img src="res/img/assistant_navigation.svg"
+					<img src="static/img/assistant_navigation.svg"
 						 class="w3-hover-shadow w3-image w3-section"
 						 style="width:32px; height:32px; cursor:pointer;"
 						 onclick="setServerStatus();"
@@ -52,7 +52,7 @@
 				<span class="w3-large hwn-text-stone">|</span>
 			{% endif %}
 				<a>
-					<img src="res/timlogo.png"
+					<img src="static/timlogo.png"
 						 class="w3-hover-shadow w3-image w3-section"
 						 style="width:32px; height:32px; cursor:pointer;"
 						 onclick="document.getElementById('about').style.display='block';"
@@ -63,7 +63,7 @@
 			<!-- Hamburger Menu oben rechts -->
 			<div class="w3-hide-medium w3-hide-large">
 				<div class="w3-dropdown-hover">
-					<button class="w3-button w3-white"><img src="res/img/menu.svg" alt="menu" style="height:24px;" class="w3-image"></button>
+					<button class="w3-button w3-white"><img src="static/img/menu.svg" alt="menu" style="height:24px;" class="w3-image"></button>
 					<div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
 					{% for data in menus.top %}
 					  {% if not data.hide %}
