@@ -24,7 +24,7 @@
 			<article class="tim-server w3-col m6 l4 w3-padding" data-fqdn="{{ data.fqdn }}">
 			<div class="w3-card-4">
 				<header>
-					<a href="{{ url }}" title="{{ hint | safe }}" target = "{{ target | d('_self') }}">>
+					<a href="{{ url }}" title="{{ hint | safe }}" target = "{{ target | d('_self') }}">
 						<div class="w3-container w3-padding w3-{{ color | d('brown') }} w3-hover-shadow caption">
 							<b>{{ data.name | d('&nbsp;') | safe }}</b>
 							<span class="w3-right">{{ data.RB | d('&nbsp;') | safe }}</span>
@@ -33,7 +33,7 @@
 				</header>
 
 				<div class="w3-container w3-padding w3-hide-small">
-					<a href="{{ url }}" title="{{ hint | safe }}" class="w3-margin-bottom" target = "{{ target | d('_self') }}">>
+					<a href="{{ url }}" title="{{ hint | safe }}" class="w3-margin-bottom" target = "{{ target | d('_self') }}">
 						{{ data.fqdn }}
 					</a>
 				</div>

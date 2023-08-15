@@ -67,7 +67,7 @@
 			<article class="tim-server w3-padding" id="{{ data.code }}" style="display:none" data-fqdn="{{ data.fqdn }}">
 			<div class="w3-card-4">
 				<header>
-					<a href="{{ url }}" title="{{ hint | safe }}" target = "{{ target | d('_self') }}">>
+					<a href="{{ url }}" title="{{ hint | safe }}" target = "{{ target | d('_self') }}">
 						<div class="w3-container w3-padding w3-{{ data.color | d('brown') }} w3-hover-shadow caption">
 							<b>{{ data.name | d('&nbsp;') | safe }}</b>
 							<span class="w3-right">{{ data.sid | d('&nbsp;') | safe }}</span>
@@ -77,7 +77,7 @@
 
 				<div class="w3-container w3-white w3-hide-small">
 					<div class="w3-quarter w3-center w3-hover-shadow" style="vertical-align:middle;overflow:hidden;">
-						<a href="{{ url }}" title="{{ hint | safe }}" target = "{{ target | d('_self') }}">>
+						<a href="{{ url }}" title="{{ hint | safe }}" target = "{{ target | d('_self') }}">
 							<img src="res/img/server.png" class="w3-panel w3-image" style="height:100%;max-height:2.5rem">
 						</a>
 					</div>
@@ -90,7 +90,7 @@
 
 				<footer>
 					<div class="w3-container w3-padding w3-light-grey" style="overflow:hidden;">
-						<a href="{{ url }}" title="{{ hint | safe }}" class="w3-margin-bottom" target = "{{ target | d('_self') }}">>
+						<a href="{{ url }}" title="{{ hint | safe }}" class="w3-margin-bottom" target = "{{ target | d('_self') }}">
 							{{ data.fqdn }}
 						</a>
 					</div>
