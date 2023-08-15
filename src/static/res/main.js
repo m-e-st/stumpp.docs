@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
  *	Die folgenden Prüfdateien stehen zur Verfügung
  *	 - Host = 'tim.ga.itbf.db.de'
  *	 - File = 'tim.ga.itbf.db.de/static/timlogo.png'
+ *	 - File = 'tim.ga.itbf.db.de/res/timlogo.png'	 // Übergangssweise ...
  *	 - File = 'localhost:8080/static/timlogo.png'	 // Entwicklungsumgebung
  *	 - File = 'localhost:8081/static/timlogo.png'	 // Entwicklungsumgebung
  */
@@ -44,8 +45,9 @@ function checkIntranetAccess() {
 		displayMain();
 		return true;
 	}
-	graceCounter = 4;  /* graceCounter MUST match no of checkServer calls */
+	graceCounter = 5;  /* graceCounter MUST match no of checkServer calls */
 	checkServer(callbackIntranetAccess, fqdnTIM, "/static/timlogo.png");
+	checkServer(callbackIntranetAccess, fqdnTIM, "/res/timlogo.png"); /* bis 6.9.23 benötigt */
 	checkServer(callbackIntranetAccess, "localhost:8080", "/static/timlogo.png");
 	checkServer(callbackIntranetAccess, "localhost:8081", "/static/timlogo.png");
 	checkServer(callbackIntranetAccess, "172.16.1.4", "/company.svg");
