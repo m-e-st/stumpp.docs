@@ -10,6 +10,10 @@
 		margin-top:.3em;
 		font-variant: small-caps;
   	}	
+	#username {
+		color:#87CEEB; /* == w3-text-blue **/
+		font-variant: small-caps;
+  	}	
 </style>
 
 <div class="">
@@ -39,7 +43,7 @@
 
 <script src="res/lib/sha.js"></script>
 <script src="res/js/login.js"></script>
-<script src="res/js/userlist.js"></script>
+<script src="res/data/userlist.js"></script>
 <script>
 $(document).ready(function(){
   // jQuery initialization goes here...
@@ -77,8 +81,8 @@ function showContent(status) {
 			$("#loginPass").val("");
 			/* $("#loginPass").css("background-color", "#FAA"); */
 	}
-	if(status)	{ $("#authorize").hide(); $("#content").show(); $("#dataversion").text("Netz " + itbf8_version); }
-	else		{ $("#authorize").show(); $("#content").hide(); $("#dataversion").text("User " + user_version); }
+	if(status)	{ $("#authorize").hide(); $("#content").show(); $("#dataversion").text("Netz " + itbf8_version); $("#username").text(user.name()); }
+	else		{ $("#authorize").show(); $("#content").hide(); $("#dataversion").text("User " + user_version);	 $("#username").text(''); }
 }
 
 function checkLogin() {
