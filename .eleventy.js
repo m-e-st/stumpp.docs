@@ -1,4 +1,4 @@
-let htmlMinifier = require ('html-minifier')
+let htmlMinifier = require ('html-minifier');
 
 module.exports = function (eleventyConfig) {
 
@@ -10,14 +10,13 @@ module.exports = function (eleventyConfig) {
 				collapseWhitespace: true,
 				minifyJS: true,
 				minifyCSS: true,
-			})
+			});
 		}
-		return content
-	})
+		return content;
+	});
   	
 	// Folders to copy to build dir (See. 1.1)
-	eleventyConfig.addPassthroughCopy("src/res/**");
-	eleventyConfig.addPassthroughCopy("src/lib/**");
+	eleventyConfig.addPassthroughCopy("src/static/**");
 	eleventyConfig.addPassthroughCopy("src/favicon.ico");
 	
 	// This allows Eleventy to watch for file changes during local development.
