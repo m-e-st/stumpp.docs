@@ -1,7 +1,7 @@
 # IBMGR Environment
 environment/
 *.zip
-*.sh
+#*.sh
 
 # Logs
 logs
