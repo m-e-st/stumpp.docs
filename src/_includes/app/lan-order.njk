@@ -4,22 +4,17 @@
   -->
   
 <!-- Under Construction -->
-<div id='underconstruction' class="w3-container w3-khaki" style="width:100%;height:100vh;position:absolute;z-index:10;">
-	<div class="w3-container w3-center w3-cell-middle">
-		<h1 style="position:relative;top:5rem;">Diese Seite wird gerade neu entwickelt.</h1>
-		<button class="w3-btn w3-large w3-round-large"
-				style="position:relative;top:8rem;float:none"
-				onclick="document.getElementById('underconstruction').style.display='none';">
-				<img style="width:128px;" src="static/img/work-in-progress.png">
-		</button>
-	</div>
-</div>
+{% include "underconstruction.njk" %}
 
 <!-- The Form -->
 <style>
 .w3-check,.w3-radio{width:20px;height:20px;position:relative;top:2px}
 .w3-check { margin-right:8px; }
 .w3-radio { margin-right:4px; }
+
+  	#rDisplay, #rSubmit {
+		cursor: pointer;
+	}
 </style>
 
 
@@ -29,7 +24,7 @@
 		<h4 class="w3-text-blue">Besteller</h4>
 		<div class="w3-row">
 			<div class="w3-col s12 m9 l5">
-				<input class="w3-input w3-border w3-padding-small" name="besteller" type="text" placeholder="Besteller">
+				<input class="w3-input w3-border w3-padding-small" name="besteller" required type="text" placeholder="Besteller">
 			</div>
 			<div class="w3-col s12 m3 l2">
 				<input class="w3-input w3-border w3-padding-small" name="OE" type="text" placeholder="OE">
@@ -43,60 +38,69 @@
 		<h4 class="w3-text-blue">Verkehrsstation</h4>
 		<div class="w3-row">
 			<div class="w3-col s4 m3 l2">
-				<input class="w3-input w3-border w3-padding-small" name="bfnr" type="text" placeholder="Bf-Nr.">
+				<input id='bfnr' class="w3-input w3-border w3-padding-small" name="bfnr" required type="text" placeholder="Bf-Nr."
+					   title="Autorisierte Benutzer können durch Eingabe der Bahnhofsnummer verschiedene andere Felder automatisch ausfüllen lassen."
+				>
 			</div>
 			<div class="w3-col s8 m9 l10">
-				<input class="w3-input w3-border w3-padding-small" name="bahnhof" type="text" placeholder="Bahnhof">
+				<input id='bfname' class="w3-input w3-border w3-padding-small" name="bahnhof" type="text" placeholder="Bahnhof">
 			</div>
 			<div class="w3-col s12 m12 l12">
-				<input class="w3-input w3-border w3-padding-small" name="anschrift" type="text" placeholder="Anschrift">
+				<input id='bfanschrift' class="w3-input w3-border w3-padding-small" name="anschrift" type="text" placeholder="Anschrift">
 			</div>
 			<div class="w3-col s6 m4 l6 w3-hide-small" style="max-height:2.2em;overflow:hidden">
 				<label class="w3-input w3-border w3-padding-small">Bahn- und Kostenstelle</label> 
 			</div>
 			<div class="w3-col s6 m4 l3">
-				<input class="w3-input w3-border w3-padding-small" name="bahnstelle" type="text" placeholder="Bahnstelle">
+				<input id='bahnstelle' class="w3-input w3-border w3-padding-small" name="bahnstelle" type="text" placeholder="Bahnstelle">
 			</div>
 			<div class="w3-col s6 m4 l3">
-				<input class="w3-input w3-border w3-padding-small" name="kostenstelle" type="text" placeholder="Kostenstelle" value="68700">
+				<input id='kostenstelle' class="w3-input w3-border w3-padding-small" name="kostenstelle" type="text" placeholder="Kostenstelle" value="68700">
 			</div>
 		</div>
 		<!-- Gebäudeautomation -->
 		<h4 class="w3-text-blue w3-section">Örtliche Gegebenheiten</h4>
 		<div class="w3-row w3-section">
 			<div class="w3-col s12 m12 l12">
-				<input class="w3-input w3-border w3-padding-small"" name="standort" type="text" placeholder="Gebäude">
+				<input id='standort' class="w3-input w3-border w3-padding-small" name="standort" type="text" placeholder="Gebäude oder Standort im Bahnhof">
 			</div>
 			<div class="w3-col s6 m6 l6">
-				<input class="w3-input w3-border w3-padding-small" name="flur" type="text" placeholder="Flur/ Etage">
+				<input id='raum' class="w3-input w3-border w3-padding-small" name="raum" type="text" placeholder="Flur / Etage / Raum">
 			</div>
 			<div class="w3-col s6 m6 l6">
-				<input class="w3-input w3-border w3-padding-small" name="raum" type="text" placeholder="Raum">
+				<input id='idg' class="w3-input w3-border w3-padding-small" name="idg" type="text" placeholder="IDG-Nr falls bekannt">
 			</div>
 		</div>
 		<div class="w3-row w3-border w3-padding-small">
-			<div class="w3-col a12 m6 l3"><input class="w3-radio" type="radio" name="gatype" value="new">			<label>Neuer Anschluß</label></div>
-			<div class="w3-col a12 m6 l3"><input class="w3-radio" type="radio" name="gatype" value="extend" ><label>GA Erweiterung</label></div>
-			<div class="w3-col a12 m6 l3"><input class="w3-radio" type="radio" name="gatype" value="umbau">			<label>GA Umbau</label> </div>
-			<div class="w3-col a12 m6 l3"><input class="w3-radio" type="radio" name="gatype" value="project">		<label>Bauprojekt</label> </div>
+			<div id='ganew' class="w3-col a12 m6 l3"><input class="w3-radio" type="radio" name="gatype" value="new">	 <label>Neuer Anschluß</label></div>
+			<div id='gaext' class="w3-col a12 m6 l3"><input class="w3-radio" type="radio" name="gatype" value="extend"> <label>GA Erweiterung</label></div>
+			<div id='gachg' class="w3-col a12 m6 l3"><input class="w3-radio" type="radio" name="gatype" value="umbau">	 <label>GA Umbau</label> </div>
+			<div id='gaprj' class="w3-col a12 m6 l3"><input class="w3-radio" type="radio" name="gatype" value="project"><label>Bauprojekt</label> </div>
 		</div>
 		<div class="w3-row w3-border w3-padding-small">
-			<div class="w3-col a12 m6 l3"><input class="w3-check" type="checkbox" name="ga1"><label>GA bereits vorhanden</label></div>
-			<div class="w3-col a12 m6 l3"><input class="w3-check" type="checkbox" name="ga4"><label>Funkanbindung prüfen</label> </div>
-			<div class="w3-col a12 m12 l6"><input class="w3-check" type="checkbox" name="ga2"><label>Bestandschutz wird beantragt</label></div>
+			<div id='gaexist'   class="w3-col a12 m6  l3"><input class="w3-check" type="checkbox" name="gaExist"><label>GA bereits vorhanden</label></div>
+			<div id='gafunk'    class="w3-col a12 m6  l3"><input class="w3-check" type="checkbox" name="gaFunk"><label>Funkanbindung prüfen</label> </div>
+			<div id='gabestand' class="w3-col a12 m12 l6"><input class="w3-check" type="checkbox" name="gaBestand"><label>Bestandschutz wird beantragt</label></div>
 		</div>
 		<!-- Netzwerk -->
 		<h4 class="w3-text-blue">Angaben zum Netzwerk</h4>
 		<div class="w3-row">
-			<div class="w3-col s4 m2 l2 w3-hide-small" style="max-height:2.2em;overflow:hidden">
+			<div class="w3-col m3 l2 w3-hide-small" style="max-height:2.2em;overflow:hidden">
 				<label class="w3-input w3-border w3-padding-small">Subnetz</label> 
 			</div>
-			<div class="w3-col s8 m6 l4">
-				<input class="w3-input w3-border w3-padding-small" name="subnetz" type="text" placeholder="10.0.0.0/8">
+			<div class="w3-col s6 m9 l4">
+				<input id='subnetz' class="w3-input w3-border w3-padding-small" name="subnetz" readonly type="text" placeholder="Subnetz vom Netzwerk-Team">
 			</div>
-			<div class="w3-rest">
-				<input class="w3-input w3-border w3-padding-small" name="besteller" type="text" placeholder="open">
+			<div class="w3-col m3 l2 w3-hide-small" style="max-height:2.2em;overflow:hidden">
+				<label class="w3-input w3-border w3-padding-small">IP-Adresse</label> 
+			</div>
+			<div class="w3-col s6 m9 l4">
+				<input id='ipadresse' class="w3-input w3-border w3-padding-small" name="ipaddress" readonly type="text" placeholder="IP-Adresse vom Netzwerk-Team">
 			</div>			
+		</div>			
+		<div class="w3-row w3-border w3-padding-small">
+			<div id='gabbmd' class="w3-col a12 m6 l3"><input class="w3-check" type="checkbox" name="gaBBMD"><label>Gerät ist ein <b>BBMD</b></label></div>
+			<div id='gasystem' class="w3-col a12 m6 l3"><input class="w3-check" type="checkbox" name="gaGateway"><label>BACnet System Device</label> </div>
 		</div>
 
 		<div class="w3-row w3-stretch w3-section">
