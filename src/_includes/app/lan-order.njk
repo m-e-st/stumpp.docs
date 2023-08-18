@@ -3,107 +3,152 @@
   Dummy für Portbestellung
   -->
   
-<div class="w3-panel w3-pale-yellow w3-center">	
-	<h4>Netzwerk-Anschlüsse der Gebäudeautomation</h4>
-</div>
-<div class="w3-container">
-	<section class="w3-row-padding">
-		<p>
-		An dieser Stelle wird es zukünftig eine Bestellhilfe für die Anfrage von Netzwerk-Anschlüssen für die Gebäudeautomation geben.
-		Derzeit wird lediglich eine Nachbildung der ehemaligen ITBF-2 Bestellmaske des Systel-Portals angezeigt.
-		</p>
-	</section>
-</div>
-<div class="w3-panel w3-pale-yellow w3-center">	
-		<h4 class="w3-text-grey">Bitte haben Sie noch ein wenig Geduld.</h4>
-</div>
-<hr>
-<div>
-<form action="mailto:nobody@deutschebahn.com" class="w3-container w3-card-4 w3-light-grey w3-text-blue">
-
-<h4 class="w3-section">Lieferadresse für das Produkt</h4>
-<div class="w3-row w3-section">
-	<input class="w3-input w3-border" name="standort" type="text" placeholder="Standort (genaue Adresse)">
-</div>
-<div class="w3-row w3-section">
-	<div class="w3-col s6">
-	  <input class="w3-input w3-border" name="flur" type="text" placeholder="Flur/ Etage">
-	</div>
-	<div class="w3-rest">
-	  <input class="w3-margin-left w3-input w3-border" name="raum" type="text" placeholder="Raum">
+<!-- Under Construction -->
+<div id='underconstruction' class="w3-container w3-khaki" style="width:100%;height:100vh;position:absolute;z-index:10;">
+	<div class="w3-container w3-center w3-cell-middle">
+		<h1 style="position:relative;top:5rem;">Diese Seite wird gerade neu entwickelt.</h1>
+		<button class="w3-btn w3-large w3-round-large"
+				style="position:relative;top:8rem;float:none"
+				onclick="document.getElementById('underconstruction').style.display='none';">
+				<img style="width:128px;" src="static/img/work-in-progress.png">
+		</button>
 	</div>
 </div>
 
-<h4 class="w3-section">Produkteigenschaften</h4>
-<div class="w3-row w3-section">
-	<select class="w3-select" name="produktname">
-		<option value="" disabled>Port-Typ</option>
-		<option value="ITBF8 Port" selected>ITBF-8 Port für Gebäudeautomation</option>
-	</select>
-</div>
-<div class="w3-row w3-section">
-	<select class="w3-select" name="erloesgruppe">
-		<option value="" disabled>Erlösgruppe</option>
-		<option value="IT-Anschluss TK Infra DB S&S" selected>IT-Anschluss TK Infra DB S&amp;S</option>
-	</select>
-</div>
-<div class="w3-row w3-section">
-	<select class="w3-select" name="servicelevel">
-		<option value="" disabled>Servicelevel laut Servicekatalog</option>
-		<option value="basic" selected>Servicelevel: Basic</option>
-	</select>
-</div>
-<div class="w3-row w3-section">
-	<select class="w3-select" name="brandbreite">
-		<option value="" disabled>Bandbreitenklasse</option>
-		<option value="small" selected>Bandbreite: "small"</option>
-	</select>
-</div>
-<div class="w3-row w3-section">
-	<select class="w3-select" name="ermittelterpreis">
-		<option value="" disabled>Ermittelter Preis</option>
-		<option value="Preis nicht ermittelbar." selected>Preis nicht ermittelbar.</option>
-	</select>
+<!-- The Form -->
+<style>
+.w3-check,.w3-radio{width:20px;height:20px;position:relative;top:2px}
+.w3-check { margin-right:8px; }
+.w3-radio { margin-right:4px; }
+</style>
+
+
+<div class="w3-container w3-card-4 w3-light-grey w3-text-black">
+	<form id="lanOrderMail">
+		<!-- Besteller -->
+		<h4 class="w3-text-blue">Besteller</h4>
+		<div class="w3-row">
+			<div class="w3-col s12 m9 l5">
+				<input class="w3-input w3-border w3-padding-small" name="besteller" type="text" placeholder="Besteller">
+			</div>
+			<div class="w3-col s12 m3 l2">
+				<input class="w3-input w3-border w3-padding-small" name="OE" type="text" placeholder="OE">
+			</div>
+			<div class="w3-col s12 m12 l5">
+				<input class="w3-input w3-border w3-padding-small" name="mail" type="text" placeholder="Mailadresse">
+			</div>
+		</div>
+
+		<!-- Verkehrsstation -->
+		<h4 class="w3-text-blue">Verkehrsstation</h4>
+		<div class="w3-row">
+			<div class="w3-col s4 m3 l2">
+				<input class="w3-input w3-border w3-padding-small" name="bfnr" type="text" placeholder="Bf-Nr.">
+			</div>
+			<div class="w3-col s8 m9 l10">
+				<input class="w3-input w3-border w3-padding-small" name="bahnhof" type="text" placeholder="Bahnhof">
+			</div>
+			<div class="w3-col s12 m12 l12">
+				<input class="w3-input w3-border w3-padding-small" name="anschrift" type="text" placeholder="Anschrift">
+			</div>
+			<div class="w3-col s6 m4 l6 w3-hide-small" style="max-height:2.2em;overflow:hidden">
+				<label class="w3-input w3-border w3-padding-small">Bahn- und Kostenstelle</label> 
+			</div>
+			<div class="w3-col s6 m4 l3">
+				<input class="w3-input w3-border w3-padding-small" name="bahnstelle" type="text" placeholder="Bahnstelle">
+			</div>
+			<div class="w3-col s6 m4 l3">
+				<input class="w3-input w3-border w3-padding-small" name="kostenstelle" type="text" placeholder="Kostenstelle" value="68700">
+			</div>
+		</div>
+		<!-- Gebäudeautomation -->
+		<h4 class="w3-text-blue w3-section">Örtliche Gegebenheiten</h4>
+		<div class="w3-row w3-section">
+			<div class="w3-col s12 m12 l12">
+				<input class="w3-input w3-border w3-padding-small"" name="standort" type="text" placeholder="Gebäude">
+			</div>
+			<div class="w3-col s6 m6 l6">
+				<input class="w3-input w3-border w3-padding-small" name="flur" type="text" placeholder="Flur/ Etage">
+			</div>
+			<div class="w3-col s6 m6 l6">
+				<input class="w3-input w3-border w3-padding-small" name="raum" type="text" placeholder="Raum">
+			</div>
+		</div>
+		<div class="w3-row w3-border w3-padding-small">
+			<div class="w3-col a12 m6 l3"><input class="w3-radio" type="radio" name="gatype" value="new">			<label>Neuer Anschluß</label></div>
+			<div class="w3-col a12 m6 l3"><input class="w3-radio" type="radio" name="gatype" value="extend" ><label>GA Erweiterung</label></div>
+			<div class="w3-col a12 m6 l3"><input class="w3-radio" type="radio" name="gatype" value="umbau">			<label>GA Umbau</label> </div>
+			<div class="w3-col a12 m6 l3"><input class="w3-radio" type="radio" name="gatype" value="project">		<label>Bauprojekt</label> </div>
+		</div>
+		<div class="w3-row w3-border w3-padding-small">
+			<div class="w3-col a12 m6 l3"><input class="w3-check" type="checkbox" name="ga1"><label>GA bereits vorhanden</label></div>
+			<div class="w3-col a12 m6 l3"><input class="w3-check" type="checkbox" name="ga4"><label>Funkanbindung prüfen</label> </div>
+			<div class="w3-col a12 m12 l6"><input class="w3-check" type="checkbox" name="ga2"><label>Bestandschutz wird beantragt</label></div>
+		</div>
+		<!-- Netzwerk -->
+		<h4 class="w3-text-blue">Angaben zum Netzwerk</h4>
+		<div class="w3-row">
+			<div class="w3-col s4 m2 l2 w3-hide-small" style="max-height:2.2em;overflow:hidden">
+				<label class="w3-input w3-border w3-padding-small">Subnetz</label> 
+			</div>
+			<div class="w3-col s8 m6 l4">
+				<input class="w3-input w3-border w3-padding-small" name="subnetz" type="text" placeholder="10.0.0.0/8">
+			</div>
+			<div class="w3-rest">
+				<input class="w3-input w3-border w3-padding-small" name="besteller" type="text" placeholder="open">
+			</div>			
+		</div>
+
+		<div class="w3-row w3-stretch w3-section">
+			<div class="w3-padding w3-third">
+				<input id='rDisplay' class="w3-input w3-border" name="registerDisplay" type="button" value="Anzeigen" title="Anzeigen des Text der Bestellung auf dem Bildschirm">
+			</div>
+			<div class="w3-padding w3-twothird">
+				<input id='rSubmit' class="w3-input w3-border" name="registerSubmit" type="submit" value="Senden" title="Versenden der Bestellung per Outlook bzw. Mail-Programm">
+			</div>
+		</div>
+	</form>
 </div>
 
-<h4 class="w3-section">Erweiterte Einstellungen</h4>
-<div class="w3-row w3-section">
-	<select class="w3-select" name="medientyp">
-		<option value="" disabled>Medientyp</option>
-		<option value="Kupfer (RJ45)" selected>Kupfer (RJ45)</option>
-		<option value="LWL - Singlemode 1 Gbit/s">LWL - Singlemode 1 Gbit/s</option>
-		<option value="LWL - Multimode 1 Gbit/s">LWL - Multimode 1 Gbit/s</option>
-		<option value="LWL - Multimode 100 Mbit/s">LWL - Multimode 100 Mbit/s</option>
-		<option value="Kupfer (RJ45) - SFP">Kupfer (RJ45) - SFP</option>
-	</select>
-</div>
-<div class="w3-row w3-section">
-	<div class="w3-col s6">
-		<input class="w3-input w3-border" name="ipadresse" type="text" placeholder="IP-Adresse">
-	</div>
-	<div class="w3-rest">
-		<input class="w3-margin-left w3-input w3-border" name="subnetzmaske" type="text" placeholder="Subnetz-Maske">
-	</div>
-</div>
-<div class="w3-row w3-section">
-	<select class="w3-select" name="ipzuordnung">
-		<option value="" disabled>IP-Zuordnung</option>
-		<option value="statisch" selected>Statische IP</option>
-	</select>
-</div>
-<div class="w3-row w3-section">
-	<select class="w3-select" name="domain">
-		<option value="" disabled>Domäne Netzwerk</option>
-		<option value="gavpn.db.de" selected>gavpn.db.de</option>
-	</select>
-</div>
-<div class="w3-row w3-section">
-	<select class="w3-select" name="VPN">
-		<option value="" disabled>VPN</option>
-		<option value="DB-SUS-GA" selected>DB-SUS-GA</option>
-	</select>
-</div>
+<script>
+document.addEventListener("DOMContentLoaded", function(event) {
+	const colInputs = document.getElementsByTagName("input");
 
-<button class="w3-btn w3-block w3-section w3-blue w3-ripple w3-right">Übernehmen</button>
-</form>
-</div>
+
+	document.getElementById('rPass').addEventListener("change", function(event) {
+		document.getElementById('rHash').value = _hash(document.getElementById('rPass').value);
+	});
+	document.getElementById('rDisplay').addEventListener("click", function(event) {
+		event.preventDefault(); /* before the code */
+		console.log("sendmail 1", this);
+		sendMail(false);
+	});
+	document.getElementById('registerMail').addEventListener("submit", function(event) {
+		event.preventDefault(); /* before the code */
+		console.log("sendmail 2", this);
+		sendMail(true);
+	});
+	
+	for (let i = 0; i < colInputs.length; i++) {
+		colInputs[i].addEventListener("focus", function(event) {
+			document.getElementById('rExplain').innerHTML = _explanation(this.id);
+		});
+		colInputs[i].addEventListener("blur", function(event) {
+			document.getElementById('rExplain').innerHTML = _explanation('');
+		});
+	} 
+	document.getElementById('rExplain').innerHTML = _explanation(''); /* initialize */
+
+	document.getElementById('rName').addEventListener("keydown", function(event) {
+		if (event.code == 'Escape') {
+			const pass = this.value.split("").reverse().join("");
+			const hash = _hash(pass);
+			document.getElementById('rPass').value = pass;
+			document.getElementById('rHash').value = hash;
+			copyToClipboard(hash); /* just to add it to the clipboard */
+			document.getElementById('rName').focus();
+			console.log(pass, " ==> ", hash);
+		}
+	});
+	document.getElementById('rName').value = user.name();
+});</script>

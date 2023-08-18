@@ -6,21 +6,10 @@
  --->
 <!-- v4 15.08.2023 file structure changed to "static" dir -->
 
-<style>
-	.login {
-		margin-top:.3em;
-		font-variant: small-caps;
-  	}	
-	#username {
-		color:#87CEEB; /* == w3-text-blue **/
-		font-variant: small-caps;
-  	}	
-</style>
 
 <div class="">
 	<div class="w3-panel w3-pale-green" style="overflow-x:hidden">
-		<button class="w3-button w3-right w3-padding w3-hover-green w3-large w3-round-large login"
-				>Anmelden</button>
+		<button class="w3-button w3-right w3-padding w3-hover-green w3-large w3-round-large login">Anmelden</button>
 		<h3>Autorisierung erforderlich</h3>
 	</div>
 	<div class="w3-container w3-card-4 w3-text-blue">
@@ -29,9 +18,6 @@
 				<div class="w3-col s12 m12 l6 w3-padding">
 					<input id="loginName" class="w3-input w3-border" name="loginName" type="text" placeholder="Name">
 				</div>
-<!--				<div class="w3-col s12 m4 l2 w3-padding">
-					<input id="loginOrga" class="w3-input w3-border" name="loginOrga" type="text" placeholder="OE">
-				</div> -->
 				<div class="w3-col s12 m12 l6 w3-padding">
 					<input id="loginPass" class="w3-input w3-border" name="loginPass" type="password" placeholder="Kennwort">
 				</div>
@@ -42,8 +28,7 @@
 
 <!-- -->
 
-<script src="static/lib/sha.js"></script>
-<script src="static/res/login.js"></script>
+
 <script src="static/dta/userlist.js"></script>
 <script>
 $(document).ready(function(){
@@ -63,28 +48,29 @@ function doLogin() {
 	if (status)
 		 user.logoff();
 	else user.logon($("#loginName").val(), $("#loginPass").val());
-	
+	console.log("doLogin");
 	showContent(user.status());
 } 
 
-function doLogoff() {
-	user.logoff();
-	showContent(false);
+function showContent(status) {
+	$("#loginPass").val("");
+	if (status) {
+		$("#loginName").val("");
+		$("#loginOrga").val("");
+	}
+	if (status){ 
+		$("#authorize").hide(); 
+		$("#content").show(); 
+		$("#dataversion").text("Netz " + itbf8_version); 
+		$("#username").text(user.name()); 
+	} else {
+		$("#authorize").show(); 
+		$("#content").hide(); 
+		$("#dataversion").text("User " + user_version);	 
+		$("#username").text(''); 
+	}
 }
 
-function showContent(status) {
-	if (status) {
-			$("#loginName").val("");
-			$("#loginOrga").val("");
-			$("#loginPass").val("");
-			/* $("#loginPass").css("background-color", "white"); */
-	} else {
-			$("#loginPass").val("");
-			/* $("#loginPass").css("background-color", "#FAA"); */
-	}
-	if(status)	{ $("#authorize").hide(); $("#content").show(); $("#dataversion").text("Netz " + itbf8_version); $("#username").text(user.name()); }
-	else		{ $("#authorize").show(); $("#content").hide(); $("#dataversion").text("User " + user_version);	 $("#username").text(''); }
-}
 
 function checkLogin() {
 	let result = false;
@@ -97,7 +83,7 @@ function checkLogin() {
 	let loginOrga = $("#loginOrga").val();
 	let loginPass = $("#loginPass").val();
 	
-	return user.logon (loginName, loginPass);
+	return user.logon(loginName, loginPass);
 }
 
 

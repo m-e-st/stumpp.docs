@@ -2,6 +2,7 @@
  --- Registrierung für beschränkte Bereiche
  --->
 <!-- v4 15.08.2023 file structure changed to "static" dir -->
+<!-- v5 16.08.2023 moved to network -->
 
 
 <style>
@@ -12,32 +13,43 @@
 </style>
 
 <div class="">
-	<div class="w3-panel w3-teal" style="overflow-x:hidden">
 <!--
-		<button class="w3-button w3-right w3-padding w3-hover-red w3-large w3-round-large login"
-				>Anmelden</button>
--->
+	<div class="w3-panel w3-teal" style="overflow-x:hidden">
 		<h3>Registrierung für den geschützten Bereich</h3>
 	</div>
+-->
 	<div class="w3-container w3-card-4 w3-text-blue">
 		<form id="registerMail">
 		<div class="w3-row">
 			<div class="w3-mobile w3-col m12 l6 w3-section">
 				<div class="w3-padding">
-					<input id='rName' class="w3-input w3-border" name="registerName" required type="text" placeholder="Name">
+					<input	id='rName' class="w3-input w3-border" name="registerName" required type="text" placeholder="Name"
+							pattern="[A-Za-z0-9_]+" 
+							title="Im Namen sind nur Buchstaben, Zahlen, Bindestrich, Unterstrich oder Punkt erlaubt."
+					>
 				</div>
 				<div class="w3-padding">
 					<input id='rPass' class="w3-input w3-border" name="registerPass" required type="password" placeholder="Kennwort">
 					<input id='rHash' class="w3-input w3-border" name="registerHash" readonly type="hidden">
 				</div>
 				<div class="w3-padding">
-					<input id='rOrga' class="w3-input w3-border" name="registerOrga" type="text"  placeholder="Organisation">
+					<input id='rOrga' class="w3-input w3-border" name="registerOrga" type="text" list="orgas" placeholder="Organisation">
+					<datalist id="orgas">
+						<option value="S&S GA-Zentrale"
+						<option value="S&S GA-Fläche"
+						<option value="S&S Netzwerk-Team"
+						<option value="Systel s.m.i.l.e. Administration"
+						
+					</datalist>
 				</div>
 				<div class="w3-padding">
 					<input id='rPurpose' class="w3-input w3-border" name="registerReason" type="text" placeholder="Bedarf">
 				</div>
-				<div class="w3-padding">
-					<input id='rSubmit' class="w3-input w3-border" name="registerSubmit" type="submit" value="Registrierung senden">
+				<div class="w3-padding w3-third">
+					<input id='rDisplay' class="w3-input w3-border" name="registerDisplay" type="button" value="Anzeigen" title="Anzeigen des Text der Registrierung auf dem Bildschirm">
+				</div>
+				<div class="w3-padding w3-twothird">
+					<input id='rSubmit' class="w3-input w3-border" name="registerSubmit" type="submit" value="Senden" title="Versenden der Registrierung per Outlook bzw. Mail-Programm">
 				</div>
 			</div>
 			<div class="w3-mobile w3-col m12 l6">
@@ -48,17 +60,23 @@
 	</div>
 </div>
 
-<script src="static/lib/sha.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function(event) {
 	const colInputs = document.getElementsByTagName("input");
 
+
 	document.getElementById('rPass').addEventListener("change", function(event) {
 		document.getElementById('rHash').value = _hash(document.getElementById('rPass').value);
 	});
+	document.getElementById('rDisplay').addEventListener("click", function(event) {
+		event.preventDefault(); /* before the code */
+		console.log("sendmail 1", this);
+		sendMail(false);
+	});
 	document.getElementById('registerMail').addEventListener("submit", function(event) {
 		event.preventDefault(); /* before the code */
-		sendMail();
+		console.log("sendmail 2", this);
+		sendMail(true);
 	});
 	
 	for (let i = 0; i < colInputs.length; i++) {
@@ -72,63 +90,66 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	document.getElementById('rExplain').innerHTML = _explanation(''); /* initialize */
 
 	document.getElementById('rName').addEventListener("keydown", function(event) {
-	/*	console.log("KEY", event.code, event.keyCode, event.location); */
 		if (event.code == 'Escape') {
 			const pass = this.value.split("").reverse().join("");
 			const hash = _hash(pass);
-			
 			document.getElementById('rPass').value = pass;
 			document.getElementById('rHash').value = hash;
-			/* just to add it to the clipboard */
-			document.getElementById('rOrga').value = hash;
-			document.getElementById('rOrga').focus();
-			document.getElementById('rOrga').select();
-			document.execCommand("copy");
-			document.getElementById('rOrga').value = '';
+			copyToClipboard(hash); /* just to add it to the clipboard */
 			document.getElementById('rName').focus();
 			console.log(pass, " ==> ", hash);
 		}
 	});
+	document.getElementById('rName').value = user.name();
 });
-		
-		
-		
-function sendMail() {
-	const dName = document.getElementById('rName').value;
+			
+function sendMail(doSend) {
+	let dName = document.getElementById('rName').value.replace(/[<>&"']/g, '?');
 	const dPass = document.getElementById('rPass').value;
 	const dHash = document.getElementById('rHash').value;
-	const dOrga = document.getElementById('rOrga').value;
-	const dPurpose = document.getElementById('rPurpose').value;
-	
-	if ((dName == dPass) || (dName == dOrga) || (dName == dPurpose) 
-	 ||	(dPass == dOrga) || (dPass == dPurpose)
-	 ||	(dOrga == dPurpose)) {
+	const dOrga = document.getElementById('rOrga').value.replace(/[<>&"']/g, '?');
+	const dPurpose = document.getElementById('rPurpose').value.replace(/[<>&"']/g, '?');
+
+	if ((((dName == dPass) || (dName == dOrga) || (dName == dPurpose)) && (dName.length > 0))
+	 ||	(((dPass == dOrga) || (dPass == dPurpose)) && (dPass.length > 0))
+	 ||	((dOrga == dPurpose) && (dOrga.length > 0))) {
 		document.getElementById('rName').value = '';
 		document.getElementById('rPass').value = '';
 		document.getElementById('rHash').value = '';
 		document.getElementById('rOrga').value = '';
 		document.getElementById('rPurpose').value = '';
-		alert("Security mismatch encountered. You cannot do this!");
+		alert("A security breach has been encountered. You cannot do this!");
 		return;
 	}
 
 	const receiver = "{{ site.mail | d(site.author.mail) }}";
 	const subject = "DB-Tools: Antrag für den Zugriff auf den geschützten Bereich";
 	
+	if (dName.length == 0) dName = "BENUTZERNAME IST LEER!";
+	if (dPass.length == 0) dName += "\n\tKEIN KENNWORT VERGEBEN!";
+	if ((dName.length*dPass.length) == 0) dName += "\n\tDie Registrierung ist unvollständig und kann nicht bearbeitet werden.";
 	const body = subject+"\n"
 		+ "\n" + "Name:\t" + dName
 		+ "\n" + "Orga:\t" + dOrga
 		+ "\n" + "Bedarf:\t" + dPurpose
+		+ "\n" 
 		+ "\n" + "Sicherheitsangaben"
-		+ "\n" + "    Hash #1:\t" + _hash(dName)
-		+ "\n" + "    Hash #2:\t" + _hash(dPass)
-		+ "\n" + "    Hash #3:\t" + _hash(dHash)
-		+ "\n" + "    Hash #4:\t" + _hash(dOrga)
-		+ "\n" + "    Hash #5:\t" + _hash(dPurpose)
+		+ "\n" + " - Hash #0:\t" + _hash(Math.random().toString())
+		+ "\n" + " - Hash #1:\t" + _hash(dName)
+		+ "\n" + " - Hash #2:\t" + _hash(dPass)
+		+ "\n" + " - Hash #3:\t" + _hash(dHash)
+		+ "\n" + " - Hash #4:\t" + _hash(dOrga + Math.random().toString())
+		+ "\n" + " - Hash #5:\t" + _hash(dPurpose + Math.random().toString())
 		+ "\n\n\tDiese Mail wurde automatisch erstellt.\n";
 	
 /*	console.log('mailto:',receiver,'\nsubject',subject,'\n&body',encodeURIComponent(body));	*/
-	window.open('mailto:'+receiver+'?subject='+subject+'&body='+encodeURIComponent(body));
+	if (doSend) {
+		const win = window.open('mailto:'+receiver+'?subject='+subject+'&body='+encodeURIComponent(body));
+		win.close();
+	} else {
+		document.getElementById('displayBody').innerHTML = body;
+		document.getElementById('register').style.display='block';
+	}	
 }
 
 function _hash(password) {

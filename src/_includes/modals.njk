@@ -17,13 +17,21 @@
 {% endmacro %}
 
 {% call modal('about','Über …', 'blue-grey') %}
-	{% include 'about.njk' %}
+	{% include 'modal/about.njk' %}
 {% endcall %}
 
 {% call modal('license', 'Lizenz: ISC', 'blue-grey') -%}
-	{% include "license.njk" %}
+	{% include "modal/license.njk" %}
 {%- endcall %}
 
 {% call modal('release', 'Release Notes', 'blue-grey') -%}
-	{% include "release.njk" %}
+	{% include "modal/release.njk" %}
+{%- endcall %}
+
+{% call modal('register', 'Registrierung', 'teal') -%}
+	{% include "modal/display.njk" %}
+{%- endcall %}
+
+{% call modal('order', 'Bestellung', 'green') -%}
+	{% include "modal/display.njk" %}
 {%- endcall %}

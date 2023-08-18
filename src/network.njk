@@ -12,6 +12,20 @@ permalink: "{{ page.fileSlug | slug }}-{{ pagination.pageNumber }}.html"
 topic: "network"
 --- 
 
+<script src="static/lib/sha.js"></script>
+<script src="static/res/login.js"></script>
+
+<style>
+	.login {
+		margin-top:.3em;
+		font-variant: small-caps;
+  	}	
+	#username {
+		color:#87CEEB; /* == w3-text-blue **/
+		font-variant: small-caps;
+  	}	
+</style>
+
 <!-- Unterauswahl für schmale Schirme -->
 <nav class="w3-hide-medium w3-hide-large" style="margin-top:-16px;">
 	<div class="w3-bar w3-dark-gray">
@@ -33,23 +47,27 @@ topic: "network"
 	{% endfor %}
 </nav>
 
-<div id="authorize" class="content">
-	{% include 'app/lan-authorize.njk' %}
-</div>
-
-<div id="content" class="content" style="display:none">
 {%- for item in pagination.items %}
-	<div class="">
-		<div class="w3-panel w3-green" style="overflow-x:hidden">
-			<button class="w3-button w3-right w3-padding w3-hover-pale-green w3-large w3-round-large login"
-					>Abmelden</button>
-			<h3>{{ item.caption | d(' ') }}</h3>
-		</div>
+{%- if item.logon -%}
+	<div id="authorize" class="content">
+		{% include 'app/lan-authorize.njk' %}
 	</div>
-	{%- if item.file %}
-		{% include 'app/' +  item.file + '.njk' %}
-	{% elif item.exec %}
-		<script>{{ item.exec }};</script>
-	{% endif -%}
+	<div id="content" class="content" style="display:none">
+{%- else -%}
+	<div id="content" class="content" style="display:block">
+{%- endif -%}
+		<div class="">
+			<div class="w3-panel w3-{{ item.color | d('green') }}" style="overflow-x:hidden">
+				{%- if item.logon -%}
+				<button class="w3-button w3-right w3-padding w3-hover-pale-green w3-large w3-round-large login">Abmelden</button>
+				{%- endif -%}
+				<h3>{{ item.caption | d(' ') }}</h3>
+			</div>
+		</div>
+		{%- if item.file %}
+			{% include 'app/' +  item.file + '.njk' %}
+		{% elif item.exec %}
+			<script>{{ item.exec }};</script>
+		{% endif -%}
+	</div>	
 {% endfor -%}
-</div>

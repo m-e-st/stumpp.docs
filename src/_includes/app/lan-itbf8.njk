@@ -125,12 +125,13 @@ function xeq_show(tag) {
 }
 
 function xeq_cmd(pos, command, pattern) {
+	const savepattern = pattern.replace(/[<>&"']/g, '?');
 	switch(pos) {
-		case 0: display_network(itbf8_retrieve_network(command, pattern));
+		case 0: display_network(itbf8_retrieve_network(command, savepattern));
 				break;
-		case 1: display_network(itbf8_retrieve_number(command, pattern));
+		case 1: display_network(itbf8_retrieve_number(command, savepattern));
 				break;
-		case 2: display_network(itbf8_retrieve_name(command, pattern));
+		case 2: display_network(itbf8_retrieve_name(command, savepattern));
 				break;
 	}
 }

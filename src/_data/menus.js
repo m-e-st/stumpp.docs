@@ -41,7 +41,7 @@ module.exports = {
 				"&bullet; Registrierung für den geschützten Bereich.",
 				"&bullet; Sonderlösungenohne thematische Zuordnung."
 			],
-			"url": "./specials-0.html"
+			"url": "./specials-1.html"
 		}, {
 			"hide": true,
 			"caption": "PoC",
@@ -111,23 +111,26 @@ module.exports = {
 			"id"  : "itbf8",
 			"name": "IP-Adressen",
 			caption: "IP-Adressen ITBF-8",
+			logon: true,
 			"file": "lan-itbf8",
 			"img" : "ethernet-port-53.png",
 		},{
 			"id"  : "order",
 			"name": "Bestellung",
 			caption: "Bestellhilfe Netzwerk",
+			logon: false,
 			"file": "lan-order",
 			"img" : "ethernet-port-53.png",
 		},{
-			"hide": true,
-			"id"  : "user",
-			"name": "IP-Anwender",
-			caption: "Anwender-Verwaltung",
-			"file": "dragon",
-			"files": "lan-user",
-			"img" : "dragon.png"
+			"id"  : "register",
+			"name": "Registrierung",
+			caption: "Registrierung für den geschützten Bereich",
+			color: "teal",
+			logon: false,
+			"file": "register",
+			"img" : "assistant_navigation.svg"
 		},{
+
 			"hide": true,
 			"id"  : "empty",
 			"name": "Reserviert",
@@ -141,6 +144,7 @@ module.exports = {
 	
 	"specials": [
 		{
+			"hide": true,
 			"id"  : "register",
 			"name": "Registrierung",
 			"tag" : "signin",
