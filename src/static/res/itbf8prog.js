@@ -107,7 +107,7 @@ function _itbf8_retrieve (indexarray, command, pattern) {
 					index = indexarray[ndx].index;
 					break;
 		default:
-			
+					return undefined;
 	}
 	//~ console.log ("retrieve", indexarray[0].value, command, pattern,"index",index);
 

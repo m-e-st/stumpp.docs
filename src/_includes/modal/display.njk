@@ -2,10 +2,10 @@
 
 <div>
 	<img src="static/img/content_copy.svg" alt="copy"
-		 onclick="copyToClipboard(document.getElementById('displayBody').innerHTML);"
+		 onclick="copyToClipboard(document.getElementById('{{ name }}Body').innerHTML);"
 		 class="w3-hover-gray" 
 		 style="width:32px;position:absolute;right:4px;margin-top:4px;cursor:pointer" 
 		 title="Kopiert den angezeigten Text in das Clipboard."
 	>
-	<pre id='displayBody' class="w3-small" style='overflow:scroll'>></pre>
+	<pre id='{{ name }}Body' class="w3-small" style='overflow:scroll'></pre>
 </div>

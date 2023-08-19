@@ -119,7 +119,7 @@ function sendMail(doSend) {
 	}
 
 	const receiver = "{{ site.mail | d(site.author.mail) }}";
-	const subject = "DB-Tools: Antrag für den Zugriff auf den geschützten Bereich";
+	const subject = "DB-TIM: Antrag für den Zugriff auf den geschützten Bereich";
 	
 	if (dName.length == 0) dName = "BENUTZERNAME IST LEER!";
 	if (dPass.length == 0) dName += "\n\tKEIN KENNWORT VERGEBEN!";
@@ -143,7 +143,7 @@ function sendMail(doSend) {
 		const win = window.open('mailto:'+receiver+'?subject='+subject+'&body='+encodeURIComponent(body));
 		win.close();
 	} else {
-		document.getElementById('displayBody').innerHTML = body;
+		document.getElementById('registerBody').innerHTML = body;
 		document.getElementById('register').style.display='block';
 	}	
 }
