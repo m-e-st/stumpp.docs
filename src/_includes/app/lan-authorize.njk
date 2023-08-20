@@ -29,15 +29,13 @@
 <!-- -->
 
 
-
 <script>
 $(document).ready(function(){
   // jQuery initialization goes here...
 
 	$(".login").click(doLogin);
 	$("#loginPass").change(doLogin);
-	$("#loginName").change(function() { if ($(this).val().length) $("#loginOrga").focus(); });
-	$("#loginOrga").change(function() { if ($(this).val().length) $("#loginPass").focus(); });
+	$("#loginName").change(function() { if ($(this).val().length) $("#loginPass").focus(); });
 	$("input").focus(function() { $(this).css("background-color", "white");});
 	
 	showContent(user.status());
@@ -45,10 +43,15 @@ $(document).ready(function(){
 	
 function doLogin() {
 	let status = user.status();
-	if (status)
-		 user.logoff();
-	else user.logon($("#loginName").val(), $("#loginPass").val());
-	console.log("doLogin");
+	if (status) { 
+		user.logoff();		 /* Funktion wird auch zum Abmelden genutzt ! */
+	} else {
+		if (($("#loginName").val().toLowerCase() == "admin") && ($("#loginPass").val().toLowerCase() == "admin")) {
+			easteregg.open();
+			return;
+		}
+		user.logon($("#loginName").val(), $("#loginPass").val());
+	}
 	showContent(user.status());
 } 
 
@@ -56,7 +59,6 @@ function showContent(status) {
 	$("#loginPass").val("");
 	if (status) {
 		$("#loginName").val("");
-		$("#loginOrga").val("");
 	}
 	if (status){ 
 		$("#authorize").hide(); 
@@ -80,13 +82,10 @@ function checkLogin() {
 					return true; }
 	
 	let loginName = $("#loginName").val();
-	let loginOrga = $("#loginOrga").val();
 	let loginPass = $("#loginPass").val();
 	
 	return user.logon(loginName, loginPass);
 }
-
-
 </script>
 
 

@@ -6,7 +6,7 @@
 	<div class="w3-container w3-{{ color }} w3-padding-small" style="height:48px;">
 	  <span class="w3-xlarge w3-margin-left">{{ caption }}</span>
 	  <span class="w3-button w3-display-topright" style="width:40px;height:40px;" id="{{ name }}-close"
-			onclick="document.getElementById('{{ name }}').style.display='none';
+			onclick="document.getElementById('{{ name }}').style.display='none';"
 			{%- if goback -%}history.back();{%- endif -%}
 			">&times;
 	  </span>
@@ -34,4 +34,8 @@
 
 {% call modal('order', 'Bestellung', 'green') -%}
 	{% include "modal/display.njk" %}
+{%- endcall %}
+
+{% call modal('easteregg', 'Osterei', 'deep-orange') -%}
+	{% include "modal/easteregg.njk" %}
 {%- endcall %}

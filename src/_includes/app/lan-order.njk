@@ -13,8 +13,7 @@
 		cursor: pointer;
 	}
 </style>
-<script>const form_version = "0.5";</script>
-
+<script>const form_version = "0.6";</script>
 
 <div class="w3-container w3-card-4 w3-light-grey w3-text-black">
 	<form id="lanOrderMail">
@@ -28,7 +27,7 @@
 				<input id='bestoe' class="w3-input w3-border w3-padding-small" name="OE" type="text" placeholder="OE">
 			</div>
 			<div class="w3-col s12 m12 l5">
-				<input id='bestmail' class="w3-input w3-border w3-padding-small" name="mail" required type="text" placeholder="Mailadresse">
+				<input id='bestmail' class="w3-input w3-border w3-padding-small" name="mail" required type="email" placeholder="Mailadresse">
 			</div>
 		</div>
 
@@ -133,30 +132,27 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	itbf8_createIndices();
 	document.getElementById('username').innerHTML = user.name();
 	document.getElementById('dataversion').innerHTML = "Form " + form_version;	
+
 });
 
 function lookupBahnhof(event) {		/* Automatik: Nachschlagen deer Bahnhofsdaten, wenn angemeldet */ 
 	if (! user.status()) return;	/* Nachschlagen nur mit gültiger Anmeldung */
-	console.log("lookupBahnhof", user.name(), user.status());
 	
 	const bfnr = document.getElementById('bfnr').value.replace(/[<>&"']/g, '?');
-	console.log('bfnr', bfnr);
 	const item = itbf8_retrieve_number('**', bfnr);
-	console.log('item', item);
 	if (item) {
-		const domName = document.getElementById('bfname');			
-		const domAnschrift = document.getElementById('bfanschrift');	
-		const domBahnstelle = document.getElementById('bahnstelle');	
-
-		domName.value = item.vst_name;
-		domAnschrift.value = item.vst_strasse.concat((item.vst_strasse == "")?'':', ', item.vst_plz, ' ', item.vst_ort);
-		domBahnstelle.value = item.bahnstelle;
+		document.getElementById('bfname').value = item.vst_name;
+		document.getElementById('bfanschrift').value = item.vst_strasse.concat((item.vst_strasse == "")?'':', ', item.vst_plz, ' ', item.vst_ort);
+		document.getElementById('bahnstelle').value = item.bahnstelle;
 		document.getElementById('subnetz').value = item.subnetz;
 		document.getElementById('ipadresse').value = (document.getElementById('gabbmd').checked) ? itbf8_scheme("offset", item.subnetz, 21) : '';
+	} else {
+		document.getElementById('bfname').value = "";
+		document.getElementById('bfanschrift').value = "";
+		document.getElementById('bahnstelle').value = "";
+		document.getElementById('subnetz').value = "";
+		document.getElementById('ipadresse').value = "";
 	}
-	
-	
-	
 }
 
 /**
@@ -200,8 +196,6 @@ function getCheckboxString(checkbox, description) {
 	return "";
 }
 
-
-
 function sendMail(doSend) {
 	
 	let d_bestname = document.getElementById('bestname').value.replace(/[<>&"']/g, '?');	
@@ -224,7 +218,6 @@ function sendMail(doSend) {
 	const d_gabbmd = getCheckboxString('gabbmd', "\n - Anschluss ist für BBMD");
 	const d_gasystem = getCheckboxString('gasystem', "\n - Anschluss ist für BACnet Systemgerät");
 	
-	const receiver = d_bestmail; /* "{{ site.mail | d(site.author.mail) }}" */
 	
 	let incomplete = false;
 	if (d_bestname.length == 0)   { incomplete=true; d_bestname = "NAME DES BESTELLERS NICHT ANGEGEBEN."; }
@@ -234,6 +227,7 @@ function sendMail(doSend) {
 	if (d_bfanschrift.length == 0){ incomplete=true; d_bfanschrift = "KEINE BAHNHOFSANSCHRIFT ANGEGEBEN."; }
 	if (d_bahnstelle.length == 0) { incomplete=true; d_bahnstelle = "KEINE BAHNSTELLE ANGEGEBEN."; }
 	
+	const receiver = (d_bestmail) ? d_bestmail : "{{ site.mail | d(site.author.mail) }}";
 	const subject = "DB-TIM: Bestellung eines LAN-Ports zur Gebäudeautomation";
 	
 	let body = subject+"\n" +
@@ -247,17 +241,17 @@ function sendMail(doSend) {
 				"\n" + "Kostenstelle:\t" + d_kostenstelle +
 				"\n" + "Standort:\t" + d_standort +
 				"\n" + "Raum:    \t" + d_raum +
-				"\n" + "IDG-Nr.: \t" + d_idg +
+				"\n" + "IDG-Nr.: \t" + (d_idg || "unbekannt") +
 				"\n" + "GA-Typ:  \t" + d_gatype +
 				d_gaexist + d_gafunk + d_gabestand +
-				"\n" + "Subnetz:\t" + d_subnetz +
-				"\n" + "IPadresse:\t" + d_ipadresse +
+				"\n" + "Subnetz:\t" + (d_subnetz || "wird vom Netzwerk-Team eingetragen.") +
+				"\n" + "IP-Adresse:\t" + (d_ipadresse || "wird vom Netzwerk-Team vergeben.") +
 				d_gabbmd + d_gasystem +
 				"\n\n\tDiese Mail wurde automatisch erstellt.\n";
 	
 		if (incomplete) body += "\n\tDie Bestellung ist unvollständig und kann nicht bearbeitet werden.\n";
 	
-console.log('mailto:',receiver,'\nsubject',subject,'\n&body',encodeURIComponent(body));
+/*	console.log('mailto:',receiver,'\nsubject',subject,'\n&body',encodeURIComponent(body)); */
 	if (doSend) {
 		const win = window.open('mailto:'+receiver+'?subject='+subject+'&body='+encodeURIComponent(body));
 		win.close();

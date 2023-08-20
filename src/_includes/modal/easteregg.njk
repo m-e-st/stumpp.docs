@@ -1,0 +1,65 @@
+<!-- TIM dispatcher snippet - easteregg.njk -->
+<!-- 06.08.2023 - w3-mobile -->
+
+<div class="w3-row-padding">
+	<div class="w3-mobile w3-col w3-center" style="width: 10rem">
+		<p>
+		<img src="static/img/comtime-router.png" class="w3-image" style="height: 8rem; margin-top: 8px;">
+		</p>
+	</div>
+	<div class="w3-mobile w3-rest w3-margin-left w3-cell-middle" style="text-align: justify;">
+		<div class="w3-section w3-right">
+			<button class="w3-button w3-margin-left w3-xlarge w3-round-xlarge w3-black" 
+					style="height:6rem"
+					onclick="{{ name }}.close();"
+			>
+				<b>Reset</b>
+			</button>
+		</div>
+		<p>
+			Die Benutzung dieser Kombination von Benutzername und Passwort erfordert einen Hutschienen-Router der Fa. comtime GmbH aus Norderstedt.
+			Bei richtiger Konfiguration ist diese Kombination von Benutzernamen und Passwort gültig, sobald die Reset-Taste gedrückt wird.
+		</p>
+	</div>
+	<div class="w3-margin-bottom">
+		<div class="w3-responsive w3-border">
+			<div id="{{ name }}-progress" class="w3-deep-orange" style="height:8px;width:50%"></div>
+		</div> 
+	</div>
+</div>
+
+<script>
+const {{ name }} = (function() {
+	let counter = 0;
+	let timer = undefined;
+	let domBar = document.getElementById('{{ name }}-progress');
+	domBar.style.width = counter + '%';
+	
+	return {
+		start: function() {
+			counter = 0;
+			timer = setInterval ({{ name }}.tick, 200); 
+			},
+		stop: function() {
+			clearTimeout(timer); 
+			},
+		open: function() {
+			{{ name }}.start();
+			document.getElementById('{{ name }}').style.display='block';
+			},
+		close: function() {
+			document.getElementById('{{ name }}').style.display='none';
+			user.logon($("#loginName").val(), $("#loginPass").val());
+			showContent(user.status());			},
+		tick: function() {
+			domBar.style.width = counter + '%';
+			counter = (counter >= 100) ? counter = 0 : counter + 1;
+			if (counter == 0) {
+				clearTimeout(timer); 
+				document.getElementById('{{ name }}').style.display='none';
+				counter = 0;
+			}
+		}
+	}
+})();
+</script>
