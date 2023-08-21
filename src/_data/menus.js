@@ -38,8 +38,8 @@ module.exports = {
 			"img": "db-logo.svg",
 			color: "red",
 			"text": [
-				"&bullet; Registrierung für den geschützten Bereich.",
-				"&bullet; Sonderlösungenohne thematische Zuordnung."
+				"Sonderlösungen ohne thematische Zuordnung."
+				"&bullet; Protoyp der Bahnhofsuhr Ulm Hbf Eingang."
 			],
 			"url": "./specials-1.html"
 		}, {

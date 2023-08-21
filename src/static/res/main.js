@@ -46,7 +46,7 @@ function checkIntranetAccess() {
 		return true;
 	}
 	graceCounter = 5;  /* graceCounter MUST match no of checkServer calls */
-	checkServer(callbackIntranetAccess, fqdnTIM, "/static/timlogo.png");
+	checkServer(callbackIntranetAccess, fqdnTIM, "/static/timlogo.png"); /* ab 6.9.23 benötigt, bis dahin liefert die Abfrage 404 */
 	checkServer(callbackIntranetAccess, fqdnTIM, "/res/timlogo.png"); /* bis 6.9.23 benötigt */
 	checkServer(callbackIntranetAccess, "localhost:8080", "/static/timlogo.png");
 	checkServer(callbackIntranetAccess, "localhost:8081", "/static/timlogo.png");
