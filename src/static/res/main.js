@@ -187,7 +187,7 @@ function closeModal(modalName) {
 function sendMail(receiver, subject, body, closewindow=false) {
 	const link = 'mailto:' + receiver 
 			   + '?subject=' + encodeURIComponent(subject)
-			   + '&body=' + encodeURIComponent(body);
+			   + '&body=' + encodeURIComponent(body.replace('&', '&amp;'));
 	const win = window.open(link);
 	if (closewindow) win.close();
 }

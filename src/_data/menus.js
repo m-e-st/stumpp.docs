@@ -34,7 +34,7 @@ module.exports = {
 			"url": "./network-0.html"
 		}, {
 			"caption": "Specials",
-			"hint": "Registrierung und Sonderlösungen",
+			"hint": "Sonderlösungen",
 			"img": "db-logo.svg",
 			color: "red",
 			"text": [
