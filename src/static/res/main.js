@@ -185,8 +185,10 @@ function closeModal(modalName) {
  */
  
 function sendMail(receiver, subject, body, closewindow=false) {
-/*	console.log('mailto:',receiver,'\nsubject',subject,'\n&body',encodeURIComponent(body));	*/
-	const win = window.open('mailto:'+receiver+'?subject='+subject+'&body='+encodeURIComponent(body));
+	const link = 'mailto:' + receiver 
+			   + '?subject=' + encodeURIComponent(subject)
+			   + '&body=' + encodeURIComponent(body);
+	const win = window.open(link);
 	if (closewindow) win.close();
 }
 

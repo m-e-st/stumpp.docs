@@ -138,7 +138,6 @@ function submitRegistration(doSend) {
 		+ "\n" + " - Hash #5:\t" + _hash(dPurpose + Math.random().toString())
 		+ "\n\n\tDiese Mail wurde automatisch erstellt.\n";
 	
-/*	console.log('mailto:',receiver,'\nsubject',subject,'\n&body',encodeURIComponent(body));	*/
 	if (doSend) {
 		sendMail (receiver, subject, body);
 	} else {

@@ -251,7 +251,6 @@ function submitLanOrder(doSend) {
 	
 		if (incomplete) body += "\n\tDie Bestellung ist unvollständig und kann nicht bearbeitet werden.\n";
 	
-/*	console.log('mailto:',receiver,'\nsubject',subject,'\n&body',encodeURIComponent(body)); */
 	if (doSend) {
 		sendMail (receiver, subject, body);
 	} else {
