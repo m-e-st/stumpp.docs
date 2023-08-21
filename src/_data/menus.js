@@ -38,7 +38,7 @@ module.exports = {
 			"img": "db-logo.svg",
 			color: "red",
 			"text": [
-				"Sonderlösungen ohne thematische Zuordnung."
+				"Sonderlösungen ohne thematische Zuordnung.",
 				"&bullet; Protoyp der Bahnhofsuhr Ulm Hbf Eingang."
 			],
 			"url": "./specials-1.html"
