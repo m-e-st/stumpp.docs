@@ -178,6 +178,18 @@ function closeModal(modalName) {
 	document.getElementById(modalName).style.display='none';
 }
 
+/** sendMail
+ *
+ *	origin: https://stackoverflow.com/questions/51805395/navigator-clipboard-is-undefined
+ *	
+ */
+ 
+function sendMail(receiver, subject, body, closewindow=false) {
+/*	console.log('mailto:',receiver,'\nsubject',subject,'\n&body',encodeURIComponent(body));	*/
+	const win = window.open('mailto:'+receiver+'?subject='+subject+'&body='+encodeURIComponent(body));
+	if (closewindow) win.close();
+}
+
 /** copyToClipboard
  *
  *	origin: https://stackoverflow.com/questions/51805395/navigator-clipboard-is-undefined

@@ -122,11 +122,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	document.getElementById('bfnr').addEventListener("change", lookupBahnhof);
 	document.getElementById('gabbmd').addEventListener("change", lookupBahnhof);
 	document.getElementById('rDisplay').addEventListener("click", function(event) {
-		sendMail(false);
+		submitLanOrder(false);
 	});
 	document.getElementById('lanOrderMail').addEventListener("submit", function(event) {
 		event.preventDefault(); /* before the code */
-		sendMail(true);
+		submitLanOrder(true);
 	});
 
 	itbf8_createIndices();
@@ -196,7 +196,7 @@ function getCheckboxString(checkbox, description) {
 	return "";
 }
 
-function sendMail(doSend) {
+function submitLanOrder(doSend) {
 	
 	let d_bestname = document.getElementById('bestname').value.replace(/[<>&"']/g, '?');	
 	const d_bestoe = document.getElementById('bestoe').value.replace(/[<>&"']/g, '?');	
@@ -253,8 +253,7 @@ function sendMail(doSend) {
 	
 /*	console.log('mailto:',receiver,'\nsubject',subject,'\n&body',encodeURIComponent(body)); */
 	if (doSend) {
-		const win = window.open('mailto:'+receiver+'?subject='+subject+'&body='+encodeURIComponent(body));
-		win.close();
+		sendMail (receiver, subject, body);
 	} else {
 		document.getElementById('orderBody').innerHTML = body;
 		document.getElementById('order').style.display='block';

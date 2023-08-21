@@ -66,13 +66,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	});
 	document.getElementById('rDisplay').addEventListener("click", function(event) {
 		event.preventDefault(); /* before the code */
-		console.log("sendmail 1", this);
-		sendMail(false);
+		console.log("submitRegistration 1", this);
+		submitRegistration(false);
 	});
 	document.getElementById('registerMail').addEventListener("submit", function(event) {
 		event.preventDefault(); /* before the code */
-		console.log("sendmail 2", this);
-		sendMail(true);
+		console.log("submitRegistration 2", this);
+		submitRegistration(true);
 	});
 	
 	for (let i = 0; i < colInputs.length; i++) {
@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	document.getElementById('rName').value = user.name();
 });
 			
-function sendMail(doSend) {
+function submitRegistration(doSend) {
 	let dName = document.getElementById('rName').value.replace(/[<>&"']/g, '?');
 	const dPass = document.getElementById('rPass').value;
 	const dHash = document.getElementById('rHash').value;
@@ -140,8 +140,7 @@ function sendMail(doSend) {
 	
 /*	console.log('mailto:',receiver,'\nsubject',subject,'\n&body',encodeURIComponent(body));	*/
 	if (doSend) {
-		const win = window.open('mailto:'+receiver+'?subject='+subject+'&body='+encodeURIComponent(body));
-		win.close();
+		sendMail (receiver, subject, body);
 	} else {
 		document.getElementById('registerBody').innerHTML = body;
 		document.getElementById('register').style.display='block';
