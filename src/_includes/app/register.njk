@@ -13,8 +13,9 @@
   	#rDisplay, #rSubmit {
 		cursor: pointer;
 	}
-	
+	input {color:#000!important;background-color:#f4fffc!important}
 	.w3-pale-teal,.w3-hover-pale-teal:hover{color:#000!important;background-color:#82CBB2!important}
+	.w3-section-small{margin-top:8px!important;margin-bottom:8px!important}
 </style>
 
 <div class="">
@@ -43,11 +44,22 @@
 				<div class="w3-padding">
 					<input id='rPurpose' class="w3-input w3-border" name="registerReason" type="text" placeholder="Bedarf">
 				</div>
-				<div class="w3-padding w3-third">
-					<input id='rDisplay' class="w3-input w3-border w3-teal w3-hover-pale-teal" name="registerDisplay" type="button" value="Anzeigen" title="Anzeigen des Text der Registrierung auf dem Bildschirm">
-				</div>
-				<div class="w3-padding w3-twothird">
-					<input id='rSubmit' class="w3-input w3-border w3-teal w3-hover-pale-teal" name="registerSubmit" type="submit" value="Senden" title="Versenden der Registrierung per Outlook bzw. Mail-Programm">
+				<div class="w3-padding w3-section-small">
+					<div class="w3-col s12 m6 l3">
+						<input id='rDisplay' class="w3-input w3-border w3-teal w3-hover-pale-teal" 
+							   name="registerDisplay" type="button" value="Anzeigen" 
+							   title="Anzeigen des Text der Registrierung auf dem Bildschirm">
+					</div>
+					<div class="w3-col s12 m6 l3">
+						<input id='rCopy' class="w3-input w3-border w3-teal w3-hover-pale-teal" 
+							   name="registerFile" type="button" value="Kopieren" 
+							   title="Die Registrierung wird in das Clipboard geladen und kann mit Strg-V abgerufen werden">
+					</div>
+					<div class="w3-col s12 m12 l6">
+						<input id='rSubmit' class="w3-input w3-border w3-teal w3-hover-pale-teal" 
+							   name="registerSubmit" type="submit" value="Senden" 
+							   title="Versenden der Registrierung per Outlook bzw. Mail-Programm">
+					</div>
 				</div>
 			</div>
 			<div class="w3-mobile w3-col m12 l6">
@@ -66,14 +78,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		document.getElementById('rHash').value = _hash(document.getElementById('rPass').value);
 	});
 	document.getElementById('rDisplay').addEventListener("click", function(event) {
-		event.preventDefault(); /* before the code */
-		console.log("submitRegistration 1", this);
-		submitRegistration(false);
+		submitLanOrder('show');
+	});
+	document.getElementById('rCopy').addEventListener("click", function(event) {
+		submitLanOrder('copy');
 	});
 	document.getElementById('registerMail').addEventListener("submit", function(event) {
 		event.preventDefault(); /* before the code */
-		console.log("submitRegistration 2", this);
-		submitRegistration(true);
+		submitLanOrder('send');
 	});
 	
 	for (let i = 0; i < colInputs.length; i++) {
@@ -138,13 +150,19 @@ function submitRegistration(doSend) {
 		+ "\n" + " - Hash #4:\t" + _hash(dOrga + Math.random().toString())
 		+ "\n" + " - Hash #5:\t" + _hash(dPurpose + Math.random().toString())
 		+ "\n\n\tDiese Mail wurde automatisch erstellt.\n";
-	
-	if (doSend) {
-		sendMail (receiver, subject, body);
-	} else {
-		document.getElementById('registerBody').innerHTML = body;
-		document.getElementById('register').style.display='block';
-	}	
+
+	switch (cmd) {
+		case 'show':	document.getElementById('registerBody').innerHTML = body;
+						document.getElementById('register').style.display='block';
+						break;
+		case 'copy':	copyToClipboard(body);
+						break;
+		case 'send':	copyToClipboard(body); /* just to ensure, that the mailbody is available, when the link fails */
+						sendMail (receiver, subject, body);
+						break;
+		default:		console.log('submitRegistration', cmd);
+						console.log('mailbody', body);
+	}		
 }
 
 function _hash(password) {

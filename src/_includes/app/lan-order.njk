@@ -5,15 +5,18 @@
 
 <!-- The Form -->
 <style>
-.w3-check,.w3-radio{width:20px;height:20px;position:relative;top:2px}
-.w3-check { margin-right:8px; }
-.w3-radio { margin-right:4px; }
+	.w3-check,.w3-radio{width:20px;height:20px;position:relative;top:2px}
+	.w3-check { margin-right:8px; }
+	.w3-radio { margin-right:4px; }
 
   	#rDisplay, #rSubmit {
 		cursor: pointer;
 	}
+	input {color:#000!important;background-color:#f8fff8!important}
+	.w3-section-small{margin-top:8px!important;margin-bottom:8px!important}
 </style>
-<script>const form_version = "0.6";</script>
+
+<script>const form_version = "0.7";</script>
 
 <div class="w3-container w3-card-4 w3-text-black">
 	<form id="lanOrderMail">
@@ -104,14 +107,25 @@
 			<div class="w3-col a12 m6 l3"><input id='gasystem' class="w3-check" type="checkbox" name="gaGateway"><label>BACnet System Device</label> </div>
 		</div>
 
-		<div class="w3-row w3-stretch w3-section">
-			<div class="w3-padding w3-third">
-				<input id='rDisplay' class="w3-input w3-border w3-green w3-hover-pale-green" name="registerDisplay" type="button" value="Anzeigen" title="Anzeigen des Text der Bestellung auf dem Bildschirm">
+		<div class="w3-row w3-padding w3-stretch w3-section">
+			<div class="w3-col s12 m6 l3">
+				<input id='rDisplay' class="w3-input w3-border w3-green w3-hover-pale-green" 
+					   name="registerDisplay" type="button" value="Anzeigen" 
+					   title="Anzeigen des Text der Bestellung auf dem Bildschirm">
 			</div>
-			<div class="w3-padding w3-twothird">
-				<input id='rSubmit' class="w3-input w3-border w3-green w3-hover-pale-green" name="registerSubmit" type="submit" value="Senden" title="Versenden der Bestellung per Outlook bzw. Mail-Programm">
+			<div class="w3-col s12 m6 l3">
+				<input id='rCopy' class="w3-input w3-border w3-green w3-hover-pale-green" 
+					   name="registerFile" type="button" value="Kopieren" 
+					   title="Die Bestellung wird in das Clipboard geladen und kann mit Strg-V abgerufen werden">
 			</div>
-		</div>
+			<div class="w3-col s12 m12 l6">
+				<input id='rSubmit' class="w3-input w3-border w3-green w3-hover-pale-green" 
+					   name="registerSubmit" type="submit" value="Senden" 
+					   title="Versenden der Bestellung per Outlook bzw. Mail-Programm">
+			</div>
+		</div>		
+		
+		
 	</form>
 </div>
 
@@ -122,11 +136,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	document.getElementById('bfnr').addEventListener("change", lookupBahnhof);
 	document.getElementById('gabbmd').addEventListener("change", lookupBahnhof);
 	document.getElementById('rDisplay').addEventListener("click", function(event) {
-		submitLanOrder(false);
+		submitLanOrder('show');
+	});
+	document.getElementById('rCopy').addEventListener("click", function(event) {
+		submitLanOrder('copy');
 	});
 	document.getElementById('lanOrderMail').addEventListener("submit", function(event) {
 		event.preventDefault(); /* before the code */
-		submitLanOrder(true);
+		submitLanOrder('send');
 	});
 
 	itbf8_createIndices();
@@ -196,7 +213,7 @@ function getCheckboxString(checkbox, description) {
 	return "";
 }
 
-function submitLanOrder(doSend) {
+function submitLanOrder(cmd) {
 	
 	let d_bestname = document.getElementById('bestname').value.replace(/[<>&"']/g, '?');	
 	const d_bestoe = document.getElementById('bestoe').value.replace(/[<>&"']/g, '?');	
@@ -249,13 +266,19 @@ function submitLanOrder(doSend) {
 				d_gabbmd + d_gasystem +
 				"\n\n\tDiese Mail wurde automatisch erstellt.\n";
 	
-		if (incomplete) body += "\n\tDie Bestellung ist unvollständig und kann nicht bearbeitet werden.\n";
+	if (incomplete) body += "\n\tDie Bestellung ist unvollständig und kann nicht bearbeitet werden.\n";
 	
-	if (doSend) {
-		sendMail (receiver, subject, body);
-	} else {
-		document.getElementById('orderBody').innerHTML = body;
-		document.getElementById('order').style.display='block';
+	switch (cmd) {
+		case 'show':	document.getElementById('orderBody').innerHTML = body;
+						document.getElementById('order').style.display='block';
+						break;
+		case 'copy':	copyToClipboard(body);
+						break;
+		case 'send':	copyToClipboard(body); /* just to ensure, that the mailbody is available, when the link fails */
+						sendMail (receiver, subject, body);
+						break;
+		default:		console.log('submitLanOrder', cmd);
+						console.log('mailbody', body);
 	}	
 }
 </script>
