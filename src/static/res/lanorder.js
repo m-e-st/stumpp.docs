@@ -89,20 +89,20 @@ const order_data = [
 
 function orderSet(
 	bahnhof		= "Angabe fehlt",
-	plz			= "Angabe fehlt";
+	plz			= "Angabe fehlt",
 	ort			= "Angabe fehlt",
 	strasse		= "Angabe fehlt",
 	endgeraet	= "GA Endgerät oder Uplink",
-	standort = "keine Angabe",
-	order_data[1][ 9] = "keine Angabe",
-	order_data[1][12] = "Angabe fehlt",
-	order_data[1][13] = "Angabe fehlt",
-	order_data[1][14] = "Angabe fehlt",
-	order_data[1][24] = "gltdev000-???"",
-	order_data[1][28] = "I.SVT",
-	order_data[1][29] = "I.SVT",
-	order_data[1][33] = "DB S",
-	switchport		= "DB S",
+	standort	= "keine Angabe",
+	raum		= "keine Angabe",
+	email		= "Angabe fehlt",
+	bahnstelle	= "Angabe fehlt",
+	kostenstelle= "Angabe fehlt",
+	hostname	= "gltdev000-???",
+	netzbereich	= "I.SVT",
+	subnetzmaske= "I.SVT",
+	idgnummer	= "DB S",
+	switchport	= "DB S",
 	
 	) {
 	const idx = 1;
@@ -117,7 +117,7 @@ function orderSet(
 	order_data[idx][12] = "Angabe fehlt";
 	order_data[idx][13] = "Angabe fehlt";
 	order_data[idx][14] = "Angabe fehlt";
-	order_data[idx][24] = "gltdev000-???"";
+	order_data[idx][24] = "gltdev000-???";
 	order_data[idx][28] = "I.SVT";
 	order_data[idx][29] = "I.SVT";
 	order_data[idx][33] = "DB S";
