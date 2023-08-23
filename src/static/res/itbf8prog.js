@@ -35,7 +35,7 @@ function network_ipwidth(subnetz) {
 
 /** --- */
 
-function itbf8_scheme(parm, subnetz, offset) {
+function itbf8_scheme(parm, subnetz, offset=0) {
 	const item = subnetz.split('/');
 	const netz = _network_number(item[0]);
 	const last = netz + 2**(32-Number(item[1]))-1;

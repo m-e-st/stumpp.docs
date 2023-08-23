@@ -157,6 +157,12 @@ module.exports = {
 			"file": "uhr",
 			"img" : "db-logo.svg"
 		},{
+			"id"  : "sandbox",
+			"name": "Buddelkiste",
+			"tag" : "sandbox",
+			"file": "sandbox",
+			"img" : "dragon.png"
+		},{
 			"hide": true,
 			"id"  : "empty",
 			"name": "Reserviert",

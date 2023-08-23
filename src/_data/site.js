@@ -2,7 +2,7 @@ module.exports = {
 	title: "DB S&S Tools",
 	description: "TIM Tool für DB Station&service AG",
 	caption: "TIM",
-	version : "0.6.97",
+	version : "0.6.100",
 	mail: "SuS.Gebaeudeautomation@deutschebahn.com",
 
 	url : {

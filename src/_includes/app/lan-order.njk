@@ -16,7 +16,7 @@
 	.w3-section-small{margin-top:8px!important;margin-bottom:8px!important}
 </style>
 
-<script>const form_version = "0.7";</script>
+<script>const form_version = "0.7.1";</script>
 
 <div class="w3-container w3-card-4 w3-text-black">
 	<form id="lanOrderMail">
@@ -37,16 +37,22 @@
 		<!-- Verkehrsstation -->
 		<h4 class="w3-text-blue">Verkehrsstation</h4>
 		<div class="w3-row">
-			<div class="w3-col s4 m3 l2">
+			<div class="w3-col s3 m2 l1">
 				<input id='bfnr' class="w3-input w3-border w3-padding-small" name="bfnr" required type="text" placeholder="Bf-Nr."
 					   title="Autorisierte Benutzer können durch Eingabe der Bahnhofsnummer verschiedene andere Felder automatisch ausfüllen lassen."
 				>
 			</div>
-			<div class="w3-col s8 m9 l10">
+			<div class="w3-col s9 m10 l11">
 				<input id='bfname' class="w3-input w3-border w3-padding-small" name="bahnhof" required type="text" placeholder="Bahnhof">
 			</div>
-			<div class="w3-col s12 m12 l12">
+			<div class="w3-col s3 m2 l1">
+				<input id='bf100' class="w3-input w3-border w3-padding-small" name="betriebsstelle" type="text" placeholder="RIL100">
+			</div>
+			<div class="w3-col s9 m10 l11">
 				<input id='bfanschrift' class="w3-input w3-border w3-padding-small" name="anschrift" required type="text" placeholder="Anschrift">
+				<input id='bfstrasse' name="strasse" type="hidden">
+				<input id='bfplz' name="plz" type="hidden">
+				<input id='bfort' name="ort" type="hidden">
 			</div>
 			<div class="w3-col s6 m4 l6 w3-hide-small" style="max-height:2.2em;overflow:hidden">
 				<label class="w3-input w3-border w3-padding-small">Bahn- und Kostenstelle</label>
@@ -101,6 +107,22 @@
 						class="w3-input w3-border w3-padding-small" readonly type="text"
 						placeholder="IP-Adresse wird vom Netzwerk-Team vergeben">
 			</div>
+			<div class="w3-col m3 l2 w3-hide-small" style="max-height:2.2em;overflow:hidden">
+				<label class="w3-input w3-border w3-padding-small">Subnetz-Maske</label>
+			</div>
+			<div class="w3-col s6 m9 l4">
+				<input id='subnetzmask' name="subnetzmask"
+						class="w3-input w3-border w3-padding-small" readonly type="text"
+						placeholder="Subnetz-Maske wird berechnet">
+			</div>
+			<div class="w3-col m3 l2 w3-hide-small" style="max-height:2.2em;overflow:hidden">
+				<label class="w3-input w3-border w3-padding-small">IP-Bereich</label>
+			</div>
+			<div class="w3-col s6 m9 l4">
+				<input id='iprange' name="iprange"
+						class="w3-input w3-border w3-padding-small" readonly type="text"
+						placeholder="IP-Adressbereich wird automatisch vergeben.">
+			</div>
 		</div>
 		<div class="w3-row w3-border w3-padding-small">
 			<div class="w3-col a12 m6 l3"><input id='gabbmd' class="w3-check" type="checkbox" name="gaBBMD"><label>Gerät ist ein <b>BBMD</b></label></div>
@@ -110,17 +132,23 @@
 		<div class="w3-row w3-padding w3-stretch w3-section">
 			<div class="w3-col s12 m6 l3">
 				<input id='rDisplay' class="w3-input w3-border w3-green w3-hover-pale-green" 
-					   name="registerDisplay" type="button" value="Anzeigen" 
+					   name="orderDisplay" type="button" value="Anzeigen" 
 					   title="Anzeigen des Text der Bestellung auf dem Bildschirm">
 			</div>
 			<div class="w3-col s12 m6 l3">
 				<input id='rCopy' class="w3-input w3-border w3-green w3-hover-pale-green" 
-					   name="registerFile" type="button" value="Kopieren" 
+					   name="orderCopy" type="button" value="Kopieren" 
 					   title="Die Bestellung wird in das Clipboard geladen und kann mit Strg-V abgerufen werden">
 			</div>
-			<div class="w3-col s12 m12 l6">
+			<div id='rFileDiv' class="w3-col s12 m6 l3">
+				<input id='rFile' class="w3-input w3-border w3-green w3-hover-pale-green" 
+					   name="orderFile" type="button" value="Download"
+					   title="Die Bestellung wird sowohl als Textdatei als auch als CSV-Datei heruntergeladen. " 
+					        +"Die CSV-Datei kann direkt in die Systel Mapping-Liste (Excel) importiert werden.">
+			</div>
+			<div id='rSendDiv' class="w3-col s12 m6 l3">
 				<input id='rSubmit' class="w3-input w3-border w3-green w3-hover-pale-green" 
-					   name="registerSubmit" type="submit" value="Senden" 
+					   name="orderSubmit" type="submit" value="Senden" 
 					   title="Versenden der Bestellung per Outlook bzw. Mail-Programm">
 			</div>
 		</div>		
@@ -135,11 +163,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 	document.getElementById('bfnr').addEventListener("change", lookupBahnhof);
 	document.getElementById('gabbmd').addEventListener("change", lookupBahnhof);
+	document.getElementById('gasystem').addEventListener("change", lookupBahnhof);
 	document.getElementById('rDisplay').addEventListener("click", function(event) {
 		submitLanOrder('show');
 	});
 	document.getElementById('rCopy').addEventListener("click", function(event) {
 		submitLanOrder('copy');
+	});
+	document.getElementById('rFile').addEventListener("click", function(event) {
+		submitLanOrder('file');
 	});
 	document.getElementById('lanOrderMail').addEventListener("submit", function(event) {
 		event.preventDefault(); /* before the code */
@@ -147,28 +179,63 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	});
 
 	itbf8_createIndices();
-	document.getElementById('username').innerHTML = user.name();
-	document.getElementById('dataversion').innerHTML = "Form " + form_version;	
+	document.getElementById('username').textContent = user.name();
+	document.getElementById('dataversion').textContent = "Form " + form_version;	
 
+	renderDownloadButton (user.status());
 });
 
 function lookupBahnhof(event) {		/* Automatik: Nachschlagen deer Bahnhofsdaten, wenn angemeldet */ 
 	if (! user.status()) return;	/* Nachschlagen nur mit gültiger Anmeldung */
 	
-	const bfnr = document.getElementById('bfnr').value.replace(/[<>&"']/g, '?');
+	const bfnr = document.getElementById('bfnr').value;
+	if (! bfnr) return;
 	const item = itbf8_retrieve_number('**', bfnr);
 	if (item) {
+		const is_bbmd = document.getElementById('gabbmd').checked;
+		const is_system = document.getElementById('gasystem').checked;
 		document.getElementById('bfname').value = item.vst_name;
+		document.getElementById('bf100').value = item.vst_100;
 		document.getElementById('bfanschrift').value = item.vst_strasse.concat((item.vst_strasse == "")?'':', ', item.vst_plz, ' ', item.vst_ort);
+		document.getElementById('bfstrasse').value = item.vst_strasse; /* hidden */
+		document.getElementById('bfplz').value = item.vst_plz; /* hidden */
+		document.getElementById('bfort').value = item.vst_ort; /* hidden */
 		document.getElementById('bahnstelle').value = item.bahnstelle;
 		document.getElementById('subnetz').value = item.subnetz;
-		document.getElementById('ipadresse').value = (document.getElementById('gabbmd').checked) ? itbf8_scheme("offset", item.subnetz, 21) : '';
+		document.getElementById('ipadresse').value = (is_bbmd) ? itbf8_scheme("offset", item.subnetz, 21) : '';
+		document.getElementById('subnetzmask').value = network_ipmask(item.subnetz);
+		document.getElementById('iprange').value = (is_bbmd || is_system) ? itbf8_scheme("rg-sys", item.subnetz) : itbf8_scheme("rg-dev", item.subnetz);
 	} else {
 		document.getElementById('bfname').value = "";
+		document.getElementById('bf100').value = "";
 		document.getElementById('bfanschrift').value = "";
+		document.getElementById('bfstrasse').value = ""; /* hidden */
+		document.getElementById('bfplz').value = ""; /* hidden */
+		document.getElementById('bfort').value = ""; /* hidden */
 		document.getElementById('bahnstelle').value = "";
 		document.getElementById('subnetz').value = "";
 		document.getElementById('ipadresse').value = "";
+		document.getElementById('subnetzmask').value = "";
+		document.getElementById('iprange').value = "";
+	}
+}
+
+function renderDownloadButton(showit) {
+	const fileDiv = document.getElementById('rFileDiv');
+	const sendDiv = document.getElementById('rSendDiv');
+
+	if (showit) {		/* <div class="w3-col s12 m6 l3"> */
+		sendDiv.classList.remove('m12');	
+		sendDiv.classList.remove('l6');
+		sendDiv.classList.add('m6');
+		sendDiv.classList.add('l3');
+		fileDiv.style.display = 'block';
+} else {				/* <div class="w3-col s12 m12 l6"> */
+		sendDiv.classList.remove('m6');
+		sendDiv.classList.remove('l3');
+		sendDiv.classList.add('m12');
+		sendDiv.classList.add('l6');
+		fileDiv.style.display = 'none';
 	}
 }
 
@@ -179,6 +246,7 @@ function lookupBahnhof(event) {		/* Automatik: Nachschlagen deer Bahnhofsdaten, 
 	id='bestmail'		name="mail"			required
 	id='bfnr'			name="bfnr"			required
 	id='bfname'			name="bahnhof"		required
+	id='bf100'			name="betriebsstelle"
 	id='bfanschrift'	name="anschrift"	required	
 	id='bahnstelle'		name="bahnstelle"	required
 	id='kostenstelle'	name="kostenstelle"
@@ -194,6 +262,8 @@ function lookupBahnhof(event) {		/* Automatik: Nachschlagen deer Bahnhofsdaten, 
 	id='gabestand'		name="gaBestand"
 	id='subnetz'		name="subnetz"
 	id='ipadresse'		name="ipaddress"
+	id='subnetzmask'	name="subnetzmask"
+	id='iprange'		name="iprange"
 	id='gabbmd' 		name="gaBBMD"
 	id='gasystem' 		name="gaGateway"
 	id='rDisplay' 		name="registerDisplay"
@@ -215,23 +285,26 @@ function getCheckboxString(checkbox, description) {
 
 function submitLanOrder(cmd) {
 	
-	let d_bestname = document.getElementById('bestname').value.replace(/[<>&"']/g, '?');	
-	const d_bestoe = document.getElementById('bestoe').value.replace(/[<>&"']/g, '?');	
-	let d_bestmail = document.getElementById('bestmail').value.replace(/[<>&"']/g, '?');	
-	let d_bfnr = document.getElementById('bfnr').value.replace(/[<>&"']/g, '?');			
-	let d_bfname = document.getElementById('bfname').value.replace(/[<>&"']/g, '?');			
-	let d_bfanschrift = document.getElementById('bfanschrift').value.replace(/[<>&"']/g, '?');	
-	let d_bahnstelle = document.getElementById('bahnstelle').value.replace(/[<>&"']/g, '?');		
-	const d_kostenstelle = document.getElementById('kostenstelle').value.replace(/[<>&"']/g, '?');	
-	const d_standort = document.getElementById('standort').value.replace(/[<>&"']/g, '?');		
-	const d_raum = document.getElementById('raum').value.replace(/[<>&"']/g, '?');			
-	const d_idg = document.getElementById('idg').value.replace(/[<>&"']/g, '?');
-	const d_gatype = getRadiobuttonValue('gatype').replace(/[<>&"']/g, '?');		
+	let d_bestname = document.getElementById('bestname').value;	
+	const d_bestoe = document.getElementById('bestoe').value;	
+	let d_bestmail = document.getElementById('bestmail').value;	
+	let d_bfnr = document.getElementById('bfnr').value;			
+	let d_bfname = document.getElementById('bfname').value;			
+	let d_bf100 = document.getElementById('bf100').value;			
+	let d_bfanschrift = document.getElementById('bfanschrift').value;	
+	let d_bahnstelle = document.getElementById('bahnstelle').value;		
+	const d_kostenstelle = document.getElementById('kostenstelle').value;	
+	const d_standort = document.getElementById('standort').value;		
+	const d_raum = document.getElementById('raum').value;			
+	const d_idg = document.getElementById('idg').value;
+	const d_gatype = getRadiobuttonValue('gatype');		
 	const d_gaexist = getCheckboxString('gaexist', "\n - GA am Standort bereits vorhanden");
 	const d_gafunk = getCheckboxString('gafunk', "\n - Empfehlung zur Funkanbindung");
 	const d_gabestand = getCheckboxString('gabestand', "\n - Bestandsschutz wird beantragt");
-	const d_subnetz = document.getElementById('subnetz').value.replace(/[<>&"']/g, '?');	
-	const d_ipadresse = document.getElementById('ipadresse').value.replace(/[<>&"']/g, '?');
+	const d_subnetz = document.getElementById('subnetz').value;	
+	const d_ipadresse = document.getElementById('ipadresse').value;
+	const d_subnetzmask = document.getElementById('subnetzmask').value;	
+	const d_iprange = document.getElementById('iprange').value;
 	const d_gabbmd = getCheckboxString('gabbmd', "\n - Anschluss ist für BBMD");
 	const d_gasystem = getCheckboxString('gasystem', "\n - Anschluss ist für BACnet Systemgerät");
 	
@@ -269,7 +342,7 @@ function submitLanOrder(cmd) {
 	if (incomplete) body += "\n\tDie Bestellung ist unvollständig und kann nicht bearbeitet werden.\n";
 	
 	switch (cmd) {
-		case 'show':	document.getElementById('orderBody').innerHTML = body;
+		case 'show':	document.getElementById('orderBody').textContent = body;
 						document.getElementById('order').style.display='block';
 						break;
 		case 'copy':	copyToClipboard(body);
@@ -277,6 +350,28 @@ function submitLanOrder(cmd) {
 		case 'send':	copyToClipboard(body); /* just to ensure, that the mailbody is available, when the link fails */
 						sendMail (receiver, subject, body);
 						break;
+		case 'file':	alert("Sorry, this function is not yet available.")
+						return;
+						//~ orderWriteText(body);
+						//~ orderWriteData({
+								//~ bestname: d_bestname,
+								//~ bestoe: d_bestoe,
+								//~ bestmail: d_bestmail,
+								//~ bfnr: d_bfnr,		
+								//~ bfname: d_bfname,		
+								//~ bf100: d_bf100,		
+								//~ bfanschrift: d_bfanschrift,
+								//~ bahnstelle: d_bahnstelle,	
+								//~ kostenstelle: d_kostenstelle,
+								//~ standort: d_standort,	
+								//~ raum: d_raum,		
+								//~ idg: d_idg,
+								//~ subnetz: d_subnetz,
+								//~ ipadresse: d_ipadresse,
+								//~ subnetzmask: d_subnetzmask,
+								//~ iprange: d_iprange
+						//~ });
+						//~ break;
 		default:		console.log('submitLanOrder', cmd);
 						console.log('mailbody', body);
 	}	

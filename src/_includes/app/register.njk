@@ -78,14 +78,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		document.getElementById('rHash').value = _hash(document.getElementById('rPass').value);
 	});
 	document.getElementById('rDisplay').addEventListener("click", function(event) {
-		submitLanOrder('show');
+		submitRegistration('show');
 	});
 	document.getElementById('rCopy').addEventListener("click", function(event) {
-		submitLanOrder('copy');
+		submitRegistration('copy');
 	});
 	document.getElementById('registerMail').addEventListener("submit", function(event) {
 		event.preventDefault(); /* before the code */
-		submitLanOrder('send');
+		submitRegistration('send');
 	});
 	
 	for (let i = 0; i < colInputs.length; i++) {
@@ -112,12 +112,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	document.getElementById('rName').value = user.name();
 });
 			
-function submitRegistration(doSend) {
-	let dName = document.getElementById('rName').value.replace(/[<>&"']/g, '?');
+function submitRegistration(cmd) {
+	let dName = document.getElementById('rName').value;
 	const dPass = document.getElementById('rPass').value;
 	const dHash = document.getElementById('rHash').value;
-	const dOrga = document.getElementById('rOrga').value.replace(/[<>&"']/g, '?');
-	const dPurpose = document.getElementById('rPurpose').value.replace(/[<>&"']/g, '?');
+	const dOrga = document.getElementById('rOrga').value;
+	const dPurpose = document.getElementById('rPurpose').value;
 
 	if ((((dName == dPass) || (dName == dOrga) || (dName == dPurpose)) && (dName.length > 0))
 	 ||	(((dPass == dOrga) || (dPass == dPurpose)) && (dPass.length > 0))
@@ -152,7 +152,7 @@ function submitRegistration(doSend) {
 		+ "\n\n\tDiese Mail wurde automatisch erstellt.\n";
 
 	switch (cmd) {
-		case 'show':	document.getElementById('registerBody').innerHTML = body;
+		case 'show':	document.getElementById('registerBody').textContent = body;
 						document.getElementById('register').style.display='block';
 						break;
 		case 'copy':	copyToClipboard(body);
@@ -184,6 +184,8 @@ function _explanation (ID) {
 		case 'rHash':	return "Dieser Wert dient lediglich zur Identifizierung Ihres Antrags.";
 		case 'rOrga':	return "Geben Sie bitte das Kurzzeichen Ihrer Organisationseinheit ein.";
 		case 'rPurpose':return "Eine kurze Angabe über den Grund Ihres Zugriffswunsches erleichtert die Freigabe und Einrichtung Ihrer Autorisierung.";
+		case 'rDisplay':return "Der Text zur Registrierung wird am Bildschirm angezeigt und kann in das Clipboard kopiert werden.";
+		case 'rCopy':	return "Der Text der Registrierung wird in das Clipboard kopiert.";
 		case 'rSubmit':	return "Es wird eine Mail mit Ihrem Antrag erzeugt. Sie müssen die Mail nur noch absenden.<br><br>\nBitte beachten:<b>Die Bearbeitung des Zugangsantrags kann aus technischen Gründen mehrere Tage dauern.</b>";
 	}
 	return 'Unbekanntes Datenfeld "'+ID+'" kann nicht erklärt werden.';
