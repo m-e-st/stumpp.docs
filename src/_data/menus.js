@@ -165,6 +165,7 @@ module.exports = {
 			"file": "uhr",
 			"img" : "db-logo.svg"
 		},{
+			"hide": true,
 			"id"  : "sandbox",
 			"name": "Buddelkiste",
 			"tag" : "sandbox",
