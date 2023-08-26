@@ -25,7 +25,7 @@ topic: "specials"
 <!-- Sidebar -->
 <nav class="w3-hide-small sidebar w3-sidebar w3-bar-block w3-white">
 	{% for data in menus.specials %}
-	  {% if not data.hide %}
+	  {% if not (data.hide or (data.env and site.env)) %}
 		<a href="{{ page.fileSlug | slug }}-{{ loop.index0 }}.html" class="w3-bar-item w3-button tablink">{{ data.name }}</a>
 	  {% endif %}
 	{% endfor %}

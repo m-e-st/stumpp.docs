@@ -16,7 +16,7 @@
 	.w3-section-small{margin-top:8px!important;margin-bottom:8px!important}
 </style>
 
-<script>const form_version = "0.7.1";</script>
+<script>const form_version = "0.7.2";</script>
 
 <div class="w3-container w3-card-4 w3-text-black">
 	<form id="lanOrderMail">
@@ -39,7 +39,7 @@
 		<div class="w3-row">
 			<div class="w3-col s3 m2 l1">
 				<input id='bfnr' class="w3-input w3-border w3-padding-small" name="bfnr" required type="text" placeholder="Bf-Nr."
-					   title="Autorisierte Benutzer können durch Eingabe der Bahnhofsnummer verschiedene andere Felder automatisch ausfüllen lassen."
+					   title="Autorisierte Benutzer können durch Eingabe der Bahnhofsnummer auch die Angaben zum Netzwerk autoomatisch ausfüllen lassen."
 				>
 			</div>
 			<div class="w3-col s9 m10 l11">
@@ -185,7 +185,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 });
 
 function lookupBahnhof(event) {		/* Automatik: Nachschlagen deer Bahnhofsdaten, wenn angemeldet */ 
-	if (! user.status()) return;	/* Nachschlagen nur mit gültiger Anmeldung */
 	
 	const bfnr = document.getElementById('bfnr').value;
 	if (! bfnr) return;
@@ -199,6 +198,7 @@ function lookupBahnhof(event) {		/* Automatik: Nachschlagen deer Bahnhofsdaten, 
 		document.getElementById('bfstrasse').value = item.vst_strasse; /* hidden */
 		document.getElementById('bfplz').value = item.vst_plz; /* hidden */
 		document.getElementById('bfort').value = item.vst_ort; /* hidden */
+		if (! user.status()) return;	/* Nachschlagen von IPs nur mit gültiger Anmeldung */
 		document.getElementById('bahnstelle').value = item.bahnstelle;
 		document.getElementById('subnetz').value = item.subnetz;
 		document.getElementById('ipadresse').value = (is_bbmd) ? itbf8_scheme("offset", item.subnetz, 21) : '';

@@ -123,7 +123,7 @@ module.exports = {
 			"img" : "ethernet-port-53.png",
 		},{
 			"id"  : "project",
-			"name": "Projekte",
+			"name": "GA-Projekt",
 			caption: "Bestellhilfe Netzwerk für Projekte",
 			logon: true,
 			color:	"light-green",
@@ -165,7 +165,7 @@ module.exports = {
 			"file": "uhr",
 			"img" : "db-logo.svg"
 		},{
-			"hide": true,
+			"env" : true,
 			"id"  : "sandbox",
 			"name": "Buddelkiste",
 			"tag" : "sandbox",
