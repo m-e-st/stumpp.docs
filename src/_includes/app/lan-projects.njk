@@ -64,6 +64,9 @@
 				<input id='kostenstelle' class="w3-input w3-border w3-padding-small" name="kostenstelle" type="text" placeholder="Kostenstelle" value="68700">
 			</div>
 		</div>
+
+<div class="w3-hide">
+		
 		<!-- Gebäudeautomation -->
 		<h4 class="w3-text-blue w3-section">Örtliche Gegebenheiten</h4>
 		<div class="w3-row w3-section">
@@ -131,27 +134,32 @@
 
 		<div class="w3-row w3-padding w3-stretch w3-section">
 			<div class="w3-col s12 m6 l3">
-				<input id='rDisplay' class="w3-input w3-border w3-green w3-hover-pale-green" 
+				<input id='rDisplay' class="w3-input w3-border w3-light-green w3-hover-pale-green" 
 					   name="orderDisplay" type="button" value="Anzeigen" 
 					   title="Anzeigen des Text der Bestellung auf dem Bildschirm">
 			</div>
 			<div class="w3-col s12 m6 l3">
-				<input id='rCopy' class="w3-input w3-border w3-green w3-hover-pale-green" 
+				<input id='rCopy' class="w3-input w3-border w3-light-green w3-hover-pale-green" 
 					   name="orderCopy" type="button" value="Kopieren" 
 					   title="Die Bestellung wird in das Clipboard geladen und kann mit Strg-V abgerufen werden">
 			</div>
 			<div id='rFileDiv' class="w3-col s12 m6 l3">
-				<input id='rFile' class="w3-input w3-border w3-green w3-hover-pale-green" 
+				<input id='rFile' class="w3-input w3-border w3-light-green w3-hover-pale-green" 
 					   name="orderFile" type="button" value="Download"
 					   title="Die Bestellung wird sowohl als Textdatei als auch als CSV-Datei heruntergeladen. Die CSV-Datei kann direkt in die Systel Mapping-Liste (Excel) importiert werden.">
 			</div>
 			<div id='rSendDiv' class="w3-col s12 m6 l3">
-				<input id='rSubmit' class="w3-input w3-border w3-green w3-hover-pale-green" 
+				<input id='rSubmit' class="w3-input w3-border w3-light-green w3-hover-pale-green" 
 					   name="orderSubmit" type="submit" value="Senden" 
 					   title="Versenden der Bestellung per Outlook bzw. Mail-Programm">
 			</div>
 		</div>		
-		
+</div> <!-- extra div to hide -->
+<div class="w3-jumbo w3-container w3-padding-64 w3-light-gray w3-text-gray">
+	Die Bestellhilfe für Projekte zur Bestellung mehrerer IP-Ports
+	<span class="w3-text-light-blue"> ist nicht implementiert.</span>
+</div>
+
 		
 	</form>
 </div>

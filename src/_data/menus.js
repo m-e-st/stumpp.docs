@@ -122,6 +122,14 @@ module.exports = {
 			"file": "lan-order",
 			"img" : "ethernet-port-53.png",
 		},{
+			"id"  : "project",
+			"name": "Projekte",
+			caption: "Bestellhilfe Netzwerk für Projekte",
+			logon: true,
+			color:	"light-green",
+			"file": "lan-projects",
+			"img" : "ethernet-port-53.png",
+		},{
 			"id"  : "register",
 			"name": "Registrierung",
 			caption: "Registrierung für den geschützten Bereich",
