@@ -1,23 +1,16 @@
 module.exports = {
-	title: "DB S&S Tools",
-	description: "TIM Tool für DB Station&service AG",
-	caption: "TIM",
-	version : "0.6.105",
-	mail: "SuS.Gebaeudeautomation@deutschebahn.com",
+	title: "QNAP Home",
+	description: "QNAP Web Server 172.16.1.4",
+	caption: "QNAP",
+	version : "0.2.106",
+	mail: "michael@stumpp.name",
 
-	url : {
-		home: "/",
-		main: "https://www.deutschebahn.com/de/konzern/konzernprofil/Konzernunternehmen/db_station_service_ag-6879530",
-		impressum: "https://www.deutschebahn.com/de/impressum",
-		info: "https://www.deutschebahn.com/de/konzern/konzernprofil/Konzernunternehmen/db_station_service_ag-6879530",
-		this: "https://tim.ga.itbf.db.de"
-	},
 	author: {
-		name: "DB Station&Service AG",
+		name: "Michael Stumpp",
 		year: 2023,
-		hide: true,
-		mail: "michael.stumpp@deutschebahn.com",
-		code: "&#x6d;&#x69;&#x63;&#x68;&#x61;&#x65;&#x6c;&#x2e;&#x73;&#x74;&#x75;&#x6d;&#x70;&#x70;&#x40;&#x64;&#x65;&#x75;&#x74;&#x73;&#x63;&#x68;&#x65;&#x62;&#x61;&#x68;&#x6e;&#x2e;&#x63;&#x6f;&#x6d;"
+		hide: false,
+		mail: "michael@stumpp.name",
+		code: "&#x6d;&#x69;&#x63;&#x68;&#x61;&#x65;&#x6c;&#x40;&#x73;&#x74;&#x75;&#x6d;&#x70;&#x70;&#x2e;&#x6e;&#x61;&#x6d;&#x65;"
 	}, 
 
 	env: process.env.ELEVENTY_ENV === 'production'

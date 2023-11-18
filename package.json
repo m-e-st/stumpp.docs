@@ -1,5 +1,5 @@
 {
-  "name": "deutschebahn",
+  "name": "QNAP Home",
   "version": "1.0.0",
   "description": "Standalone Programm für die DB",
   "main": ".eleventy.js",
@@ -12,16 +12,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/m-e-st/deutschebahn.git"
+    "url": "git+https://github.com/m-e-st/qnap-home.git"
   },
   "author": "Michael Stumpp",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/m-e-st/deutschebahn/issues"
+    "url": "https://github.com/m-e-st/qnap-home/issues"
   },
-  "homepage": "https://github.com/m-e-st/deutschebahn#readme",
+  "homepage": "https://github.com/m-e-st/qnap-home#readme",
   "dependencies": {
     "@11ty/eleventy": "^1.0.2",
+    "@grimlink/eleventy-plugin-lucide-icons": "^1.0.4",
     "csv-to-js-parser": "^2.3.5",
     "del-cli": "^5.0.0",
     "html-minifier": "^4.0.0"

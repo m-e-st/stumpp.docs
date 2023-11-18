@@ -1,68 +1,90 @@
 module.exports = {
-	"title": "DB Menus",
-	"version": "1.0.2",
-	"date": "2023-07-31",
-	
-	"top": [
+	title:	"www.stumpp.name",
+	version:"1.0.0",
+	date:	"2023-08-27",
+
+	top: [
 		{
-			"hide": true, 
-			"caption": "Info",
-			"hint": "Informationen",
-			"img": "home.svg",
-			color: "gray",
-			"text": [ "Derzeit liegen keine weiteren Informationen über die HTML-Tools von Station&Service vor." ],
-			"url": "./index.html"
+			hide_card:	true,
+			caption: 	"Home",
+			title: 		"Startseite",
+			hint: 		"Übersicht über die Inhalte dieser Seite",
+			icon: 		"home",
+			color:		"gray",
+			text: 		[ "Startseite von <b>www.stumpp.name</b>" ],
+			url:		"/index.html"
 		}, {
-			"caption": "TIM",
-			"hint": "TIM Serverauswahl",
-			"img": "regionalbereiche.png",
-			color: "blue",
-			"text": [
-				"Jeder Regionalbereich wird vom zugeordneten TIM-Servier bedient. Hinzu kommt der Quarantäne-Server für alle Regionen."
-			],
-			"url": "./tim-1.html"
+			hide:		true,
+			caption: 	"Developer",
+			title: 		"Informationen für Entwickler",
+			hint: 		"Nachschlagewerke und Werkzeuge zur Software-Entwicklung",
+			icon: 		"chef-hat",
+			color:		"green",
+			text: 		[ " " ],
+			url:		"/index.html"
 		}, {
-			"caption": "ITBF",
-			"hint": "Datennetz der Gebäudeautomation",
-			"img": "ethernet-port-53.png",
-			color: "green",
-			"text": [
-				"&bullet; Informationen zum GA-Datennetz.",
-				"&bullet; Bestellhilfe für GA-Netzwerk-Anschlüsse.",
-				"<b>Für diesen Bereich wird eine Anmeldung benötigt.</b>"
-			],
-			"url": "./network-0.html"
+			caption: 	"IT-Security",
+			title: 		"Cyber Security Unterstützung",
+			hint: 		"Wechsel zur Rezeptseite von Familie Stumpp",
+			icon: 		"shield",
+			color:		"deep-orange",
+			text: 		[ " " ],
+			url:		"/index.html"
 		}, {
-			"caption": "Specials",
-			"hint": "Sonderlösungen",
-			"img": "db-logo.svg",
-			color: "red",
-			"text": [
-				"Sonderlösungen ohne thematische Zuordnung.",
-				"&bullet; Protoyp der Bahnhofsuhr Ulm Hbf Eingang."
-			],
-			"url": "./specials-1.html"
+			caption: 	"Tools",
+			title: 		"Werkzeug",
+			hint: 		"Wechsel zur Rezeptseite von Familie Stumpp",
+			icon: 		"hammer",
+			color:		"yellow",
+			text: 		[ " " ],
+			url:		"/tools"
 		}, {
-			"hide": true,
-			"caption": "PoC",
-			"hint": "Proof of Concept Pages",
-			"img": "dragon.png",
-			color: "black",
-			"text": [
-				"Hic sunt dracones."
-			],
-			"url": "./dragon-0.html"
+			caption: 	"Infothek",
+			title: 		"Bibliothek",
+			hint: 		"Bibliothek aller verfügbaren Informationen auf dieser Seite",
+			icon: 		"book-open",
+			color:		"blue",
+			text: 		[ " " ],
+			url:		"/infothek"
 		}, {
-			"hide": false,
-			"caption": "Über",
-			"img": "about-94.png",
-			color: "light-blue",
-			"hint": "Über das Programm",
-			text: [ "HTML Tool für DB Station&service AG" ],
-			action: "document.getElementById('about').style.display='block';"
+			caption: 	"Rezepte",
+			title: 		"Rezeptseite Familie Stumpp",
+			hint: 		"Wechsel zur Rezeptseite von Familie Stumpp",
+			icon: 		"chef-hat",
+			color:		"pale-blue",
+			text: 		[ "Die Rezeptseite ist momentan noch auf einer separaten Seite untergebracht. "
+						+ "Es ist vorgesehen, die Rezeptseite vollständig hier zu integrieren"
+						],
+			url:		"https://rezepte.stumpp.name"
+		}, {
+			caption: 	"Intern",
+			title: 		"Interne Seiten",
+			hint: 		"Der Zugriff auf die internen Seiten erfordert eine Autorisierung",
+			icon: 		"book-lock",
+			color:		"red",
+			text: 		[ "Dies ist der private Bereich der Familie Stumpp. Die Inhalte sind nicht für die Öffentlichkeit bestimmt. " ],
+			url:		"/internal"
+		}, {
+			caption: 	"Privat",
+			title: 		"Private Seiten",
+			hint: 		"Der Zugriff auf die internen Seiten erfordert eine Autorisierung",
+			icon: 		"book-lock",
+			color:		"blue",
+			text: 		[ "Dies ist der private Bereich der Familie Stumpp. Die Inhalte sind nicht für die Öffentlichkeit bestimmt. " ],
+			url:		"/private"
+		}, {
+			hide_menu:	true,
+			caption: 	"Version",
+			title:		"Release Notes",
+			hint:		"Release Notes",
+			icon: 		"sticky-note",
+			color:		"light-blue",
+			text: 		[ "Integrierte Webseite Michael Stumpp" ],
+			bottom:		"Version 1",
+			action:		"document.getElementById('release').style.display='block';"
 		}
 	],
-	
+
 	"tim": [
 		{
 			"id"  : "index",
@@ -105,7 +127,47 @@ module.exports = {
 			"img" : "db-logo.svg"
 		}
 	],
-	
+
+	internal: [
+		{
+			"id"  : "overview",
+			"name": "Übersicht",
+			caption: "Funktionen",
+			logon: true,
+			"img" : "ethernet-port-53.png",
+		},{
+			"id"  : "itbf8",
+			"name": "Nummer 1",
+			caption: "IP-Adressen ITBF-8",
+			logon: true,
+			"file": "lan-itbf8",
+			"img" : "ethernet-port-53.png",
+		},{
+			"id"  : "order",
+			"name": "Nummer 2",
+			caption: "Bestellhilfe Netzwerk",
+			logon: false,
+			"file": "lan-order",
+			"img" : "ethernet-port-53.png",
+		},{
+			"id"  : "project",
+			"name": "GA-Projekt",
+			caption: "Bestellhilfe Netzwerk für Projekte",
+			logon: true,
+			color:	"light-green",
+			"file": "lan-projects",
+			"img" : "ethernet-port-53.png",
+		},{
+			"id"  : "register",
+			"name": "Registrierung",
+			caption: "Registrierung für den geschützten Bereich",
+			color: "teal",
+			logon: false,
+			"file": "register",
+			"img" : "assistant_navigation.svg"
+		}
+	],
+
 	"network": [
 		{
 			"id"  : "itbf8",
@@ -149,7 +211,7 @@ module.exports = {
 			"img": "hourglass-64.png"
 		}
 	],
-	
+
 	"specials": [
 		{
 			"hide": true,
@@ -183,7 +245,7 @@ module.exports = {
 			"img" : "db-logo.svg"
 		}
 	],
-	
+
 	"dragon": [
 		{
 			"id"  : "dragon 1",

@@ -1,52 +1,24 @@
-<!-- db tools -->
-<!-- v3 09.08.2023 jquery.js added -->
-<!-- v4 15.08.2023 file structure changed to "static" dir -->
+<!-- QNAP intranet -->
+<!-- v5 03.09.2023 from db-tools -->
 <!DOCTYPE html>
 <html lang="de">
     <head>
 		<meta charset="utf-8">											<!-- The following 2 meta tags *must* come first in the <head> -->
 		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<base href="./">
-		{% if meta_refresh -%}
-		<meta http-equiv="refresh" content="{{ meta_delay | d(10) }} url={{ meta_url | d('/') }}">
-		{%- endif %}
-		<meta name="robots" content="none">								<!-- Control the behavior of search engine crawling and indexing -->
-		<meta name="googlebot" content="none">							<!-- All Search Engines -->
-		<meta name="google" content="nositelinkssearchbox">				<!-- Tells Google not to show the sitelinks search box -->
-		<meta name="google" content="notranslate">						<!-- Tells Google not to provide a translation for this document -->
-		<meta name="google" content="noimageindex">						<!-- Tells Google not to index images -->
-		<meta name="generator" content="eleventy">						<!-- Identify the software used to build the document, Eleventy ftw! -->
-		<meta name="format-detection" content="telephone=no">			<!-- Disable automatic detection and formatting of possible phone numbers -->
+		<base href="/">
 		<meta name="generator" content="eleventy 1.0" />
 
 		<title>{% if title -%}{{ title }}{%- else -%}{{ site.title }}{%- endif %}</title>
 		<meta name="description" content="{% if description -%}{{ description }}{%- else -%}{{ site.description }}{%- endif %}">
 		
-		<link rel="stylesheet" href="static/lib/w3.css" />
-		<link rel="stylesheet" href="static/res/main.css" />
-		
-		{% if enable.jquery %}
-			<script src="static/lib/jquery.min.js" ></script>	
-		{% endif %}
-		{% if enable.sjcl %}
-			<script src="static/lib/sjcl.min.js" defer></script>	
-		{% endif %}
-		{% if enable.mermaid %}	
-			<script src="static/lib/mermaid.min.js" defer></script>
-			<script>
-				document.addEventListener("DOMContentLoaded", function(evt)	{ 
-									mermaid.initialize({startOnLoad: true});});
-			</script>
-		{% endif %}
-		
-		{%if- meta_refresh -%}
-		{%- else -%}
-		<script src="static/res/main.js" defer></script>
-		{%- endif -%}
+		<link rel="stylesheet" href="static/w3.css" />
 		<style>
 			#versionstring::after {
 				content: "Version {{ site.version }}";
+			}
+			a, a:hover {
+				text-decoration: none;
 			}
 		</style>		
     </head>

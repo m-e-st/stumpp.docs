@@ -1,25 +1,72 @@
 ---
 layout: main.njk
 description: "Information"
-dbstyle: true
-testbutton: false
+
+menu:
+    - caption: Home
+      title: Startseite
+      hint: Übersicht über die Inhalte dieser Seite
+      icon: home
+      url: http:/web.stumpp.name
+    - caption: Geräte
+      title: Geräteliste
+      hint: Übersicht über die Inhalte dieser Seite
+      icon: boom-box
+      menu:
+        - caption: aaa
+          hint: Hinweis
+          url: /12311
+        - caption: bbb
+          hint: Hinweis
+          url: /12322
+        - caption: ccc
+          hint: Hinweis
+          url: /12333
+      url: /index.html
+    - caption: Server
+      title: Serverliste
+      hint: Liste der lokalen und wichtigen Server
+      icon: server
+      menu:
+        - caption: vm-nodered
+          url: http://172.16.1.21
+        - caption: vm-tobias
+          url: http://172.16.1.22
+        - caption: vm-lamp
+          url: http://172.16.1.23
+    - caption: Admin
+      title: Administration
+      hint: Funktionen zur Administration
+      icon: server
+      menu:
+        - caption: Fritzbox
+          url: https://172.16.1.1
+        - caption: QNAP Admin
+          url: https://172.16.1.4:8443
+        - caption: DNS
+          url: http://172.16.1.6/admin
+        - caption: Domoticz
+          url: http://172.16.1.200:8080
+        - caption: Mail
+          url: https://box.stumpp.tk/admin
+
 ---
  
 <!-- index - main entry point
   -- 
-  -- Übersicht über die Funktionen
-  -- 08.09.2023 - revived
-  -- 13.08.2023 - data.action implemented
+  -- 18.11.2023 - komplett neu
   -->
 
-<div class="w3-container">
 
+
+<div class="w3-container">
 	<section class="w3-row-padding">
 		{% for data in menus.top %}
-			{% if not data.hide %}
-			<article class="w3-col m12 l6 w3-padding"">
-				
+			{% set showcard = not ( data.hide or data.hide_card or (data.hide_prod and site.env) ) %}
+			{% if showcard %}
+			<article class="w3-col m6 l4 w3-padding">
 				<div class="w3-card-4">
+					
 					<header>
 						{% if data.url -%}
 						<a href="{{ data.url }}" title="{{ data.hint | safe }}">
@@ -27,38 +74,41 @@ testbutton: false
 							<div class="w3-container w3-padding w3-{{ data.color | d('gray') }} w3-hover-shadow caption"
 								{% if data.action -%}onclick="{{ data.action }}"{%- endif %}
 							>
-								<b>{{ data.hint | d('&nbsp;') | safe }}</b>
-								<span class="w3-right">{{ data.sid | d('&nbsp;') | safe }}</span>
+								<b>{{ data.title | d('&nbsp;') | safe }}</b>
+								<span class="w3-right">{{ data.tag | d('&nbsp;') | safe }}</span>
 							</div>
 						{%if data.url %}</a>{% endif %}
 					</header>
 					
 					<div class="w3-container w3-white w3-hide-small">
-						<div class="w3-quarter w3-center w3-hover-shadow" style="vertical-align:middle;overflow:hidden;">
+						<div class="w3-col w3-center w3-hover-shadow hwn-overflow" style="width:5rem;margin:8px 4px;vertical-align:middle;">
 							{% if data.url -%}
-							<a href="{{ data.url }}" title="{{ data.hint | safe }}" class="tim-url">
+							<a href="{{ data.url }}" title="{{ data.hint | safe }}">
 							{%- endif %}
-								<img src="static/img/{{ data.img | d('home.svg') }}" class="w3-panel w3-image" style="height:100%;max-height:3rem"
-									{% if data.action -%}onclick="{{ data.action }}"{%- endif %}
-								>
+								<div class="w3-image w3-padding" {% if data.action -%}onclick="{{ data.action }}"{%- endif %}>
+									{% set icon %}{{ data.icon | d('zap') }}{% endset %}
+									{% lucide icon, { "size": "3rem" } %}
+								</div>
 							{%if data.url %}</a>{% endif %}
 						</div>
-						<div class="w3-rest w3-padding-tiny w3-small w3-hide-small" style="overflow:hidden;">
+						<div class="w3-rest w3-padding-tiny w3-container w3-small w3-hide-small" style="height:6rem;overflow:auto">
 							<p>{% for line in data.text %}
 								{{ line | safe }}<br>
 							{% endfor %}</p>
 						</div>
 					</div>
 				
-					{% if data.bottom %}
 					<footer>
-						<div class="w3-container w3-padding w3-light-grey" style="overflow:hidden;">
+						<div class="w3-container w3-padding w3-light-grey w3-tiny" style="height:2rem;overflow:hidden">
+							{% if data.url -%}
 							<a href="{{ data.url }}" title="{{ data.hint | safe }}" class="w3-margin-bottom ">
-								{{ data.bottom }}
+							{%- endif %}
+								{{ data.bottom | d("&nbsp;") | safe }}
+							{% if data.url -%}
 							</a>
+							{%- endif %}
 						</div>
 					</footer>
-					{% endif %}
 				</div>
 			</article>
 			{% endif %}

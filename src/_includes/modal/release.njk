@@ -5,32 +5,12 @@
   Version {{ site.version }}
   Release Notes
 {%- if site.author.hide -%}
-{%- else -%}
-  Copyright (c) {{ site.author.year | d("2022") }} {{ site.author.name }} &lt;{{ site.author.code | safe }}&gt;
+{%- else %}
+  Copyright &copy; {{ site.author.year | d("2022") }} {{ site.author.name }} &lt;{{ site.author.code | safe }}&gt;
 {%- endif %}
 
-  v0.7
-    + Integration des TIM Dispatcher v0.7.38 abgeschlossen
-  v0.6
-    + Osterei versteckt.
-    + Bestell-Hilfe für GA-Datenport-Bestellung 
-    + Systel-Mapping-Liste kann erzeugt werden    
-  v0.5
-    + Netzwerk-Informationen nur mit Anmeldung
-    + Registrierungsformular für neue Anwender
-    + Quellcode-Verdichtung
-    * <del>TIM öffnet sich jetzt in einem neuen Fenster</del>
-    * Nummerierung der Netzsegmente nach neuem Werksstandard
-  v0.4
-    * Intranet-Detektion verbessert
-    * ITBF-8 Adress-Schema erweitert
-    * TIM Dispatcher integriert
-    - Mobile Responsiveness verbessert
-  v0.3
-    + ITBF-8 Adress-Schema
-    - Protoyp Netzwerkportal
   v0.2
-    + Ulmer Bahnhofsuhr
+    + Redesign und Umstellung auf w3.css
   v0.1
     + Erstausgabe
     

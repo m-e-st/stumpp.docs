@@ -1,6 +1,16 @@
-let htmlMinifier = require ('html-minifier');
+const htmlMinifier = require ('html-minifier');
+const lucideIcons = require("@grimlink/eleventy-plugin-lucide-icons");
 
 module.exports = function (eleventyConfig) {
+
+    //~ eleventyConfig.addPlugin(lucideIcons, {
+        //~ "class": "custom-class",
+        //~ "width": 24,
+        //~ "height": 24,
+        //~ "stroke": "currentColor",
+        //~ "stroke-width": 2
+    //~ });
+    eleventyConfig.addPlugin(lucideIcons);
 
 	eleventyConfig.addTransform ('htmlMinifier', content => {
 		if (process.env.ELEVENTY_ENV === 'production') {

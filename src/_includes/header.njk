@@ -1,42 +1,46 @@
-<!-- deutschebahn header.njk - stone header and menu -->
+<!-- stumpp.name header.njk - lime header and menu -->
 <!--
 	v2 31.08.2023 spearate "hwn-btn" class defines width; "w3-button" removed.
 -->
 
-<header class="{{ "w3-top" if not head.topscroll }}">
+<header class="{{ "w3-top" if not head.topscroll }} w3-black">
 
-	<div class="w3-cell-row {{ 'w3-white' if dbstyle else 'hwn-pale-stone' }}">
+	<div class="w3-cell-row color-header">
 		
 		<!-- LOGO Abschnitt -->
-		<div class="w3-mobile w3-container w3-cell w3-cell-middle w3-hover-shadow hwn-capitalize {{ head.class }}" style="width:11rem">
+		<div class="w3-mobile w3-container w3-cell w3-cell-middle w3-hover-shadow {{ head.class }}" style="width:12rem">
 			<a href="{{ site.url.home | default('/') }}">
-				<h3 class="hwn-text-stone" style="font-weight: 550;"
+				<h3 id="site-caption"
+					class="color-text-header" style="font-weight: 550;"
 					title="{{ description if description else site.description }}">
-					<img src="static/img/db-logo.svg" style="float:left;height:36px;margin-right:12px;"
-						 id="db-logo" onmouseover="document.getElementById('db-logo').classList.add('w3-spin');">
+					<img src="static/pagelogo.svg" style="float:left;height:36px;margin-right:12px;"
+						 id="pagelogo" 
+						 onmouseover="document.getElementById('pagelogo').classList.add('w3-spin');"
+						 onmouseout="document.getElementById('pagelogo').classList.remove('w3-spin');">
 					{{ caption if caption else site.caption}}
 				</h3>
 			</a>
 		</div>
 
 		<!-- TOP MENU Mitte-->
-		<div class="w3-hide-small w3-container w3-cell w3-cell-middle">
-			{% for data in menus.top %}
-				{% if not data.hide %}
-					{% if data.url -%}
-						<a href="{{ data.url }}" {% if data.target -%}target="{{ data.target }}"{%- endif %}>
-					{%- endif %}
-					<button {% if data.action -%}onclick="{{ data.action }}"{%- endif %}
-							{% if data.disabled %}disabled{% endif %}
-							class="w3-bar-item w3-button hwn-btn hwn-textstone hwn-hover-pale-stone {% if data.menu-right %}w3-right w3-right-align{% endif %}"
-							{% if data.hint -%}title="{{ data.hint }}"{%- endif %}
-					>
-						{{ data.caption }}
-					</button>
-					{%if data.url %}</a>{% endif %}
-				{%- endif %}
+			
+		<div class="w3-hide-small w3-container">
+			<div class="w3-bar w3-black w3-cell w3-cell-middle">
+			{% for item in menu %}
+				{% if item.menu %}
+					<div class="w3-dropdown-hover">
+						<button class="w3-button w3-black">{{ item.caption}}</button>
+						<div class="w3-dropdown-content w3-bar-block w3-card-4">
+						{% for subitem in item.menu %}
+							<a href="{{subitem.url}}" class="w3-bar-item w3-button w3-black">{{ subitem.caption}}</a>
+						{% endfor %}
+						</div>
+					</div>
+				{% else %}
+					<a href="{{item.url}}" class="w3-bar-item w3-button">{{ item.caption}}</a>
+				{% endif %}
 			{% endfor %}
-		</div>
+			</div> 
 
 		<div class="w3-container w3-cell w3-cell-middle w3-right-align" style="width:10rem;">
 			<!-- Zweites Logo oben rechts-->
@@ -49,30 +53,30 @@
 						 onclick="setServerStatus();"
 						 title="Überprüfung des Online Status der Server (Methode 2)">
 				</a>
-				<span class="w3-large hwn-text-stone">|</span>
+				<span class="w3-large color-text-header">|</span>
 			{% endif %}
-				<a>
-					<img src="static/timlogo.png"
-						 class="w3-hover-shadow w3-image w3-section"
-						 style="width:32px; height:32px; cursor:pointer;"
-						 onclick="document.getElementById('about').style.display='block';"
-						 title="{{ site.title }} Version {{ site.version }}">
-				</a>
+				<button class="w3-btn color-text-header"
+						style="margin-top:0;"
+						onclick="document.getElementById('about').style.display='block';"
+						>
+					{% lucide "info" ,{ "size":"32" } %}
+				</button>
 			</div>
 			
 			<!-- Hamburger Menu oben rechts -->
 			<div class="w3-hide-medium w3-hide-large">
 				<div class="w3-dropdown-hover">
-					<button class="w3-button w3-white"><img src="static/img/menu.svg" alt="menu" style="height:24px;" class="w3-image"></button>
+					<button class="w3-btn color-header color-hover-menu">{% lucide "menu" %}</button>
 					<div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
 					{% for data in menus.top %}
-					  {% if not (data.hide or (data.env and site.env)) %}
+					  {% set showmenu = not ( data.hide or data.hide_menu or (data.hide_prod and site.env) ) %}
+					  {% if showmenu %}
 						{% if data.url -%}
 							<a class="" href="{{ data.url }}" {% if data.target -%}target="{{ data.target }}"{%- endif %}>
 						{%- endif %}
 						<button {% if data.action -%}onclick="{{ data.action }}"{%- endif %}
 								{% if data.disabled %}disabled{% endif %}
-								class="w3-bar-item w3-button hwn-btn hwn-textstone hwn-hover-pale-stone {% if data.menu-right %}w3-right w3-right-align{% endif %}"
+								class="w3-bar-item w3-button hwn-btn color-menu color-hover-menu {% if data.menu-right %}w3-right w3-right-align{% endif %}"
 								{% if data.hint -%}title="{{ data.hint }}"{%- endif %}
 						>
 							{{ data.caption }}
@@ -80,7 +84,7 @@
 						{%if data.url %}</a>{% endif %}
 					  {%- endif %}
 					{% endfor %}
-						<button class="w3-bar-item w3-button hwn-btn hwn-textstone hwn-hover-pale-stone"
+						<button class="w3-bar-item w3-button hwn-btn color-menu color-hover-menu"
 								onclick="document.getElementById('about').style.display='block';"
 								title="{{ site.title }} Version {{ site.version }}">
 							Info
@@ -92,8 +96,8 @@
 			<!-- Ende Hamburger -->
 		</div>
 	</div>
+	</div>
 
-	{% if dbstyle %}
-	<hr class="hwn-border-pale-stone w3-hide-small" style="margin-top:0; border: 1px solid;">
-	{% endif %}
+
+	<hr class="color-border-header w3-hide-small" style="margin-top:0; border: 1px solid;">
 </header>

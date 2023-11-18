@@ -1,0 +1,25 @@
+---
+layout: base.njk
+--- 
+
+{% include 'header.njk' %}
+<style>
+.markdown {
+	color:var(--stone-700)!important
+}
+.markdown a {
+	color:blue;
+}
+.markdown a:hover {
+	font-weight: bold;
+}
+</style>
+
+<main style="{{ "padding-top:64px;" if not head.topscroll }} padding-bottom:48px; display:none;">
+
+	<section class="w3-container markdown">
+	{{ content | safe }}
+	</section>
+</main>
+
+
