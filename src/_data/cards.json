@@ -1,0 +1,20 @@
+[
+	{
+		"name": 		"ibmanager",
+		"caption": 		"IB-Manager",
+		"description": 	"Dokumentation zum IB-Manager",
+		"icon": 		"app-window",
+		"color":		"brown",
+		"text": 		[ "IB-Manager Dokumente" ],
+		"url":			"/ibmanager"
+	}, {
+		"name": 		"servicenotebook",
+		"caption": 		"Service Notebook",
+		"description": 	"Handreichungen zum GA-Service-Notebook",
+		"icon": 		"laptop",
+		"image": 		"laptop-96.png",
+		"color":		"light-blue",
+		"text": 		[ "GA-Service-Notebook" ],
+		"url":			"/notebook"
+	}
+]

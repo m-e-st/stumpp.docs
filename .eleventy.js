@@ -28,8 +28,10 @@ module.exports = function (eleventyConfig) {
 	// Folders to copy to build dir (See. 1.1)
 	eleventyConfig.addPassthroughCopy("src/static/**");
 	eleventyConfig.addPassthroughCopy("src/favicon.ico");
+	//eleventyConfig.addPassthroughCopy("src/**/*.php");
 	
 	// This allows Eleventy to watch for file changes during local development.
+	eleventyConfig.addWatchTarget("src/**/*.php");
 	eleventyConfig.setUseGitIgnore(false);
 
 	return {

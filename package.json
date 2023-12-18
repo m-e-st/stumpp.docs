@@ -7,7 +7,7 @@
     "clean": "del public",
     "dev": "eleventy --serve --watch",
     "build": "ELEVENTY_ENV=production eleventy",
-    "postbuild": "./uglify.sh",
+    "no-postbuild": "./deploy-site.sh",
     "browse": "firefox -p \"eleventy\" -browser -new-tab localhost:8080"
   },
   "repository": {

@@ -1,5 +1,5 @@
-<!-- QNAP intranet -->
-<!-- v5 03.09.2023 from db-tools -->
+<!-- db docs -->
+<!-- v5 18.12.2023 from QNAP intranet -->
 <!DOCTYPE html>
 <html lang="de">
     <head>
@@ -7,7 +7,7 @@
 		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<base href="/">
-		<meta name="generator" content="eleventy 1.0" />
+		<meta name="generator" content="{{ eleventy.generator }}">
 
 		<title>{% if title -%}{{ title }}{%- else -%}{{ site.title }}{%- endif %}</title>
 		<meta name="description" content="{% if description -%}{{ description }}{%- else -%}{{ site.description }}{%- endif %}">

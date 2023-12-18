@@ -1,20 +1,28 @@
-<!-- stumpp.name header.njk - lime header and menu -->
-<!--
-	v2 31.08.2023 spearate "hwn-btn" class defines width; "w3-button" removed.
+<!--	dbdocs from qnap intranet
+  --
+		30.11.2023 1.0 neu - mit PHP Unterstützung
+
 -->
 
-<header class="{{ "w3-top" if not head.topscroll }} w3-black">
+{% macro dropdown_item(caption, url, tooltip='', color='black') %}
+	<a href="{{url}}" class="w3-tooltip w3-bar-item w3-button w3-{{color}}">{{caption|safe}} <span class="w3-text w3-tag">{{tooltip|safe}}</span></a>
+{% endmacro %}
+
+
+
+
+<header class="{{ "w3-top" if not head.topscroll }} w3-{{ menucolor | default('black') }}">
 
 	<div class="w3-cell-row color-header">
-		
+
 		<!-- LOGO Abschnitt -->
-		<div class="w3-mobile w3-container w3-cell w3-cell-middle w3-hover-shadow {{ head.class }}" style="width:12rem">
+		<div class="w3-mobile w3-container w3-cell w3-cell-middle w3-hover-shadow {{ head.class }}" style="width:15rem">
 			<a href="{{ site.url.home | default('/') }}">
 				<h3 id="site-caption"
 					class="color-text-header" style="font-weight: 550;"
 					title="{{ description if description else site.description }}">
-					<img src="static/pagelogo.svg" style="float:left;height:36px;margin-right:12px;"
-						 id="pagelogo" 
+					<img src="{{site.pagelogo}}" style="float:left;height:36px;margin-right:12px;"
+						 id="pagelogo"
 						 onmouseover="document.getElementById('pagelogo').classList.add('w3-spin');"
 						 onmouseout="document.getElementById('pagelogo').classList.remove('w3-spin');">
 					{{ caption if caption else site.caption}}
@@ -23,31 +31,48 @@
 		</div>
 
 		<!-- TOP MENU Mitte-->
-			
 		<div class="w3-hide-small w3-container">
-			<div class="w3-bar w3-black w3-cell w3-cell-middle">
+			<div class="w3-bar w3-{{ menucolor | default('black') }} w3-cell w3-cell-middle">
 			{% for item in menu %}
-				{% if item.menu %}
+				{% if item.menu or item.data %}
 					<div class="w3-dropdown-hover">
-						<button class="w3-button w3-black">{{ item.caption}}</button>
+						<button class="w3-button w3-{{ menucolor | default('black') }}">{{ item.name }}</button>
 						<div class="w3-dropdown-content w3-bar-block w3-card-4">
-						{% for subitem in item.menu %}
-							<a href="{{subitem.url}}" class="w3-bar-item w3-button w3-black">{{ subitem.caption}}</a>
-						{% endfor %}
+						{% if item.data == 'functions' %}
+							{%- for subitem in functions -%}
+								{{ dropdown_item(subitem.name,'http://'+subitem.ip,'Device: '+subitem.ip, 'dark-grey') }}
+							{%- endfor -%}
+						{% elif item.data == 'devices' %}
+							{% for subitem in devices %}
+								{{ dropdown_item(subitem.name,'http://'+subitem.ip, subitem.ip) }}
+							{% endfor %}
+						{% elif item.data == 'server' %}
+							{% for subitem in server %}
+								{{ dropdown_item(subitem.name,'http://'+subitem.ip,'Server: '+subitem.ip, 'blue-grey') }}
+							{% endfor %}
+						{% elif item.data == 'manuals' %}
+							{% for subitem in manuals %}
+								{{ dropdown_item(subitem.name, subitem.url, subitem.lang + ' ' + subitem.url, 'dark-grey' ) }}
+							{% endfor %}
+						{% else %}				
+							{% for subitem in item.menu %}
+								{{ dropdown_item(subitem.name,subitem.url,subitem.url, menucolor) }}
+							{% endfor %}
+						{% endif %}
 						</div>
 					</div>
 				{% else %}
-					<a href="{{item.url}}" class="w3-bar-item w3-button">{{ item.caption}}</a>
+					<a href="{{item.url}}" class="w3-bar-item w3-button">{{ item.name }}</a>
 				{% endif %}
 			{% endfor %}
-			</div> 
+			</div>
 
 		<div class="w3-container w3-cell w3-cell-middle w3-right-align" style="width:10rem;">
 			<!-- Zweites Logo oben rechts-->
 			<div class="w3-hide-small">
 			{% if testbutton %}
 				<a>
-					<img src="static/img/assistant_navigation.svg"
+					<img src="{{site.imagedir}}/assistant_navigation.svg"
 						 class="w3-hover-shadow w3-image w3-section"
 						 style="width:32px; height:32px; cursor:pointer;"
 						 onclick="setServerStatus();"
@@ -62,26 +87,28 @@
 					{% lucide "info" ,{ "size":"32" } %}
 				</button>
 			</div>
-			
-			<!-- Hamburger Menu oben rechts -->
+
+<!--
+DAS HAMBURGER MENÜ MUSS KOMPLETT NEU GEMACHT WERDEN - DROPDOWN VON DROPDOWN HABEN WIR NOCH NICHT 
+-->
+			<!-- Hamburger Menu oben rechts --> 
 			<div class="w3-hide-medium w3-hide-large">
 				<div class="w3-dropdown-hover">
-					<button class="w3-btn color-header color-hover-menu">{% lucide "menu" %}</button>
+					<button class="w3-btn w3-red color-hover-menu">{% lucide "menu" %}</button>
 					<div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
-					{% for data in menus.top %}
-					  {% set showmenu = not ( data.hide or data.hide_menu or (data.hide_prod and site.env) ) %}
-					  {% if showmenu %}
-						{% if data.url -%}
-							<a class="" href="{{ data.url }}" {% if data.target -%}target="{{ data.target }}"{%- endif %}>
+					{% for item in menu %}
+					  {% if item.menu or item.data %}
+						{% if item.url -%}
+							<a class="" href="{{ item.url }}" {% if item.target -%}target="{{ item.target }}"{%- endif %}>
 						{%- endif %}
-						<button {% if data.action -%}onclick="{{ data.action }}"{%- endif %}
-								{% if data.disabled %}disabled{% endif %}
-								class="w3-bar-item w3-button hwn-btn color-menu color-hover-menu {% if data.menu-right %}w3-right w3-right-align{% endif %}"
-								{% if data.hint -%}title="{{ data.hint }}"{%- endif %}
+						<button {% if item.action -%}onclick="{{ item.action }}"{%- endif %}
+								{% if item.disabled %}disabled{% endif %}
+								class="w3-bar-item w3-button hwn-btn color-menu color-hover-menu {% if item.menu-right %}w3-right w3-right-align{% endif %}"
+								{% if item.hint -%}title="{{ item.hint }}"{%- endif %}
 						>
-							{{ data.caption }}
+							{{ item.caption }}
 						</button>
-						{%if data.url %}</a>{% endif %}
+						{%if item.url %}</a>{% endif %}
 					  {%- endif %}
 					{% endfor %}
 						<button class="w3-bar-item w3-button hwn-btn color-menu color-hover-menu"
@@ -91,8 +118,8 @@
 						</button>
 					</div>
 				</div>
-				
-			</div>			
+
+			</div>
 			<!-- Ende Hamburger -->
 		</div>
 	</div>

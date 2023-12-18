@@ -1,8 +1,8 @@
-# QNAP Home
+# db-docs
 
-### Intranet
+### DB Dokumentation
 
-Dies ist die `index.html`-Datei für den lokalen QNAP Web-Server
+Dokumenten-Blog auf netlify - wird über iframe eingeblendet
 
 #### Entwicklung
 

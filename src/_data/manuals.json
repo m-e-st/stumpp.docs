@@ -1,0 +1,33 @@
+[
+  {
+	"tag":  "awk",
+    "name": "Gnu AWK",
+    "url":  "https://www.gnu.org/software/gawk/manual/html_node/index.html",
+    "lang": "&#127468;&#127463;"
+  },{
+	"tag":  "html",
+    "name": "SelfHTML",
+    "url":  "https://wiki.selfhtml.org/wiki/SELFHTML",
+    "lang": "&#127465;&#127466;"
+  },{
+	"tag":  "php",
+    "name": "php.net Manual",
+    "url":  "https://www.php.net/manual/en/",
+    "lang": "&#127468;&#127463;"
+  },{
+	"tag":  "sed",
+    "name": "SED stream editor",
+    "url":  "https://www.tutorialspoint.com/sed/index.htm",
+    "lang": "&#127468;&#127463;"
+  },{
+	"tag":  "sql",
+    "name": "SQL MariaDB",
+    "url":  "https://mariadb.com/kb/en/sql-statements/",
+    "lang": "&#127468;&#127463;"
+  },{
+	"tag":  "w3schools",
+    "name": "W3SCHOOLS",
+    "url":  "https://www.w3schools.com/",
+    "lang": "&#127468;&#127463;"
+  }
+]
