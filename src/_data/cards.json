@@ -13,7 +13,7 @@
 		"description": 	"Handreichungen zum GA-Service-Notebook",
 		"icon": 		"laptop",
 		"image": 		"laptop-96.png",
-		"color":		"light-blue",
+		"color":		"yellow",
 		"text": 		[ "GA-Service-Notebook" ],
 		"url":			"/notebook"
 	}
