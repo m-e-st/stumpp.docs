@@ -1,11 +1,11 @@
 <!--	dbdocs from qnap intranet
   --
-		30.11.2023 1.0 neu - mit PHP Unterstützung
+		18.12.2023 1.1 neu - mit Menüfarbe und Hamburger Menu
 
 -->
 
 {% macro dropdown_item(caption, url, tooltip='', color='black') %}
-	<a href="{{url}}" class="w3-tooltip w3-bar-item w3-button w3-{{color}}">{{caption|safe}} <span class="w3-text w3-tag">{{tooltip|safe}}</span></a>
+	<a href="{{url}}" target="{{ 'external' if url.startsWith('http') else '_self' }}" class="w3-tooltip w3-bar-item w3-button w3-{{color}}">{{caption|safe}} <span class="w3-text w3-tag">{{tooltip|safe}}</span></a>
 {% endmacro %}
 
 
