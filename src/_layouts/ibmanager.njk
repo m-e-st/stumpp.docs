@@ -1,21 +1,20 @@
 ---
-layout: main.njk
+layout: docs.njk
 caption: "ibmanager"
 description: "IB-Manager"
-imgdir: /static/img
 menucolor: brown
 menu:
     - name: 🔼
       hint: Zurück zur Hauptseite
       icon: home
       url: /ibmanager
-    - name: Bedienungsanleitung
+    - name: Benutzerhandbuch
       url: /ibmanager/manual
-    - name: Technische Dokumente
-      url: /ibmanager/techdoc
-    - name: Entwickler-Doku
-      url: /ibmanager/developer
-
+    - name: Technik
+      menu:
+        - name: "Technische Dokumentation"
+          url: /ibmanager/techdoc
+        - name: "Entwickler-Doku"
+          url: /ibmanager/developer
 ---
 {{ content | safe }}
-

@@ -1,0 +1,9 @@
+---
+layout: main.njk
+imgdir: /static/img
+---
+<div class="w3-container" style="float:none">
+	<div class= "w3-small w3-padding-small w3-right w3-text-{{menucolor}}">{{ page.date.toLocaleDateString() }}</div>
+	{{ content | safe }}
+</div>
+

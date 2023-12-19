@@ -3,18 +3,19 @@
 		18.12.2023 1.1 neu - mit Menüfarbe und Hamburger Menu
 
 -->
+<!--  -->
+
+{% set colorclass %}
+w3-{{ menucolor | default('black')}}
+{% endset %}
 
 {% macro dropdown_item(caption, url, tooltip='', color='black') %}
 	<a href="{{url}}" target="{{ 'external' if url.startsWith('http') else '_self' }}" class="w3-tooltip w3-bar-item w3-button w3-{{color}}">{{caption|safe}} <span class="w3-text w3-tag">{{tooltip|safe}}</span></a>
 {% endmacro %}
 
-
-
-
-<header class="{{ "w3-top" if not head.topscroll }} w3-{{ menucolor | default('black') }}">
-
-	<div class="w3-cell-row color-header">
-
+<header class="{{ "w3-top" if not head.topscroll }} {{ colorclass }}">
+	<div class="w3-cell-row">
+		
 		<!-- LOGO Abschnitt -->
 		<div class="w3-mobile w3-container w3-cell w3-cell-middle w3-hover-shadow {{ head.class }}" style="width:15rem">
 			<a href="{{ site.url.home | default('/') }}">
@@ -29,14 +30,15 @@
 				</h3>
 			</a>
 		</div>
-
+		<!-- Ende LOGO Abschnitt -->
+		
 		<!-- TOP MENU Mitte-->
-		<div class="w3-hide-small w3-container">
-			<div class="w3-bar w3-{{ menucolor | default('black') }} w3-cell w3-cell-middle">
+		<div class="w3-hide-small w3-container w3-cell w3-cell-middle">
+			<div class="w3-bar {{ colorclass }}">
 			{% for item in menu %}
 				{% if item.menu or item.data %}
 					<div class="w3-dropdown-hover">
-						<button class="w3-button w3-{{ menucolor | default('black') }}">{{ item.name }}</button>
+						<button class="w3-button {{ colorclass }}">{{ item.name }}</button>
 						<div class="w3-dropdown-content w3-bar-block w3-card-4">
 						{% if item.data == 'functions' %}
 							{%- for subitem in functions -%}
@@ -56,7 +58,11 @@
 							{% endfor %}
 						{% else %}				
 							{% for subitem in item.menu %}
-								{{ dropdown_item(subitem.name,subitem.url,subitem.url, menucolor) }}
+								{% if subitem.lang %}
+									{{ dropdown_item(subitem.name,subitem.url, subitem.lang + ' ' + subitem.url, menucolor) }}
+								{% else %}
+									{{ dropdown_item(subitem.name,subitem.url, subitem.url, menucolor) }}
+								{% endif %}
 							{% endfor %}
 						{% endif %}
 						</div>
@@ -66,65 +72,49 @@
 				{% endif %}
 			{% endfor %}
 			</div>
+		</div>
+		<!-- Ende TOP MENU Mitte-->
 
-		<div class="w3-container w3-cell w3-cell-middle w3-right-align" style="width:10rem;">
-			<!-- Zweites Logo oben rechts-->
+		<!-- Zweites Logo oben rechts-->
+		<div class="w3-container w3-cell w3-cell-middle" style="position:absolute;top:4px;right:-16px;">
 			<div class="w3-hide-small">
-			{% if testbutton %}
-				<a>
-					<img src="{{site.imagedir}}/assistant_navigation.svg"
-						 class="w3-hover-shadow w3-image w3-section"
-						 style="width:32px; height:32px; cursor:pointer;"
-						 onclick="setServerStatus();"
-						 title="Überprüfung des Online Status der Server (Methode 2)">
-				</a>
-				<span class="w3-large color-text-header">|</span>
-			{% endif %}
-				<button class="w3-btn color-text-header"
+				<button class="w3-btn"
 						style="margin-top:0;"
 						onclick="document.getElementById('about').style.display='block';"
 						>
 					{% lucide "info" ,{ "size":"32" } %}
 				</button>
 			</div>
+		</div>
+		<!-- Ende Zweites Logo oben rechts-->
+		
 
 <!--
-DAS HAMBURGER MENÜ MUSS KOMPLETT NEU GEMACHT WERDEN - DROPDOWN VON DROPDOWN HABEN WIR NOCH NICHT 
+DAS HAMBURGER MENÜ IST UNVOLLSTÄNDIG - DROPDOWN VON DROPDOWN HABEN WIR NOCH NICHT 
 -->
-			<!-- Hamburger Menu oben rechts --> 
-			<div class="w3-hide-medium w3-hide-large">
+		<!-- Hamburger Menu oben rechts --> 
+		<div class="w3-container w3-hide-medium w3-hide-large w3-cell w3-cell-middle" style="position:absolute;top:4px;right:-16px;">
 				<div class="w3-dropdown-hover">
-					<button class="w3-btn w3-red color-hover-menu">{% lucide "menu" %}</button>
+					<button class="w3-btn {{ colorclass }}">{% lucide "menu" %}</button>
 					<div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
 					{% for item in menu %}
-					  {% if item.menu or item.data %}
-						{% if item.url -%}
-							<a class="" href="{{ item.url }}" {% if item.target -%}target="{{ item.target }}"{%- endif %}>
-						{%- endif %}
-						<button {% if item.action -%}onclick="{{ item.action }}"{%- endif %}
-								{% if item.disabled %}disabled{% endif %}
-								class="w3-bar-item w3-button hwn-btn color-menu color-hover-menu {% if item.menu-right %}w3-right w3-right-align{% endif %}"
-								{% if item.hint -%}title="{{ item.hint }}"{%- endif %}
-						>
-							{{ item.caption }}
-						</button>
-						{%if item.url %}</a>{% endif %}
-					  {%- endif %}
+						{% if item.menu or item.data %}
+							{{ dropdown_item(item.name,'#','gesperrt', menucolor) }}
+						{% else %}
+							{{ dropdown_item(item.name,item.url,'', menucolor) }}
+						{% endif %}
 					{% endfor %}
-						<button class="w3-bar-item w3-button hwn-btn color-menu color-hover-menu"
+						<button class="w3-bar-item w3-button {{ colorclass }}"
 								onclick="document.getElementById('about').style.display='block';"
 								title="{{ site.title }} Version {{ site.version }}">
 							Info
 						</button>
 					</div>
 				</div>
-
-			</div>
-			<!-- Ende Hamburger -->
 		</div>
-	</div>
-	</div>
+		<!-- Ende Hamburger -->
 
+	</div>
 
 	<hr class="color-border-header w3-hide-small" style="margin-top:0; border: 1px solid;">
 </header>
