@@ -1,8 +1,4 @@
----
-layout: ibmanager.njk
-title: Dokumente für den Entwickler
-description: Dokumente für den Entwickler
---- 
+
 ## Entwickler-Dokumentation
 
 Aenean vulputate iaculis sapien et suscipit. Etiam vel sapien blandit, consequat purus non, hendrerit ipsum. Praesent ac semper dolor. Suspendisse eu tincidunt odio, in mattis purus. Curabitur pellentesque sem eros, id viverra nibh interdum ut. Quisque viverra vehicula lacinia. Phasellus facilisis ipsum et risus varius, a sodales eros mattis. Proin sed porta nisl, in volutpat lacus. Praesent et eros consectetur mauris ornare interdum in in arcu. In hac habitasse platea dictumst.
