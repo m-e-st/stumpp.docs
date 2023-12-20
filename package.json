@@ -1,5 +1,5 @@
 {
-  "name": "QNAP Home",
+  "name": "DB Docs",
   "version": "1.0.0",
   "description": "Standalone Programm für die DB",
   "main": ".eleventy.js",

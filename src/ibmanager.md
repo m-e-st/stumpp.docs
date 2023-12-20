@@ -3,6 +3,11 @@ layout: ibmanager.njk
 description: Eingangsseite der Dokumentation zum IB-Manager
 
 --- 
+Das Dokumentations- und Hilfe-System für den IB-Manager ist noch 
+in der Entwicklung und daher experimentell. Insbesonders sind keine
+gehaltvollen oder gar vollständigen Inhalte hinterlegt. Derzeit geht
+es um die technische Vervollständigung der Funktion und noch nicht um
+die inhaltliche Redaktion.
 
 ### Kurzbeschreibung
 
