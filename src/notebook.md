@@ -2,7 +2,7 @@
 layout: notebook.njk
 description: Eingangsseite der Dokumentation zum GA-Service-Notebook
 ---
-Das Dokumentations- und Hilfe-System für den TIM-Dispatcher ist noch 
+Das Dokumentations- und Hilfe-System für das GA-Service-Notebook ist noch 
 in der Entwicklung und daher experimentell. Insbesonders sind keine
 gehaltvollen oder gar vollständigen Inhalte hinterlegt. Derzeit geht
 es um die technische Vervollständigung der Funktion und noch nicht um
