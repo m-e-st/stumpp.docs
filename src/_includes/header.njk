@@ -82,7 +82,7 @@ w3-{{ menucolor | default('black')}}
 						style="margin-top:0;"
 						onclick="document.getElementById('about').style.display='block';"
 						>
-					{% lucide "info" ,{ "size":"32" } %}
+					{%- if false -%}{% lucide "info" ,{ "size":"32" } %}{%- else -%}&nbsp;{%- endif -%}
 				</button>
 			</div>
 		</div>

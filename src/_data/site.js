@@ -2,7 +2,7 @@ module.exports = {
 	title: "DB Dokumentation",
 	description: "Dokumentationssammlung für die Deutsche Bahn",
 	caption: "docs",
-	version : "0.1.2",
+	version : "0.1.4",
 	mail: "michael@stumpp.name",
 
 	scriptdir: "static",
