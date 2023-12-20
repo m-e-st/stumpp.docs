@@ -1,0 +1,28 @@
+---
+layout: docs.njk
+caption: "TIM"
+description: "TIM dispatcher"
+menucolor: green
+menu:
+    - name: 🔼
+      hint: Zurück zur Hauptseite
+      icon: home
+      url: /tim
+    - name: Server
+      url: /tim/dispatcher
+    - name: Netzwerk
+      icon: network
+      menu:
+        - name: "ITBF-8 Adressen "
+          url: /tim/itbf8
+        - name: "Bestell-Hilfe"
+          url: /tim/order#Bestell-Hilfe
+        - name: "GA-Projekt"
+          url: /tim/order#GA-Projekt
+        - name: "Anmeldung"
+          url: /tim/logon#Anmeldung
+        - name: "Registrierung"
+          url: /tim/logon#Registrierung
+---
+{{ content | safe }}
+

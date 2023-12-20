@@ -1,5 +1,13 @@
 [
 	{
+		"name": 		"timdispatcher",
+		"caption": 		"TIM Dispatcher",
+		"description": 	"TIM Server und ITBF-8 Netzwerk",
+		"icon": 		"network",
+		"color":		"green",
+		"text": 		[ "TIM Dispatcher Online Hilfe" ],
+		"url":			"/tim"
+	}, {
 		"name": 		"ibmanager",
 		"caption": 		"IB-Manager",
 		"description": 	"Dokumentation zum IB-Manager",
