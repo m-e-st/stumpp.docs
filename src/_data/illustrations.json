@@ -1,0 +1,37 @@
+[
+  {
+	"tag":  "emoji",
+    "name": "Emojis",
+    "url":  "https://emojipedia.org/",
+    "lang": "&#127468;&#127463;"
+  },{
+	"tag":  "iconify",
+    "name": "Iconify Meta",
+    "url":  "https://icon-sets.iconify.design/",
+    "lang": "&#127468;&#127463;"
+  },{
+	"tag":  "lucide",
+    "name": "Lucide Icons",
+    "url":  "https://lucide.dev/icons",
+    "lang": "&#127468;&#127463;"
+  },{
+	"tag":  "flaticon",
+    "name": "FlatIcon",
+    "url":  "https://www.flaticon.com/icons",
+    "lang": "&#127468;&#127463;"
+  },{
+	"tag":  "icons8",
+    "name": "Icons8",
+    "url":  "https://icons8.com/",
+    "lang": "&#127468;&#127463;"
+  },{
+	"tag":  "clipartmax",
+    "name": "ClipArtMax",
+    "url":  "https://www.clipartmax.com/",
+    "lang": "&#127468;&#127463;"
+  },{
+    "name": "",
+    "EN": "&#127468;&#127463;",
+    "DE": "&#127465;&#127466;"
+  }
+]

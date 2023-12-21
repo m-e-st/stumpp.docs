@@ -1,0 +1,37 @@
+[
+  {
+	"tag":  "github",
+    "name": "Github",
+    "url":  "https://github.com/",
+    "lang": "&#127468;&#127463;"
+  },{
+	"tag":  "jslint",
+    "name": "Javascript Lint",
+    "url":  "https://www.jslint.com/",
+    "lang": "&#127468;&#127463;"
+  },{
+	"tag":  "json",
+    "name": "Json Lint",
+    "url":  "https://jsonlint.com/",
+    "lang": "&#127468;&#127463;"
+  },{
+	"tag":  "netlify",
+    "name": "Netlify",
+    "url":  "https://app.netlify.com/teams/m-e-st/overview",
+    "lang": "&#127468;&#127463;"
+  },{
+	"tag":  "replit",
+    "name": "Replit",
+    "url":  "https://www.php.net/manual/en/",
+    "lang": "&#127468;&#127463;"
+  },{
+	"tag":  "vercel",
+    "name": "Vercel",
+    "url":  "https://vercel.com",
+    "lang": "&#127468;&#127463;"
+  },{
+    "name": "",
+    "EN": "&#127468;&#127463;",
+    "DE": "&#127465;&#127466;"
+  }
+]

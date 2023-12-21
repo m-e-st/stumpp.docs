@@ -1,8 +1,8 @@
 module.exports = {
-	title: "DB Dokumentation",
-	description: "Dokumentationssammlung für die Deutsche Bahn",
-	caption: "docs",
-	version : "0.1.4",
+	title: "doc.stumpp.name",
+	description: "Dokumentations- und Blogsystem doc.stumpp.name",
+	caption: "doc",
+	version : "0.1.5",
 	mail: "michael@stumpp.name",
 
 	scriptdir: "static",

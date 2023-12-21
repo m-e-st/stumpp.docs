@@ -1,6 +1,6 @@
-# db-docs
+# doc.stumpp.name
 
-### DB Dokumentation
+### Dokumentations- und Blog-System
 
 Dokumenten-Blog auf netlify - wird über iframe eingeblendet
 

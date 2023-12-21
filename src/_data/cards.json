@@ -1,28 +1,24 @@
 [
 	{
-		"name": 		"timdispatcher",
-		"caption": 		"TIM Dispatcher",
-		"description": 	"TIM Server und ITBF-8 Netzwerk",
-		"icon": 		"network",
+		"name": 		"toolchain",
+		"caption": 		"Tool Chain",
+		"description": 	"Developer Tool Chain",
+		"icon": 		"wrench",
 		"color":		"green",
-		"text": 		[ "TIM Dispatcher Online Hilfe" ],
-		"url":			"/tim"
+		"url":			"/toolchain"
 	}, {
-		"name": 		"ibmanager",
-		"caption": 		"IB-Manager",
-		"description": 	"Dokumentation zum IB-Manager",
-		"icon": 		"app-window",
+		"name": 		"illustrations",
+		"caption": 		"Icons & Clipart",
+		"description": 	"Graphiken für Illustration",
+		"icon": 		"image",
 		"color":		"brown",
-		"text": 		[ "IB-Manager Dokumente" ],
-		"url":			"/ibmanager"
+		"url":			"/illustrations"
 	}, {
-		"name": 		"servicenotebook",
+		"name": 		"manuals",
 		"caption": 		"Service Notebook",
 		"description": 	"Handreichungen zum GA-Service-Notebook",
-		"icon": 		"laptop",
-		"image": 		"laptop-96.png",
+		"icon": 		"book-open",
 		"color":		"yellow",
-		"text": 		[ "GA-Service-Notebook" ],
-		"url":			"/notebook"
+		"url":			"/manuals"
 	}
 ]

@@ -1,7 +1,7 @@
 {
-  "name": "DB Docs",
-  "version": "1.0.0",
-  "description": "Standalone Programm für die DB",
+  "name": "doc.stumpp.name",
+  "version": "0.1.5",
+  "description": "Dokumentations- und Blogsystem doc.stumpp.name",
   "main": ".eleventy.js",
   "scripts": {
     "clean": "del public",
