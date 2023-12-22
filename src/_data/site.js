@@ -2,7 +2,7 @@ module.exports = {
 	title: "doc.stumpp.name",
 	description: "Dokumentations- und Blogsystem doc.stumpp.name",
 	caption: "doc",
-	version : "0.1.5",
+	version : "0.1.6",
 	mail: "michael@stumpp.name",
 
 	scriptdir: "static",

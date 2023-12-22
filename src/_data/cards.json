@@ -1,24 +1,25 @@
 [
 	{
-		"name": 		"toolchain",
-		"caption": 		"Tool Chain",
-		"description": 	"Developer Tool Chain",
-		"icon": 		"wrench",
-		"color":		"green",
-		"url":			"/toolchain"
+		"name": 		"github",
+		"caption": 		"Github Repository",
+		"text":		[	"Github Repository M-E-ST mit allen relevaten Web-Projekten"
+					],
+		"icon": 		"database",
+		"color":		"blue",
+		"url":  		"https://github.com/"
 	}, {
-		"name": 		"illustrations",
-		"caption": 		"Icons & Clipart",
-		"description": 	"Graphiken für Illustration",
+		"name": 		"lucide",
+		"caption":		"Lucide Icons",
+		"description": 	"Lucide Icons für Eleventy",
+		"text":		[	"Bibliothek der Lucide SVG Icons für <b>eleventy</b> Projekte. Achtung: Nicht alle Icons sind in der eleventy-Integration enthalten!"
+					],
 		"icon": 		"image",
-		"color":		"brown",
-		"url":			"/illustrations"
-	}, {
-		"name": 		"manuals",
-		"caption": 		"Service Notebook",
-		"description": 	"Handreichungen zum GA-Service-Notebook",
-		"icon": 		"book-open",
+		"color":		"deep-orange",
+		"url":  		"https://lucide.dev/icons"
+    	}, {
+		"name":			"netlify",
+		"caption":		"Netlify CDN",
 		"color":		"yellow",
-		"url":			"/manuals"
+		"url": 			"https://app.netlify.com/teams/m-e-st/overview"
 	}
 ]
