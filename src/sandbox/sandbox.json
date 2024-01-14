@@ -1,0 +1,6 @@
+{
+	"caption": "sandbox",
+	"menucolor": "khaki",
+	"permalink": "{{ page.filePathStem }}.html",
+	"layout": "docs.njk" 
+}

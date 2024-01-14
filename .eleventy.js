@@ -11,6 +11,7 @@ module.exports = function (eleventyConfig) {
         //~ "stroke-width": 2
     //~ });
     eleventyConfig.addPlugin(lucideIcons);
+  	eleventyConfig.addShortcode("anchor", function setAnchor(anchorName) { return `<a name="${anchorName}"><br><br><hr></a>`; });
 
 	eleventyConfig.addTransform ('htmlMinifier', content => {
 		if (process.env.ELEVENTY_ENV === 'production') {
@@ -24,6 +25,7 @@ module.exports = function (eleventyConfig) {
 		}
 		return content;
 	});
+  	
   	
 	// Folders to copy to build dir (See. 1.1)
 	eleventyConfig.addPassthroughCopy("src/static/**");

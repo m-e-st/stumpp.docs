@@ -16,11 +16,15 @@ menu:
       hint: Web Development Manuals
       icon: book-open
       data: manuals
+    - name: Sandbox
+      icon: book-open
+      url:  sandbox/
 ---
 
 <!-- index - main entry point
   --
   -- 18.11.2023 - komplett neu
+  -- 14.01.2024 - preview added
   -->
 
 <div class="w3-container">
@@ -72,3 +76,16 @@ menu:
 		{% endfor %}
 	</section>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(event) {
+
+	const preview = (location.search == "?preview");
+	if (preview) {
+		document.getElementById('header').style.display = 'none';
+		document.getElementById('footer').style.display = 'none';
+	}
+
+});
+
+</script>

@@ -1,0 +1,6 @@
+{
+	"caption": "developer",
+	"menucolor": "indigo",
+	"permalink": "{{ page.filePathStem }}.html",
+	"layout": "docs.njk" 
+}

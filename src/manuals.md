@@ -1,5 +1,5 @@
 ---
-layout: ibmanager.njk
+layout: docs.njk
 description: Eingangsseite der Dokumentation zum IB-Manager
 
 --- 

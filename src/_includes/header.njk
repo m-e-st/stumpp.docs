@@ -1,6 +1,7 @@
 <!--	doc from dbdocs from qnap intranet
   --
 		21.12.2023 1.1 neu - mit Menüfarbe und Hamburger Menu
+		23.12.2023 1.2 capiton führt zu Home der zweiten Ebene + Tooltip abschaltbar
 -->
 
 {% set colorclass %}
@@ -8,10 +9,10 @@ w3-{{ menucolor | default('black')}}
 {% endset %}
 
 {% macro dropdown_item(caption, url, tooltip='', color='black') %}
-	<a href="{{url}}" target="{{ 'external' if (''+url).startsWith('http') else '_self' }}" class="w3-tooltip w3-bar-item w3-button w3-{{color}}">{{caption|safe}} <span class="w3-text w3-tag">{{tooltip|safe}}</span></a>
+	<a href="{{url}}" target="{{ 'external' if (''+url).startsWith('http') else '_self' }}" class="w3-tooltip w3-bar-item w3-button w3-{{color}}">{{caption|safe}} <span class="w3-text w3-tag"> {{tooltip|safe}}</span></a>
 {% endmacro %}
 
-<header class="{{ "w3-top" if not head.topscroll }} {{ colorclass }}">
+<header id="header" class="{{ "w3-top" if not head.topscroll }} {{ colorclass }}">
 	<div class="w3-cell-row">
 		
 		<!-- LOGO Abschnitt -->
@@ -66,6 +67,10 @@ w3-{{ menucolor | default('black')}}
 							{% for subitem in item.menu %}
 								{% if subitem.lang %}
 									{{ dropdown_item(subitem.name,subitem.url, subitem.lang + ' ' + subitem.url, menucolor) }}
+								{% elif subitem.tip %}
+									{{ dropdown_item(subitem.name,subitem.url, subitem.tip, menucolor) }}
+								{% elif subitem.tip === '' %}
+									{{ dropdown_item(subitem.name,subitem.url, '', menucolor) }}
 								{% else %}
 									{{ dropdown_item(subitem.name,subitem.url, subitem.url, menucolor) }}
 								{% endif %}
