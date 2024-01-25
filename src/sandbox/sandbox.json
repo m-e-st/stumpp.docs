@@ -1,6 +1,23 @@
 {
+	"layout": "docs.njk",
 	"caption": "sandbox",
-	"menucolor": "khaki",
+	"title": "Sandbox - Experimente",
+	"tags":    ["manual"],
 	"permalink": "{{ page.filePathStem }}.html",
-	"layout": "docs.njk" 
+	"format": {
+		"nobuttons": true,
+		"info": true,
+		"menucolor": "khaki"
+	},
+	"disclaimer": "Hier sind noch keine Informationen vorhanden. Stattdessen werden Dummy-Texte mit den pseudo-lateinischen [x](y) <a href='https://lipsum.com'>lorem ipsum</a>-Inhalten angezeigt. Diese Texte haben keinen sinnhaften Gehalt, auch wenn sich unlängst herausgestellt hat, dass verschiedene KI-Übersetzer durchaus in der Lage sind, deutschsprachige Übersetzungen fragwürdigen Inhalts zu liefern.",
+	"menu": [
+		{	"name": "Kapitel", 
+			"menu": [
+				{ "tip": "", "name": "Developer", 		"url": "/developer" },
+				{ "tip": "", "name": "Illustrationen", 	"url": "/illustration" },
+				{ "tip": "", "name": "Manuals", 		"url": "/manuals" },
+				{ "tip": "", "name": "Sandbox", 		"url": "/sandbox" },
+				{ "tip": "", "name": "Tech-Info", 		"url": "/techinfo" },
+				{ "tip": "", "name": "Tool Chain", 		"url": "/toolchain" }
+		]}]
 }

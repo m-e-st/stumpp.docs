@@ -1,0 +1,11 @@
+---
+layout: index.njk
+collection: sandbox
+default:
+  icon: function-square
+  color: khaki
+---
+
+{% for card in collections.techinfo | reverse %}
+	{% include 'minicard.njk' %}
+{% endfor %}

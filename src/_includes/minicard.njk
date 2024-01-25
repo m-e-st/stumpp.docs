@@ -1,0 +1,71 @@
+
+<!-- INCLUDE für ansprechende Kartendarstellung KLEINE KARTEN
+  -- Es eine Karte aus einer Collection dargestellt
+  --
+  -- "card" muss als Collection Member gesetzt sein !!!
+  --
+  -- Variablen
+  --	card.url				Aufruf der Seite, welche die Karte beschreibt
+  --	card.data.hint			Hinweis für den Link (bei mouseover)
+  --	card.data.color			Farbe des Kopfs
+  --	card.data.description	Einzeilige Beschreibung der Karte (Text rechts)
+  --	card.data.text			Mehrzeilige Beschreibung der Karte (Text rechts)
+  --	card.data.bottom		Beschriftung des grauen Bands unten
+  --
+  --	default.color
+  --	default.icon
+  -- UNUSED
+  --	card.data.access		"intranet", "user", "admin"
+  --	card.data.preview		Wenn vorhanden - Gestaltung der Vorschau
+  --				.image		Bild für den Kopf der Vorschau
+  --				.captioncolor	Farbe des Schriftzugs im Bild (Default: Weiß)
+  --				.page		URL der Seite, die in der Vorschau gezeigt wird
+  --				.text		Text für die Vorschauseite (anstelle von .page oder .template)
+  --
+  -- 25.01.2023 - komplett neu
+  -->
+<article class="w3-col s12 m6 l4 w3-padding" >
+	<div class="w3-card-4">		
+		<header>
+			<a href="{{ card.url }}" title="{{ card.data.hint | safe }}">
+				<div class="w3-container w3-padding w3-{{ card.data.color | d(default.color) | d('gray') }} w3-hover-shadow">
+					<span>{{ card.data.title | d('&nbsp;') | safe }}</span>
+					<span class="w3-right">{{ card.tag | d('&nbsp;') | safe }}</span>
+				</div>
+			</a>
+		</header>		
+
+		<div class="w3-container w3-white w3-hide-small">
+			<div class="w3-col w3-center w3-hover-shadow" style="width:5rem;margin:8px 4px;vertical-align:middle;">
+				{% if card.url -%}
+				<a href="{{ card.url }}" title="{{ card.data.hint | safe }}">
+				{%- endif %}
+					<div class="w3-image w3-padding">
+						{% set icon %}{{ card.data.icon | d(default.icon) | d('container') }}{% endset %}
+						{% lucide icon, { "size": "3rem" } %}
+					</div>
+				{%if card.url %}</a>{% endif %}
+			</div>
+			<div class="w3-rest w3-padding-tiny w3-container w3-small w3-hide-small" style="height:6rem;overflow:hidden">
+				{% if card.data.text %}
+					<p>{% for line in card.data.text %}
+						{{ line | safe }}<br>
+					{% endfor %}</p>
+				{% elif card.data.description %}
+					<p>{{ card.data.description }}</p>
+				{% endif %}
+			</div>
+		</div>
+		<footer>
+			<div class="w3-container w3-padding w3-light-grey w3-tiny" style="height:2rem;overflow:hidden">
+				{% if card.url -%}
+				<a href="{{ card.url }}" title="{{ card.data.hint | safe }}" class="w3-margin-bottom ">
+				{%- endif %}
+					{{ card.data.bottom | d("&nbsp;") | safe }}
+				{% if card.url -%}
+				</a>
+				{%- endif %}
+			</div>
+		</footer>
+	</div>
+</article>

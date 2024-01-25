@@ -1,0 +1,11 @@
+---
+layout: index.njk
+collection: toolchain
+default:
+  icon: function-square
+  color: lime
+---
+
+{% for card in collections.techinfo | reverse %}
+	{% include 'minicard.njk' %}
+{% endfor %}

@@ -1,0 +1,11 @@
+---
+layout: index.njk
+collection: manual
+default:
+  icon: scroll-text
+  color: light-blue
+---
+
+{% for card in collections.manual | reverse %}
+	{% include 'minicard.njk' %}
+{% endfor %}

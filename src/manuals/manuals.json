@@ -1,13 +1,13 @@
 {
 	"layout": "docs.njk",
-	"caption": "developer",
-	"title": "Entwickler-Infothek",
-	"tags":    ["develop"],
+	"caption": "manuals",
+	"title": "Handbücher und Dokumentationen",
+	"tags":    ["manual"],
 	"permalink": "{{ page.filePathStem }}.html",
 	"format": {
 		"nobuttons": true,
 		"info": true,
-		"menucolor": "orange"
+		"menucolor": "light-blue"
 	},
 	"disclaimer": "Hier sind noch keine Informationen vorhanden. Stattdessen werden Dummy-Texte mit den pseudo-lateinischen [x](y) <a href='https://lipsum.com'>lorem ipsum</a>-Inhalten angezeigt. Diese Texte haben keinen sinnhaften Gehalt, auch wenn sich unlängst herausgestellt hat, dass verschiedene KI-Übersetzer durchaus in der Lage sind, deutschsprachige Übersetzungen fragwürdigen Inhalts zu liefern.",
 	"menu": [

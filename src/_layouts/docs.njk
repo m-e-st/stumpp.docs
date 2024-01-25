@@ -1,9 +1,21 @@
 ---
+type: layout
 layout: main.njk
 imgdir: /static/img
 ---
-<div class="w3-container" style="float:none">
-	<div class= "w3-small w3-padding-small w3-right w3-text-{{menucolor}}">{{ page.date.toLocaleDateString() }}</div>
+
+<style>
+.markdown a, .markdown a:hover {
+	color: #3f51b5;
+	font-weight: 700;
+	text-decoration: none;
+}
+</style>
+
+<div class="w3-container markdown" style="float:none">
+	<div class= "w3-small w3-padding-small w3-right w3-text-{{format.menucolor}}">
+		{{ page.date.toISOString().slice(8,10) }}.{{ page.date.toISOString().slice(5,7) }}.{{ page.date.toISOString().slice(0,4) }}
+	</div>
 	{{ content | safe }}
 </div>
 
