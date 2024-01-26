@@ -1,6 +1,6 @@
 {
   "name": "doc.stumpp.name",
-  "version": "0.2.13",
+  "version": "0.2.14",
   "description": "Dokumentations- und Blogsystem doc.stumpp.name",
   "main": ".eleventy.js",
   "scripts": {
