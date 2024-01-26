@@ -1,12 +1,25 @@
+---
+title: Lorem Ipsum
+description: Beispieltext zum Auffüllen von leeren Seiten.
+menu:
+   - name: Anker
+     menu:
+      - name: Top
+        url: "/developer/loremipsum.html"
+      - name: Anker 1
+        url: "/developer/loremipsum.html#Anker"
+      - name: Anker 2
+        url: "developer/loremipsum.html#Anker zwei"
+---
 
-## Lorem Ipsum
+## {{ title }}
 
-{% lucide "book-open" %}
+{{ disclaimer | safe }}
+
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ipsum ante, consectetur eget libero sit amet, luctus venenatis urna. Vestibulum vehicula ligula vel sagittis consectetur. Ut efficitur placerat gravida. Ut accumsan, nunc non congue iaculis, diam magna egestas nunc, nec aliquam nunc neque ut dui. Nullam interdum eros tristique, imperdiet lorem quis, porta quam. Duis in nunc efficitur, euismod orci at, tempor metus. Aenean ut interdum mi. Curabitur consequat neque vel magna ullamcorper, at luctus dolor laoreet. Quisque a vestibulum lectus.
 
 Etiam tempus dolor nec dolor condimentum maximus. Proin erat odio, lobortis ac metus eget, dignissim consectetur nisl. In sagittis blandit interdum. Sed ac leo sagittis ex egestas ullamcorper at et neque. Sed at ante commodo, facilisis ex sit amet, fermentum felis. Vestibulum id ante enim. Nunc viverra dapibus lacus ac luctus. Nullam commodo ac est vitae tristique. Interdum et malesuada fames ac ante ipsum primis in faucibus.
-
-Mauris dignissim massa in magna accumsan, sagittis volutpat neque lobortis. Integer pulvinar ipsum et ipsum scelerisque suscipit vel vel augue. In volutpat turpis a sem suscipit luctus. Nullam id felis mattis, dignissim nisl sed, viverra sapien. Quisque lobortis id purus eu eleifend. Nam sodales enim nibh, id malesuada felis pulvinar nec. Mauris ullamcorper tempor neque, sit amet condimentum nibh vestibulum consequat. Quisque sit amet metus sollicitudin, malesuada felis vitae, euismod lorem. Maecenas eget leo nec libero volutpat egestas. Vivamus tincidunt tellus quis eleifend pulvinar. Nullam aliquet quam diam, eget hendrerit enim mollis malesuada. Vestibulum non elit fermentum ex aliquam semper vel at erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vivamus consequat orci mi, quis dictum dui hendrerit sit amet. Nullam sed justo nisl. Pellentesque mollis, turpis non fringilla facilisis, enim nunc interdum ex, id laoreet nunc eros vitae ipsum.
+{% lucide "book-open", { "size":16 } %} Mauris dignissim massa in magna accumsan, sagittis volutpat neque lobortis. Integer pulvinar ipsum et ipsum scelerisque suscipit vel vel augue. In volutpat turpis a sem suscipit luctus. Nullam id felis mattis, dignissim nisl sed, viverra sapien. Quisque lobortis id purus eu eleifend. Nam sodales enim nibh, id malesuada felis pulvinar nec. Mauris ullamcorper tempor neque, sit amet condimentum nibh vestibulum consequat. Quisque sit amet metus sollicitudin, malesuada felis vitae, euismod lorem. Maecenas eget leo nec libero volutpat egestas. Vivamus tincidunt tellus quis eleifend pulvinar. Nullam aliquet quam diam, eget hendrerit enim mollis malesuada. Vestibulum non elit fermentum ex aliquam semper vel at erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vivamus consequat orci mi, quis dictum dui hendrerit sit amet. Nullam sed justo nisl. Pellentesque mollis, turpis non fringilla facilisis, enim nunc interdum ex, id laoreet nunc eros vitae ipsum.
 
 Nam fringilla pharetra tellus, ut suscipit sem pretium ut. Fusce auctor, erat a pulvinar luctus, metus turpis facilisis magna, vel lobortis felis quam vitae ipsum. Pellentesque mauris felis, sodales eu libero sit amet, sodales tincidunt risus. Integer suscipit bibendum elit in pulvinar. Nullam luctus libero molestie ultricies suscipit. Integer non risus sit amet nulla accumsan euismod. Donec vel massa accumsan, congue nunc eget, dapibus magna. Maecenas ultrices nunc et consectetur scelerisque. Pellentesque at nisl vitae diam tempor varius at vel justo. Nulla dolor erat, blandit vel pharetra ac, ultricies sed enim. Fusce vel enim eleifend dolor fringilla faucibus quis nec tortor. Vivamus mattis elit quis dapibus efficitur. Aliquam efficitur libero vel nisi convallis, nec pretium felis pretium. Donec dapibus facilisis tortor id condimentum. Maecenas ornare sollicitudin felis. Proin eget consequat nibh.
 

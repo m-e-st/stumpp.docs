@@ -1,9 +1,11 @@
 ---
 title: Eleventy Dokumentation
-description: Links zu relevanten Einführungen und Erläuterungen von eleventy
+description: Links zur Dokumentation und Tutorials von eleventy
 tags:
-  - eleventy
   - www
+  - develop
+  - ssg
+  - eleventy
 ---
 
 ### Eleventy Originals

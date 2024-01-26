@@ -1,12 +1,12 @@
 ---
 layout: index.njk
-collection: techinfo
+collection: develop
 eleventyExcludeFromCollections: true
 default:
   icon: scroll-text
-  color: gray
+  color: lime
 ---
 
-{% for card in collections.techinfo | reverse %}
+{% for card in collections.develop | reverse %}
 	{% include 'minicard.njk' %}
 {% endfor %}

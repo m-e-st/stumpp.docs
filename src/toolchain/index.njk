@@ -1,11 +1,12 @@
 ---
 layout: index.njk
 collection: toolchain
+eleventyExcludeFromCollections: true
 default:
   icon: function-square
   color: lime
 ---
 
-{% for card in collections.techinfo | reverse %}
+{% for card in collections.toolchain | reverse %}
 	{% include 'minicard.njk' %}
 {% endfor %}
